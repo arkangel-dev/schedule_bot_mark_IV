@@ -9,8 +9,11 @@ import telepot
 # DONT YOU FUCKING DARE SPAM WITH THIS BOT!!!
 bot = telepot.Bot("641334893:AAF1_MJ2ou9nGt4MIbAYSIWMUxfKPDCpDAw")
 output = parse_nl.getFullTodayNL()
+sendstring = ""
 for x in output:
-	bot.sendMessage(488976797, x)
+	sendstring += x + "\n"
+bot.sendMessage(488976797, sendstring, parse_mode="Markdown")
+
 
 # print(len(p_modified_d.getAppendedSessions("thursday")))
 # print(p_cancledd_d.getCancelledSessions("wednesday"))

@@ -1,11 +1,17 @@
 {
 	"cancelled" : {
 		"sunday" : [],
-		"wednesday" : ["1","2"],
-		"thursday" : []
+		"monday" : [],
+		"tuesday" : [],
+		"wednesday" : [],
+		"thursday" : ["1"],
+		"friday" : [],
+		"saturaday : []
 	},
+	
 	"appended" : {
 		"thursday" : [
+		["CNS", "2000", "2200", "False", "Megnha", "NW207", "False"]
 		]
 	}
 }
