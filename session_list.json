@@ -1,25 +1,10 @@
 { 
 	"days" :
-	
-	
 		{ "wednesday" :  {
 			"free_day" : "False",
 			"sessions" : [
-				[	"OOSD",
-					"1800",
-					"2000",
-					"True",
-					"Nihaadh",
-					"Lab 1",
-					"True"],
-					
-				[	"CNS",
-					"2000",
-					"2200",
-					"True",
-					"Megnha",
-					"NW207",
-					"True"]
+				["OOSD","1800","2000","True","Nihaadh","Lab 1","True"],
+				["CNS","2000","2200","True","Megnha","NW207","True"]
 			]
 		},
 		"monday" :  {
@@ -29,21 +14,8 @@
 		"thursday" :  {
 			"free_day" : "False",
 			"sessions" : [
-				[	"OOSD",
-					"1800",
-					"2000",
-					"False",
-					"Nihaadh",
-					"Lab 1",
-					"False"],
-					
-				[	"CNS",
-					"2000",
-					"2200",
-					"False",
-					"Megnha",
-					"NW207",
-					"False"]
+				["OOSD", "1800", "2000", "False", "Nihaadh", "Lab 1 \n fhjwdbfej", "False"],
+				["CNS", "2000", "2200", "False", "Megnha", "NW207", "False"]
 			]
 		}
 	}
