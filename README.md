@@ -58,3 +58,9 @@ and the following `appended_session_list` will give the following output:
 
 and so on...
 
+# Note
+When using to send message use the `parse_natural_language.py` file like the following:
+```python
+import parse_natural_language as parse_nl
+print(parse_nl.getFullTodayNL())
+```
