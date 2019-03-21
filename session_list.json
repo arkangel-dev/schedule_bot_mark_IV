@@ -32,7 +32,7 @@
 				[	"OOSD",
 					"1800",
 					"2000",
-					"True",
+					"False",
 					"Nihaadh",
 					"Lab 1",
 					"False"],
@@ -40,7 +40,7 @@
 				[	"CNS",
 					"2000",
 					"2200",
-					"True",
+					"False",
 					"Megnha",
 					"NW207",
 					"False"]

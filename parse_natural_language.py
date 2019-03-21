@@ -18,13 +18,15 @@ def getFullTodayNL():
 			if str(x) in cancelled_session_list:
 				output_list.append("Your " + dayData[0] + " session have been cancelled")
 			else:
-				if dayData[6]:
+				if dayData[3]:
 					bring_laptop = True
 				output_list.append("You have " + dayData[0] + " from " + dayData[1] + " hours to " + dayData[2] + " hours with " + dayData[4] + ". Class will be held at " + str(dayData[5]) + ".")
 		if len(appended_session_list) != 0:
 			output_list.append("In addition to your regular classes you also have the following appended class(es) :")
 			for x in range(0, len(appended_session_list)):
 				output_list.append(appended_session_list[x][0] + " from " + appended_session_list[x][1] + " hours to " + appended_session_list[x][2] + " hours with " + appended_session_list[x][4] + ", at " + appended_session_list[x][5] + ".")
+				if pd.parseBooleans(appended_session_list[x][3]):
+					bring_laptop = True
 		if bring_laptop:
 			output_list.append("You'll also need to bring your laptop. Dont forget to charge it")
 		else:
