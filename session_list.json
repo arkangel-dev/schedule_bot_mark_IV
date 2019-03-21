@@ -1,0 +1,49 @@
+{ 
+	"days" :
+	
+	
+		{ "wednesday" :  {
+			"free_day" : "False",
+			"sessions" : [
+				[	"OOSD",
+					"1800",
+					"2000",
+					"True",
+					"Nihaadh",
+					"Lab 1",
+					"True"],
+					
+				[	"CNS",
+					"2000",
+					"2200",
+					"True",
+					"Megnha",
+					"NW207",
+					"True"]
+			]
+		},
+		"thursday" :  {
+			"free_day" : "False",
+			"sessions" : [
+				[	"OOSD",
+					"1800",
+					"2000",
+					"True",
+					"Nihaadh",
+					"Lab 1",
+					"False"],
+					
+				[	"CNS",
+					"2000",
+					"2200",
+					"True",
+					"Megnha",
+					"NW207",
+					"False"]
+			]
+		}
+	}
+	
+}
+
+
