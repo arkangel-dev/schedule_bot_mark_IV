@@ -4,14 +4,12 @@
 		"monday" : [],
 		"tuesday" : [],
 		"wednesday" : [],
-		"thursday" : ["1"],
+		"thursday" : [],
 		"friday" : [],
-		"saturaday : []
+		"saturaday" : []
 	},
-	
 	"appended" : {
 		"thursday" : [
-		["CNS", "2000", "2200", "False", "Megnha", "NW207", "False"]
 		]
 	}
 }
