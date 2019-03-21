@@ -29,7 +29,7 @@ the output will be the following
 
 and the following `appended_session_list` will give the following output:
 
-```{
+```json {
 	"cancelled" : {
 		"sunday" : [
 		],
