@@ -1,0 +1,24 @@
+{
+	"cancelled" : {
+		"sunday" : [
+		],
+		"wednesday" : [
+		"1",
+		"2"
+		],
+		"thursday" : [
+		"0"
+		]
+	},
+	"appended" : {
+		"thursday" : [
+			[	"OOSD",
+				"1800",
+				"2000",
+				"True",
+				"Java",
+				"Lab1"
+			]
+		]
+	}
+}

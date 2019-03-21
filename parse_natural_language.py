@@ -1,6 +1,6 @@
 import parse_dates as pda
 import parse_data as pd
-import parse_cancelled_data as p_cancledd_d
+import parse_modified_data as p_modified_d
 from datetime import datetime
 
 
@@ -8,10 +8,10 @@ def getFullTodayNL():
 	output_list = []
 	bring_laptop = False
 	todayDay = pda.convertDateToDay(datetime.today())
-	cancelled_session_list = p_cancledd_d.getCancelledSessions(todayDay)
+	cancelled_session_list = p_modified_d.getCancelledSessions(todayDay)
 	session_count = pd.getSessionCount(todayDay) # - len(cancelled_session_list)
 	if session_count != 0:
-		output_list.append("You have " + str(session_count) + " session(s) today. They are the following : ")
+		output_list.append("You have " + str(session_count - len(cancelled_session_list)) + " session(s) today. They are the following : ")
 		for x in range(0, session_count):
 			dayData = pd.parseSessionData(x, todayDay)
 			if str(x) in cancelled_session_list:
