@@ -6,7 +6,7 @@ import telepot
 # print(pda.convertDateToDay(datetime.today()))
 # print(p_data.parseSessionData(0, "wednesday"))
 
-
+# DONT YOU FUCKING DARE SPAM WITH THIS BOT!!!
 bot = telepot.Bot("641334893:AAF1_MJ2ou9nGt4MIbAYSIWMUxfKPDCpDAw")
 output = parse_nl.getFullTodayNL()
 for x in output:
