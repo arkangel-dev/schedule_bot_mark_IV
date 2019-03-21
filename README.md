@@ -1,4 +1,4 @@
-# schedule_bot_mark_IV
+# Schedule Bot Mark IV
 
 There are two bots users in this project. One will be used to notify the users. and the other will be used the maintainers
 to update and push messages from Villa College Student desk. The second bot will also be used to cancel and reschedule sessions.
@@ -58,7 +58,7 @@ and the following `appended_session_list` will give the following output:
 
 and so on...
 
-# Note
+## Note
 When using to send message use the `parse_natural_language.py` file like the following:
 ```python
 import parse_natural_language as parse_nl
