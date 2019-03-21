@@ -22,6 +22,10 @@
 					"True"]
 			]
 		},
+		"monday" :  {
+			"free_day" : "True",
+			"sessions" : []
+		},
 		"thursday" :  {
 			"free_day" : "False",
 			"sessions" : [
@@ -43,7 +47,6 @@
 			]
 		}
 	}
-	
 }
 
 
