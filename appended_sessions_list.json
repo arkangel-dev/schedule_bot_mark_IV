@@ -9,7 +9,12 @@
 		"saturaday" : []
 	},
 	"appended" : {
-		"thursday" : [
-		]
+		"sunday" : [],
+		"monday" : [],
+		"tuesday" : [],
+		"wednesday" : [],
+		"thursday" : [],
+		"friday" : [],
+		"saturaday" : []
 	}
 }
