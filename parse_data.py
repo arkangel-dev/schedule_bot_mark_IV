@@ -23,7 +23,6 @@ def parseSessionData(session_id, day):
 	venue			= raw_data["days"][day]["sessions"][session_id][5]
 	bring_snacks	= parseBooleans(raw_data["days"][day]["sessions"][session_id][6])
 	return(session_name, start_time, end_time, bring_laptop, lectuer, venue, bring_snacks)
-	
 
 def parseBooleans(raw_string):
 	if raw_string == "True":

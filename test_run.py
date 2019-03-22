@@ -9,15 +9,15 @@ import telepot
 # print(pda.convertDateToDay(datetime.today()))
 # print(p_data.parseSessionData(0, "wednesday"))
 
-# bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-# output = parse_nl.getFullTodayNL()
+bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
+output = parse_nl.checkFutureDateNL("25 Apr 2019")
 
-# sendstring = ""
-# for x in output:
-# 	sendstring += x + "\n"
+sendstring = ""
+for x in output:
+	sendstring += x + "\n"
+bot.sendMessage(MY_ID, sendstring, parse_mode="Markdown")
 
-# bot.sendMessage(MY_ID, sendstring, parse_mode="Markdown")
-print(parse_nl.checkFutureDate("25 Apr 2019"))
+# print(parse_nl.checkFutureDate("25 Apr 2019"))
 
 # print(len(p_modified_d.getAppendedSessions("thursday")))
 # print(p_cancledd_d.getCancelledSessions("wednesday"))
