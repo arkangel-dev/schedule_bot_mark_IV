@@ -10,14 +10,13 @@ import telepot
 # print(p_data.parseSessionData(0, "wednesday"))
 
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-output = parse_nl.checkFutureDateNL("25 Apr 2019")
+# output = parse_nl.checkFutureDateNL("25 Apr 2019")
+output = parse_nl.getFullTodayNL()
 
 sendstring = ""
 for x in output:
 	sendstring += x + "\n"
 bot.sendMessage(MY_ID, sendstring, parse_mode="Markdown")
-
-# print(parse_nl.checkFutureDate("25 Apr 2019"))
 
 # print(len(p_modified_d.getAppendedSessions("thursday")))
 # print(p_cancledd_d.getCancelledSessions("wednesday"))
