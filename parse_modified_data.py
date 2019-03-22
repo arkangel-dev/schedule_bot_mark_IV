@@ -9,5 +9,5 @@ def getCancelledSessions(day):
 	return(cancelled_sessions)
 
 def getAppendedSessions(day):
-	appended_sessions = modified_data_raw["appended"][day]
-	return(appended_sessions)
+	if modified_data_raw["appended"][day]:
+		return modified_data_raw["appended"][day]

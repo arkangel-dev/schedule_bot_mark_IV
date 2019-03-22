@@ -22,7 +22,10 @@
 			]
 		},
 		"friday" : {
-			"sessions" : []
+			"sessions" : [
+				["CNS", "1800", "1900", "False", "Megnha", "NW207", "False"],
+				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1", "False"]
+			]
 		},
 		"saturday" : {
 			"sessions" : []
