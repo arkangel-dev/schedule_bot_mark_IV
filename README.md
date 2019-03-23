@@ -34,8 +34,52 @@ To make long term changes. The `session_list.json` file'd be modifed. The sessio
 	}
 }
 ```
-To add a session append `json ["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1", "False"]` to the `sessions` array of the session's respective day
+To add a session append the following code to the `sessions` array of the session's respective day :
+```json ["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]```
 
+For example, an OOSD session to monday at 1800 hours to 1900 hours will look like this :
+```json{ 
+"days" :
+	{ 
+		"sunday" :  {
+			"sessions" : []
+		},
+		"monday" :  {
+			"sessions" : []
+		},
+		"tuesday" : {
+			"sessions" : []
+		},
+		"wednesday" : {
+			"sessions" : []
+		},
+		"thursday" :  {
+			"sessions" : []
+		},
+		"friday" : {
+			"sessions" : []
+		},
+		"saturday" : {
+			"sessions" : ["OOSD", "1800", "1900", "True", "Mr.Potatoe", "Lab 1"]
+		}
+	}
+}
+```
+### Note
+
+The start and end time have to be in 24-hour format. Or else it will mess up the arthimetic functions in the code. If you want the time in 12-hour format, convert the 24-hour format to 12-hour format <u><b>AFTER</b></u> the arthimetic functions in `parse_natural_language.py`. Use the following block of code to convert 24-hour format to 12-hour format:
+
+```python
+from datetime import datetime
+# make sure the 12-hour format is a datetime object and not a string
+d = datetime.strptime("10:30", "%H:%M")
+d.strftime("%I:%M %p")
+d = datetime.strptime("22:30", "%H:%M")
+d.strftime("%I:%M %p")
+```
+
+
+ 
 ---
 
 ## Appending and Cancelling sessions
