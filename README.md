@@ -35,7 +35,9 @@ To make long term changes. The `session_list.json` file'd be modifed. The sessio
 }
 ```
 To add a session append the following code to the `sessions` array of the session's respective day :
-```json ["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]```
+```json
+["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]
+```
 
 For example, an OOSD session to monday at 1800 hours to 1900 hours will look like this :
 ```json { 
