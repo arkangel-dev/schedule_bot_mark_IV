@@ -3,9 +3,39 @@
 There are two bots users in this project. One will be used to notify the users. and the other will be used by the maintainers
 to update and push messages from Villa College Student desk, also the second bot will also be used to cancel and reschedule sessions.
 
+## Configuring Long Term Sessions
+To make long term changes. The `session_list.json` file'd be modifed. The session file below is a blank template. You can any amount of sessions to each day.
+```json { 
+"days" :
+	{ 
+		"sunday" :  {
+			"sessions" : []
+		},
+		"monday" :  {
+			"sessions" : []
+		},
+		"tuesday" : {
+			"sessions" : []
+		},
+		"wednesday" : {
+			"sessions" : []
+		},
+		"thursday" :  {
+			"sessions" : []
+		},
+		"friday" : {
+			"sessions" : []
+		},
+		"saturday" : {
+			"sessions" : []
+		}
+	}
+}
+```
+To add a session append `json ["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1", "False"]` to the `sessions` array of the session's respective day
+
 ## Appending and Cancelling sessions
-To make short term modifications to the sesssions you'd have to update the `appended_session_list.json` file. To make long term changes
-the `session_list.json` file'd be modifed. The `appended_session_list.json` file will be reset at the end of every week.
+To make short term modifications to the sesssions you'd have to update the `appended_session_list.json` file. The `appended_session_list.json` file will be reset at the end of every week. To check if sessions are cancelled aligned array checking is used. 
 
 for example : when the `appended_session_list` is set to the following : 
 ```json
