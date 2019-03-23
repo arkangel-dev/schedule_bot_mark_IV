@@ -5,7 +5,7 @@
 		"tuesday" : [],
 		"wednesday" : [],
 		"thursday" : [],
-		"friday" : ["1"],
+		"friday" : [],
 		"saturaday" : []
 	},
 	"appended" : {
@@ -14,7 +14,7 @@
 		"tuesday" : [],
 		"wednesday" : [],
 		"thursday" : [],
-		"friday" : [["CNS", "1800", "1900", "False", "Megnha", "NW207", "False"]],
+		"friday" : [["OOSD", "1800", "2000", "True", "Java", "Lab1", "False"]],
 		"saturaday" : []
 	}
 }

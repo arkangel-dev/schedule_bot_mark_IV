@@ -13,6 +13,5 @@ def convertStringToDatetime(raw_string):
 	try:
 		datetime_object = datetime.strptime(raw_string, '%d %b %Y')
 		return(datetime_object)
-	except ValueError:
+	except ValueError: 
 		return("InvalidFormat")
-	
