@@ -56,6 +56,7 @@ coverage.xml
 *.mo
 *.pot
 
+# node red stuff
 node_modules
 package-lock.json
 
