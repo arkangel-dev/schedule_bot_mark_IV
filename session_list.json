@@ -3,33 +3,33 @@
 	{ 
 		"sunday" :  {
 			"sessions" : [
-				["CNS","2000","2200","True","Mr.Krishnamoorthy","Computer Lab 2","True"]
+				["CNS","2000","2200","True","Mr.Krishnamoorthy","Computer Lab 2"]
 			]
 		},
 		"monday" :  {
 			"sessions" : []
 		},
 		"tuesday" : {
-			"sessions" : ["Introduction to Artificial Intelligence", "1800", "2100", "Computer Lab 2", "False"]
+			"sessions" : []
 		},
 		"wednesday" : {
-			"sessions" : ["OOSD" , "1900", "2200", "Computer Lab 2", "False"]
+			"sessions" : []
 		},
 		"thursday" :  {
 			"sessions" : [
-				["CNS", "1800", "1900", "False", "Megnha", "NW207", "False"],
-				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1", "False"]
+				["CNS", "1800", "1900", "False", "Megnha", "NW207"],
+				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1"]
 			]
 		},
 		"friday" : {
 			"sessions" : [
-				["CNS", "1800", "1900", "False", "Megnha", "NW207", "False"],
-				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1", "False"]
+				["CNS", "1800", "1900", "False", "Megnha", "NW207"],
+				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1"]
 			]
 		},
 		"saturday" : {
 			"sessions" : [
-				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1", "False"]
+				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1"]
 			]
 		}
 	}

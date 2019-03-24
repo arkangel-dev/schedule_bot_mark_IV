@@ -10,7 +10,11 @@ raw = sys.argv[1]
 converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
-command = content.split()[0]
+if len(content.split()):
+    command = content.split()[0]
+else:
+    command = "NULL"
+
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 af_version = 0.5
 
@@ -21,6 +25,11 @@ print("Command : " + command)
 f = open("test_json.json" , "r")
 file_json = f.read()
 append_raw_data = json.loads(file_json)
+
+# open the main session file...
+f = open("session_list.json" , "r")
+file_json = f.read()
+session_raw_data = json.loads(file_json)
 
 # check commands...
 if (command == "append"): # append_sessions...
@@ -47,14 +56,47 @@ elif (command == "list"):
     #
     session_list = []
     day_list = ("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
+
+    session_list.append("*Appended Sessions : * \n")
     for x in day_list:
-        session_list.append("*" + x + "* : \n")
+        session_list.append(x + " : \n")
         if len(append_raw_data["appended"][x]) != 0:
             count = 0
             for y in append_raw_data["appended"][x]:
                 session_list.append("`" + str(count) + " : " + str(y) + "`\n")
                 count += 1
-    print(session_list)
+
+    session_list.append("\n *Cancelled Sessions : * \n")
+    for x in day_list:
+        session_list.append(x + " : \n")
+        if len(append_raw_data["cancelled"][x]) != 0:
+            count = 0
+            for y in append_raw_data["cancelled"][x]:
+                session_list.append("`" + str(count) + " : " + str(y) + "`\n")
+                count += 1
+    finalString = ""
+    for x in session_list:
+        finalString += x
+    bot.sendMessage(chat_id, finalString, parse_mode="markdown")
+
+elif (command == "NULL"):
+    bot.sendMessage(chat_id, "Send `/admin help` for a full list of commands", parse_mode="markdown")
+
+elif (command == "raw_list"):
+    #
+    # print out the session list
+    #
+    session_list = []
+    session_list.append("*Main Long Term List*")
+    day_list = ("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
+    for x in day_list:
+        session_list.append(x + " : \n")
+        if (len(session_raw_data["days"][x]["sessions"]) != 0):
+            count = 0
+            for y in session_raw_data["days"][x]["sessions"]:
+                session_list.append(str(count) + " : `" + str(y) + "` \n")
+                count += 1
+
     finalString = ""
     for x in session_list:
         finalString += x
@@ -74,8 +116,13 @@ elif (command == "help"):
     outputList.append("Use as : ` /admin append DAY,SESSION_NAME,STARTING_TIME,ENDING_TIME,BRING_LAPTOP_BOOLEAN,LECTURER_NAME,VENUE` \n\n")
 
     outputList.append("*List : * \n")
-    outputList.append("Lists all the appended sessions stored. \n")
+    outputList.append("Lists all the appended session data stored. \n")
     outputList.append("Use as : ` /admin list `\n\n")
+
+    outputList.append("*Raw List : * \n")
+    outputList.append("Lists all the long term sessions. Useful for cancelling sessions. \n")
+    outputList.append("Use as : ` /admin raw_list `\n\n")
+
 
     outputList.append("*Help : * \n")
     outputList.append("Sends help. That's all it does. \n")
@@ -89,6 +136,4 @@ elif (command == "help"):
         finalString += x
     bot.sendMessage(chat_id, finalString, parse_mode="markdown") # enable markdown and send it...
 else: # fall back clause...
-    bot.sendMessage(chat_id, "Command not found...", parse_mode="markdown")
-
-
+    bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")
