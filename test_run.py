@@ -8,6 +8,7 @@ import telepot
 import sys
 import json
 
+
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
 raw = sys.argv[1]
