@@ -12,10 +12,15 @@ def getFullTodayNL():
 	cancelled_session_list_count = len(cancelled_session_list)
 
 	appended_session_list = p_modified_d.getAppendedSessions(todayDay) # open up the json file
+	
+	if (appended_session_list == None):
+		appended_session_list_count = 0
+	else:
+		appended_session_list_count = len(appended_session_list)
 
 	session_count = pd.getSessionCount(todayDay) # - len(cancelled_session_list) # tampering with this variable for the double for loops will cause issues
 	if session_count != 0: # check if there are any sessions...
-		output_list.append("You have " + str((session_count - cancelled_session_list_count) + len(appended_session_list)) + " session(s) today. They are the following : \n")
+		output_list.append("You have " + str((session_count - cancelled_session_list_count) + appended_session_list_count) + " session(s) today. They are the following : \n")
 		for x in range(0, session_count):
 			dayData = pd.parseSessionData(x, todayDay)
 			if str(x) in cancelled_session_list: # check if the session was cancelled via the modified json file..
@@ -24,7 +29,7 @@ def getFullTodayNL():
 				if dayData[3]: # check if you have to bring your laptop...
 					bring_laptop = True # set the boolean to True
 				output_list.append("* >  " + dayData[0] + " from " + dayData[1] + " hours to " + dayData[2] + " hours with " + dayData[4] + ". Class will be held at " + str(dayData[5]) + ".*")
-		if len(appended_session_list) != 0: # check if there are any appended sessions...
+		if appended_session_list_count != 0: # check if there are any appended sessions...
 			output_list.append("\nIn addition to your regular classes you also have the following appended class(es) : \n")
 			for x in range(0, len(appended_session_list)):
 				output_list.append("* >  " + appended_session_list[x][0] + " from " + appended_session_list[x][1] + " hours to " + appended_session_list[x][2] + " hours with " + appended_session_list[x][4] + ", at " + appended_session_list[x][5] + ".*")

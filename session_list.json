@@ -28,9 +28,9 @@
 			]
 		},
 		"saturday" : {
-			"sessions" : []
+			"sessions" : [
+				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1", "False"]
+			]
 		}
 	}
 }
-
-

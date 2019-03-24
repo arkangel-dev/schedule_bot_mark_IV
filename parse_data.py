@@ -1,13 +1,9 @@
 import json
 import parse_dates
 
-# with open('session_list.json') as f:
-	# raw_data = json.load(f)
-
 f = open("session_list.json" , "r")
 file_json = f.read()
 raw_data = json.loads(file_json)
-
 session_count = len(raw_data["days"]["wednesday"]["sessions"])
 
 def getSessionCount(day):

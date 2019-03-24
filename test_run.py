@@ -5,18 +5,21 @@ import parse_natural_language as parse_nl
 from datetime import datetime
 import parse_dates as p_dates
 import telepot
-
-# print(pda.convertDateToDay(datetime.today()))
-# print(p_data.parseSessionData(0, "wednesday"))
+import sys
+import json
 
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-# output = parse_nl.checkFutureDateNL("25 Apr 2019")
-output = parse_nl.getFullTodayNL()
 
-sendstring = ""
-for x in output:
-	sendstring += x + "\n"
-bot.sendMessage(MY_ID, sendstring, parse_mode="Markdown")
+raw = sys.argv[1]
+converted = json.loads(raw)
+chatId = converted["chatId"]
+content = converted["content"]
+command = content.split()[0]
 
-# print(len(p_modified_d.getAppendedSessions("thursday")))
-# print(p_cancledd_d.getCancelledSessions("wednesday"))
+if (command == "/today"):
+	sendstring = ""
+	output = parse_nl.getFullTodayNL()
+	for x in output:
+		sendstring += x + "\n"
+	bot.sendMessage(MY_ID, sendstring, parse_mode="Markdown")
+	print("[+] Send Today Data...")
