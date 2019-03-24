@@ -87,7 +87,7 @@ elif (command == "raw_list"):
     # print out the session list
     #
     session_list = []
-    session_list.append("*Main Long Term List*")
+    session_list.append("*Main Long Term List* \n")
     day_list = ("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
     for x in day_list:
         session_list.append(x + " : \n")
