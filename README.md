@@ -1,7 +1,19 @@
 # Schedule Bot Mark IV
 
-There are two bots users in this project. One will be used to notify the users. and the other will be used by the maintainers
-to update and push messages from Villa College Student desk, also the second bot will also be used to cancel and reschedule sessions.
+There will be only a single bot controlling this entire project. The bot will recieve commands from the end user such as `/today`. The bot will
+also have a command that will not be listed in the command line interface. and that command is `/admin`. If used without any paramenters the
+bot will start using the inline keyboad to interact with the user. This will be useful for when the admin is not comfortable with manually entering
+commands.
+
+## Using the bot
+
+### Interactive Mode
+
+When the admin starts using the `/admin` function without any parameters the interactive mode is started. When the buttons of the keyboard directs
+users to to another command it will check if interactive mode is enabled. But first all the functions of the admin function must be put into another
+file. But how? hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm... hmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+
+ 
 
 ---
 
