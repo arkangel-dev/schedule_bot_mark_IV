@@ -125,15 +125,17 @@ def help_list(chat_id, query_mode, query_id):
 
     outputList.append("\n\n `Admin Functions Version : " + str(af_version) + "`")
 
-    if (query_mode):
-        bot.answerCallbackQuery(query_id , "Here's you help. Have a good day")
-
-
     # convert it to a single string...
     finalString = ""
     for x in outputList:
         finalString += x
     bot.sendMessage(chat_id, finalString, parse_mode="markdown") # enable markdown and send it...
+
+    if (query_mode):
+        bot.answerCallbackQuery(query_id , "Here's your help. Have a good day")
+
+# ####################################################################################
+# ####################################################################################
 
 def SendCommandKeyboard(chat_id, content):
     from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton

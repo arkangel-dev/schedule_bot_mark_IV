@@ -7,7 +7,7 @@ import traceback
 import admin_func_lib as admin_func
 
 # ["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]
-
+# ATHFAN'S CODE
 #=========================================================================
 # import telepot
 # from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
@@ -40,17 +40,9 @@ else:
     command = "EnterInteractiveMode"
 
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-af_version = 0.5
+af_version = 1.5
 
 print("Command : " + command) # debug the command in the node-red command lines...
- 
-f = open("test_json.json" , "r") # open the append-session file...
-file_json = f.read()
-append_raw_data = json.loads(file_json)
-
-f = open("session_list.json" , "r") # open the main session file...
-file_json = f.read()
-session_raw_data = json.loads(file_json)
 
 # check commands...
 if (command == "append"): # append_sessions...
@@ -72,8 +64,7 @@ elif (command == "help"):
     admin_func.help_list(chat_id, queryMode, query_id)
 
 elif (command == "disableInteractive"):
-    bot.sendMessage(chat_id, "Okay, Have a good day.")
+    #bot.sendMessage(chat_id, "Okay, Have a good day.")
     bot.answerCallbackQuery(query_id, "OK, Have a good day.")
-    
 else: # fall back clause...
     bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")
