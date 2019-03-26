@@ -9,11 +9,10 @@ commands.
 
 ### Interactive Mode
 
-When the admin starts using the `/admin` function without any parameters the interactive mode is started. When the buttons of the keyboard directs
-users to to another command it will check if interactive mode is enabled. But first all the functions of the admin function must be put into another
-file. But how?... hmmmm.... 
- 
+When the admin starts using the `/admin` function without any parameters the interactive mode is started. When the buttons of the keyboard redirect user to another keyboard or message the current keyboard will delete itself before or after executing its designated task. Hence the suicide keyboards. You can disable the interactive mode by clicking on the button that says disable interactive mode or send the command `/admin disable_interactive`. This will disable the suicide keyboards and you'll have to use manual command like commands. To bring back interactive mode just send `/admin` again. 
 
+There are some functions that interactive mode cannot work with ( for now ). And those functions include all functions that require additional parameters that the bot cannot predict. Such as appending sessions and blasting out messages. Other functions such as cancel sessions, which the bot can suggest options via the keyboard.
+ 
 ---
 
 ## Configuring Long Term Sessions
