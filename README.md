@@ -11,8 +11,7 @@ commands.
 
 When the admin starts using the `/admin` function without any parameters the interactive mode is started. When the buttons of the keyboard directs
 users to to another command it will check if interactive mode is enabled. But first all the functions of the admin function must be put into another
-file. But how? hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm... hmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-
+file. But how?... hmmmm.... 
  
 
 ---

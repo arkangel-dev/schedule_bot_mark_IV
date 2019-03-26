@@ -5,28 +5,12 @@ from env import TELEGRAM_BOT_API_KEY
 from datetime import datetime
 import traceback
 import admin_func_lib as admin_func
-
-# ["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]
-# ATHFAN'S CODE
-#=========================================================================
-# import telepot
-# from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
-
-# keyboard = InlineKeyboardMarkup(inline_keyboard=[
-#                    [InlineKeyboardButton(text="hey", callback_data='/command1')],
-#                    [InlineKeyboardButton(text="hey", callback_data='/command1')],
-#                    [InlineKeyboardButton(text="hey", callback_data='/command1')]
-#                ])
-
-# bot = telepot.Bot("641334893:AAF1_MJ2ou9nGt4MIbAYSIWMUxfKPDCpDAw")
-# bot.sendMessage(488976797, "Hello", reply_markup = keyboard)
-#============================================================================
+import core_functions as core
 
 raw = sys.argv[1]
 converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
-
 if (converted["type"] == "callback_query"):
     queryMode = True
     query_id = converted["callbackQueryId"]
@@ -40,7 +24,6 @@ else:
     command = "EnterInteractiveMode"
 
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-af_version = 1.5
 
 print("Command : " + command) # debug the command in the node-red command lines...
 
@@ -52,19 +35,36 @@ elif (command == "cancel_session"):
     x = None
 
 elif (command == "list"):
-    admin_func.list_sess(chat_id)
+    if (queryMode):
+         bot.answerCallbackQuery(query_id, "Please wait while we get our shit together.")
+    admin_func.list_sess(chat_id, queryMode)
 
 elif (command == "EnterInteractiveMode"): # this is the function that activates the command keybaord...
-    admin_func.SendCommandKeyboard(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
+    admin_func.SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
 elif (command == "raw_list"):
-    admin_func.raw_list(chat_id)
+    if (queryMode):
+         bot.answerCallbackQuery(query_id, "Please wait while we get our shit together.")
+    admin_func.raw_list(chat_id, queryMode)
 
 elif (command == "help"):
     admin_func.help_list(chat_id, queryMode, query_id)
 
+elif (command == "WIP"):
+    bot.answerCallbackQuery(query_id, "This function is not ready yet. Try again later.")
+
 elif (command == "disableInteractive"):
-    #bot.sendMessage(chat_id, "Okay, Have a good day.")
     bot.answerCallbackQuery(query_id, "OK, Have a good day.")
+
+elif (command == "send_manipulate_keyboard"):
+    admin_func.SendCommandManipulate(chat_id, "Choose command : ")
+
+elif (command == "send_list_keyboard"):
+    admin_func.SendCommandList(chat_id, "Choose command : ")
+
+elif (command == "disable_interactive"):
+    core.delLastMessage(chat_id)
+    bot.sendMessage(chat_id, "Interactive mode disabled. You now have to use command lines. Send /admin to restart interactive mode.", parse_mode="markdown")
+
 else: # fall back clause...
     bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")

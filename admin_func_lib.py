@@ -4,6 +4,10 @@ import telepot
 from env import TELEGRAM_BOT_API_KEY
 from datetime import datetime
 import traceback
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+import core_functions as core
+import time
+
 
 # open the append-session file...
 f = open("test_json.json" , "r")
@@ -16,12 +20,12 @@ file_json = f.read()
 session_raw_data = json.loads(file_json)
 
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-af_version = 0.5
+af_version = 0.75
 
 # ####################################################################################
 # ####################################################################################
 
-def list_sess(chat_id):
+def list_sess(chat_id, query_mode):
     #
     # List command
     # invoked by /list
@@ -51,6 +55,8 @@ def list_sess(chat_id):
     for x in session_list:
         finalString += x
     bot.sendMessage(chat_id, finalString, parse_mode="markdown")
+    if (query_mode):
+        SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
 # ####################################################################################
 # ####################################################################################
@@ -74,7 +80,7 @@ def append_session(chat_id, content):
 # ####################################################################################
 # ####################################################################################
 
-def raw_list(chat_id):
+def raw_list(chat_id, query_mode):
     #
     # print out the session list
     #
@@ -93,6 +99,8 @@ def raw_list(chat_id):
     for x in session_list:
         finalString += x
     bot.sendMessage(chat_id, finalString, parse_mode="markdown")
+    if (query_mode):
+        SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
 # ####################################################################################
 # ####################################################################################
@@ -133,19 +141,72 @@ def help_list(chat_id, query_mode, query_id):
 
     if (query_mode):
         bot.answerCallbackQuery(query_id , "Here's your help. Have a good day")
+        SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
 # ####################################################################################
 # ####################################################################################
 
-def SendCommandKeyboard(chat_id, content):
-    from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+# def cancelSession(chat_id, arguments):
+#     # the arguments will be Day, SessionID
+#     x = None
 
+# ####################################################################################
+# ####################################################################################
+
+# ["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]
+# ATHFAN'S CODE
+#=========================================================================
+# import telepot
+# from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+
+# keyboard = InlineKeyboardMarkup(inline_keyboard=[
+#                    [InlineKeyboardButton(text="hey", callback_data='/command1')],
+#                    [InlineKeyboardButton(text="hey", callback_data='/command1')],
+#                    [InlineKeyboardButton(text="hey", callback_data='/command1')]
+#                ])
+
+# bot = telepot.Bot("641334893:AAF1_MJ2ou9nGt4MIbAYSIWMUxfKPDCpDAw")
+# bot.sendMessage(488976797, "Hello", reply_markup = keyboard)
+#===========================================================================
+
+def SendCommandList(chat_id, content):
+    # this is the keyboard that will be sent to the user when the list command is sent from the
+    # main keyboard...
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
                         [InlineKeyboardButton(text="List main sessions", callback_data='raw_list')],
                         [InlineKeyboardButton(text="List temporary manipulations", callback_data='list')],
-                        [InlineKeyboardButton(text="Call for help", callback_data='help')],
-                        [InlineKeyboardButton(text="Cancel", callback_data='disableInteractive')]
+                        [InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')]
                    ])
+    core.delLastMessage(chat_id)
+    core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
 
-    bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-    bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown")
+def SendCommandManipulate(chat_id, content):
+    # this the function that will be sent to the uesr when the manipulate function is
+    # invoked from the main keyboard...
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
+                        [InlineKeyboardButton(text="Cancel Session", callback_data="WIP")],
+                        [InlineKeyboardButton(text="Append Session", callback_data="WIP")],
+                        [InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')]
+                   ])
+    core.delLastMessage(chat_id)
+    core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
+
+def SendCommandMain(chat_id, content):
+    # this is the function that will be sent to the user when the /admin function is
+    # first invoked...
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
+                        [InlineKeyboardButton(text="List Sessions", callback_data='send_list_keyboard')],
+                        [InlineKeyboardButton(text="Manipulate Sessions", callback_data="send_manipulate_keyboard")],
+                        [InlineKeyboardButton(text="Call for help", callback_data='help')],
+                        [InlineKeyboardButton(text="Exit Interactive Mode", callback_data="disable_interactive")]
+                   ])
+    core.delLastMessage(chat_id)
+    core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
+
+
+def SendCustomKeyboard(chat_id, content, commands):
+    keyboard = InlineKeyboardMarkup(inline_keyboard=commands)
+    core.delLastMessage(chat_id)
+    core.appendChat(bot.sendMessage( chat_id, content, reply_markup=keyboard, parse_mode="markdown"))
+
+    
