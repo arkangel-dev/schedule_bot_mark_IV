@@ -22,5 +22,8 @@ if (command == "/today"):
 	output = parse_nl.getFullTodayNL()
 	for x in output:
 		sendstring += x + "\n"
-	bot.sendMessage(MY_ID, sendstring, parse_mode="Markdown")
+	bot.sendMessage(chatId, sendstring, parse_mode="Markdown")
 	print("[+] Send Today Data...")
+
+if (command == "/start"):
+	 bot.sendMessage(chatId, "*Start Administrative Mode : * \nInteractive mode disabled. You now have to use command lines. Send /admin to start interactive mode. Send `/admin help` to get a list of commands.", parse_mode="markdown")

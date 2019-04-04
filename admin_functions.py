@@ -32,7 +32,16 @@ if (command == "append"): # append_sessions...
     admin_func.append_session(chat_id, content)
 
 elif (command == "cancel_session"):
-    x = None
+    admin_func.Cancel_SendDayList(chat_id)
+
+elif (command == "cancel_getsessionid"):
+    dayname = content.split()[1]
+    admin_func.Cancel_SendSessionList(chat_id, dayname)
+
+elif (command == "cancel_sessionbyid"):
+    dayName = content.split()[1]
+    sessionId = content.split()[2]
+    admin_func.CancelSessionById(chat_id, dayName, sessionId)
 
 elif (command == "list"):
     if (queryMode):
@@ -61,6 +70,8 @@ elif (command == "send_manipulate_keyboard"):
 
 elif (command == "send_list_keyboard"):
     admin_func.SendCommandList(chat_id, "Choose command : ")
+
+
 
 elif (command == "disable_interactive"):
     core.delLastMessage(chat_id)

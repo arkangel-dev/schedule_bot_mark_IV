@@ -7,10 +7,11 @@ import traceback
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 import core_functions as core
 import time
+import parse_data as parsedata
 
 
 # open the append-session file...
-f = open("test_json.json" , "r")
+f = open("appended_sessions_list.json" , "r")
 file_json = f.read()
 append_raw_data = json.loads(file_json)
 
@@ -175,38 +176,105 @@ def SendCommandList(chat_id, content):
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
                         [InlineKeyboardButton(text="List main sessions", callback_data='raw_list')],
                         [InlineKeyboardButton(text="List temporary manipulations", callback_data='list')],
-                        [InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')]
+                        [InlineKeyboardButton(text="« Cancel", callback_data='EnterInteractiveMode')]
                    ])
     core.delLastMessage(chat_id)
-    core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
+    core.appendChat(bot.sendMessage(chat_id, "*List Sessions : * \nSelect a command : ", reply_markup = keyboard, parse_mode="markdown"))
 
 def SendCommandManipulate(chat_id, content):
     # this the function that will be sent to the uesr when the manipulate function is
     # invoked from the main keyboard...
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
-                        [InlineKeyboardButton(text="Cancel Session", callback_data="WIP")],
-                        [InlineKeyboardButton(text="Append Session", callback_data="WIP")],
-                        [InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')]
+                        [InlineKeyboardButton(text="Cancel Session", callback_data="cancel_session"),
+                        InlineKeyboardButton(text="Append Session", callback_data="WIP")],
+                        [InlineKeyboardButton(text="Revert Cancelled", callback_data="WIP"),
+                        InlineKeyboardButton(text="Cancel Appended", callback_data="WIP")],
+                        [InlineKeyboardButton(text="« Cancel", callback_data='EnterInteractiveMode')]
                    ])
     core.delLastMessage(chat_id)
-    core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
+    core.appendChat(bot.sendMessage(chat_id, "*Cancel Session :* \nSelect a command : ", reply_markup = keyboard, parse_mode="markdown"))
 
 def SendCommandMain(chat_id, content):
+    # override the content variable
+    content = "*Main Menu : * \nPlease select a command to continue : "
     # this is the function that will be sent to the user when the /admin function is
     # first invoked...
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
                         [InlineKeyboardButton(text="List Sessions", callback_data='send_list_keyboard')],
                         [InlineKeyboardButton(text="Manipulate Sessions", callback_data="send_manipulate_keyboard")],
                         [InlineKeyboardButton(text="Call for help", callback_data='help')],
-                        [InlineKeyboardButton(text="Exit Interactive Mode", callback_data="disable_interactive")]
+                        [InlineKeyboardButton(text="« Exit Interactive Mode", callback_data="disable_interactive")]
                    ])
     core.delLastMessage(chat_id)
     core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
 
+def Cancel_SendSessionList(chat_id, DayName):
+    # send a list of keyboard button containing
+    # all the session of a day that is specified
+    # as an argument...
+    session_count = parsedata.getSessionCount(DayName)
+
+    if (session_count != 0):
+        keyboard = []
+        for sessionid in range(0,session_count):
+            # run this loop for each session
+            # the loop runs from 0 to session_count
+            # parse a the details of the sessions
+            # so the data can be parsed into a keyboard
+            data = parsedata.parseSessionData(sessionid, DayName.lower())
+            session_name    = data[0]
+            session_start   = data[1]
+            session_end     = data[2]
+            lecturer        = data[4]
+            venue           = data[5]
+            
+            keyboard_text = session_name + " | From " + str(session_start) + " to " + str(session_end) + " | " + lecturer + " | " + venue
+            callback_text = "cancel_sessionbyid " + " " + str(DayName.lower()) + " " + str(sessionid)  # create a command callback system
+            keyboard.append([InlineKeyboardButton(text=keyboard_text, callback_data=callback_text)])  # append the keyboard button into the keyboard
+            # Make the send the keyboard
+
+        keyboard.append([InlineKeyboardButton(text="« Go Back", callback_data='cancel_session')])
+        SendCustomKeyboard(chat_id, "*Cancel Session : * \nPlease select a session from the list below to cancel it : ", keyboard)
+        # add the cancel button
+    else:
+        # if there are no session say that
+        # there are no sessions in the the content
+        # of the keyboard
+        keyboard = []
+        keyboard.append([InlineKeyboardButton(text="« Go Back", callback_data='cancel_session')])
+        SendCustomKeyboard(chat_id, "*Cancel Session : * \nYou have no sessions on the selected day : ", keyboard)
+       
+def Cancel_SendDayList(chat_id):
+    # send the day list so that the user can
+    # choose a day and recieve a session list
+    keyboardList = [
+        [InlineKeyboardButton(text="Sunday", callback_data='cancel_getsessionid Sunday'),
+        InlineKeyboardButton(text="Monday", callback_data='cancel_getsessionid Monday')],
+        [InlineKeyboardButton(text="Tuesday", callback_data='cancel_getsessionid Tuesday'),
+        InlineKeyboardButton(text="Wednesday", callback_data='cancel_getsessionid Wednesday')],
+        [InlineKeyboardButton(text="Thursday", callback_data='cancel_getsessionid Thursday'),
+        InlineKeyboardButton(text="Friday", callback_data='cancel_getsessionid Friday')],
+        [InlineKeyboardButton(text="Saturday", callback_data='cancel_getsessionid Saturday')],
+        [InlineKeyboardButton(text="« Cancel", callback_data='EnterInteractiveMode')],
+    ]
+    
+    SendCustomKeyboard(chat_id, "*Cancel Session :* \nSelect a day :", keyboardList)
+
+def CancelSessionById(chat_id, DayName, session_id):
+    # function to send modify the session list
+    # so that the session will be cancelled...
+    bot.sendMessage(chat_id, "*Status Return : * \n" + DayName + "'s session ID " + session_id + " has been cancelled. A blast out will be sent out in a few minutes.", parse_mode="markdown")
+    SendCommandMain(chat_id, "Null Data")
+    append_raw_data["cancelled"][DayName].append(session_id)
+    with open('appended_sessions_list.json', 'w') as outfile: # save the file
+        json.dump(append_raw_data, outfile)
 
 def SendCustomKeyboard(chat_id, content, commands):
+    # send a custom keyboard with custom commands
+    # the commands will have to be sent as an array...
     keyboard = InlineKeyboardMarkup(inline_keyboard=commands)
     core.delLastMessage(chat_id)
     core.appendChat(bot.sendMessage( chat_id, content, reply_markup=keyboard, parse_mode="markdown"))
 
-    
+
+
