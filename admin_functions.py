@@ -61,6 +61,17 @@ elif (command == "cancel_sessionbyid"):
     sessionId = content.split()[2]
     admin_func.CancelSessionById(chat_id, dayName, sessionId)
 
+elif (command == "revert_cancel_sendlist"):
+    # reverts the effects of cancelled session list...
+    # used for when reverting the effects of unwanted
+    # cancellation of sessions
+    admin_func.SendCancelledSessionList(chat_id)
+
+elif (command == "revert_cancellation"):
+    dayName = content.split()[1]
+    sessionId = content.split()[2]
+    admin_func.RevertCancellationById(chat_id, query_id, dayName, sessionId)
+
 elif (command == "list"):
     if (queryMode):
          bot.answerCallbackQuery(query_id, "Please wait while we get our shit together.")

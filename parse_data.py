@@ -9,7 +9,7 @@ f = open("appended_sessions_list.json" , "r")
 file_json = f.read()
 append_raw_data = json.loads(file_json)
 
-session_count = len(raw_data["days"]["wednesday"]["sessions"])
+# session_count = len(raw_data["days"]["wednesday"]["sessions"])
 
 def getSessionCount(day):
 	# returns a count of all session
