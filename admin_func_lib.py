@@ -89,11 +89,12 @@ def raw_list(chat_id, query_mode):
     session_list.append("*Main Long Term List* \n")
     day_list = ("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
     for x in day_list:
-        session_list.append(x + " : \n")
+        session_list.append(x.capitalize() + " : \n")
         if (len(session_raw_data["days"][x]["sessions"]) != 0):
             count = 0
             for y in session_raw_data["days"][x]["sessions"]:
-                session_list.append(str(count) + " : `" + str(y) + "` \n")
+                session_list.append(str(count))
+                session_list.append("`   Session : " + y[0] + "\n    Start Time : " + y[1] + "\n    End Time : " + y[2] + "\n    Venue : " + y[5] + "`\n")
                 count += 1
 
     finalString = ""
@@ -114,23 +115,6 @@ def help_list(chat_id, query_mode, query_id):
     #
     outputList = [] # create the help Lists
     outputList.append("*HELP* \n\n")
-
-    outputList.append("*Append : * \n")
-    outputList.append("Adds a temporary session to the agenda. \n")
-    outputList.append("Use as : ` /admin append DAY,SESSION_NAME,STARTING_TIME,ENDING_TIME,BRING_LAPTOP_BOOLEAN,LECTURER_NAME,VENUE` \n\n")
-
-    outputList.append("*List : * \n")
-    outputList.append("Lists all the appended session data stored. \n")
-    outputList.append("Use as : ` /admin list `\n\n")
-
-    outputList.append("*Raw List : * \n")
-    outputList.append("Lists all the long term sessions. Useful for cancelling sessions. \n")
-    outputList.append("Use as : ` /admin raw_list `\n\n")
-
-
-    outputList.append("*Help : * \n")
-    outputList.append("Sends help. That's all it does. \n")
-    outputList.append("Use as : ` /admin help`")
 
     outputList.append("\n\n `Admin Functions Version : " + str(af_version) + "`")
 
@@ -179,7 +163,7 @@ def SendCommandList(chat_id, content):
                         [InlineKeyboardButton(text="« Cancel", callback_data='EnterInteractiveMode')]
                    ])
     core.delLastMessage(chat_id)
-    core.appendChat(bot.sendMessage(chat_id, "*List Sessions : * \nSelect a command : ", reply_markup = keyboard, parse_mode="markdown"))
+    core.appendChat(bot.sendMessage(chat_id, "*List Sessions : * \n Select a command : ", reply_markup = keyboard, parse_mode="markdown"))
 
 def SendCommandManipulate(chat_id, content):
     # this the function that will be sent to the uesr when the manipulate function is
@@ -266,7 +250,7 @@ def Cancel_SendDayList(chat_id):
 def CancelSessionById(chat_id, DayName, session_id):
     # function to send modify the session list
     # so that the session will be cancelled...
-    bot.sendMessage(chat_id, "*Status Return : * \n" + DayName + "'s session ID " + session_id + " has been cancelled. A blast out will be sent out in a few minutes.", parse_mode="markdown")
+    bot.sendMessage(chat_id, "*Status Return : * \n" + str(DayName).capitalize() + "'s session ID " + session_id + " has been cancelled. A blast out will be sent out in a few minutes.", parse_mode="markdown")
     SendCommandMain(chat_id, "Null Data")
     append_raw_data["cancelled"][DayName].append(session_id)
     with open('appended_sessions_list.json', 'w') as outfile: # save the file
@@ -297,7 +281,6 @@ def RevertCancellationById(chat_id, query_id, day, session_id):
     # via the day and session_id
     objectIndex = append_raw_data["cancelled"][day.lower()].index(str(session_id))
     del append_raw_data["cancelled"][day.lower()][objectIndex]
-    bot.answerCallbackQuery(query_id, append_raw_data["cancelled"][day.lower()])
     with open('appended_sessions_list.json', 'w') as outfile: # save the file
         json.dump(append_raw_data, outfile)
     SendCancelledSessionList(chat_id)
