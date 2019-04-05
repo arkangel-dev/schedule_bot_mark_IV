@@ -213,25 +213,28 @@ def Cancel_SendSessionList(chat_id, DayName):
     # all the session of a day that is specified
     # as an argument...
     session_count = parsedata.getSessionCount(DayName)
+    cancelled_session_list = parsedata.getCancelledSessionsByDay(DayName)
 
-    if (session_count != 0):
+    if (session_count != 0 and len(cancelled_session_list) != session_count):
         keyboard = []
+        print(cancelled_session_list)
         for sessionid in range(0,session_count):
-            # run this loop for each session
-            # the loop runs from 0 to session_count
-            # parse a the details of the sessions
-            # so the data can be parsed into a keyboard
-            data = parsedata.parseSessionData(sessionid, DayName.lower())
-            session_name    = data[0]
-            session_start   = data[1]
-            session_end     = data[2]
-            lecturer        = data[4]
-            venue           = data[5]
-            
-            keyboard_text = session_name + " | From " + str(session_start) + " to " + str(session_end) + " | " + lecturer + " | " + venue
-            callback_text = "cancel_sessionbyid " + " " + str(DayName.lower()) + " " + str(sessionid)  # create a command callback system
-            keyboard.append([InlineKeyboardButton(text=keyboard_text, callback_data=callback_text)])  # append the keyboard button into the keyboard
-            # Make the send the keyboard
+            if (str(sessionid) not in cancelled_session_list): # check if this session is already cancelled
+                # run this loop for each session
+                # the loop runs from 0 to session_count
+                # parse a the details of the sessions
+                # so the data can be parsed into a keyboard
+                data = parsedata.parseSessionData(sessionid, DayName.lower())
+                session_name    = data[0]
+                session_start   = data[1]
+                session_end     = data[2]
+                lecturer        = data[4]
+                venue           = data[5]
+                
+                keyboard_text = session_name + " | From " + str(session_start) + " to " + str(session_end) + " | " + lecturer + " | " + venue
+                callback_text = "cancel_sessionbyid " + " " + str(DayName.lower()) + " " + str(sessionid)  # create a command callback system
+                keyboard.append([InlineKeyboardButton(text=keyboard_text, callback_data=callback_text)])  # append the keyboard button into the keyboard
+                # Make the send the keyboard
 
         keyboard.append([InlineKeyboardButton(text="« Go Back", callback_data='cancel_session')])
         SendCustomKeyboard(chat_id, "*Cancel Session : * \nPlease select a session from the list below to cancel it : ", keyboard)
@@ -242,7 +245,7 @@ def Cancel_SendSessionList(chat_id, DayName):
         # of the keyboard
         keyboard = []
         keyboard.append([InlineKeyboardButton(text="« Go Back", callback_data='cancel_session')])
-        SendCustomKeyboard(chat_id, "*Cancel Session : * \nYou have no sessions on the selected day : ", keyboard)
+        SendCustomKeyboard(chat_id, "*Cancel Session : * \nYou have no sessions on the selected day. Revert any cancelled sessions to view them here : ", keyboard)
        
 def Cancel_SendDayList(chat_id):
     # send the day list so that the user can
@@ -257,7 +260,7 @@ def Cancel_SendDayList(chat_id):
         [InlineKeyboardButton(text="Saturday", callback_data='cancel_getsessionid Saturday')],
         [InlineKeyboardButton(text="« Cancel", callback_data='EnterInteractiveMode')],
     ]
-    
+
     SendCustomKeyboard(chat_id, "*Cancel Session :* \nSelect a day :", keyboardList)
 
 def CancelSessionById(chat_id, DayName, session_id):

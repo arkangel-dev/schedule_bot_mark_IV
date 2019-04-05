@@ -19,8 +19,13 @@ else:
     query_id = 0
 
 if len(content.split()):
+    # if the command is available
+    # set the command variable
     command = content.split()[0]
 else:
+    # or else that means only /admin
+    # was pased... Then enter
+    # interactive mode
     command = "EnterInteractiveMode"
 
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
@@ -28,17 +33,30 @@ bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 print("Command : " + command) # debug the command in the node-red command lines...
 
 # check commands...
-if (command == "append"): # append_sessions...
+if (command == "append"):
+    # append the sessions to the
+    # main sessions list system
     admin_func.append_session(chat_id, content)
 
 elif (command == "cancel_session"):
+    # This function is a part of the cancel functions...
+    # this command will send a list of all the days
+    # from which you can send one to cancel that
+    # day's session(s)
     admin_func.Cancel_SendDayList(chat_id)
 
 elif (command == "cancel_getsessionid"):
+    # This function is part of the cancel function
+    # This command will send a list of all sessions
+    # on that day...
+    # inputs : DayName
     dayname = content.split()[1]
     admin_func.Cancel_SendSessionList(chat_id, dayname)
 
 elif (command == "cancel_sessionbyid"):
+    # This function is a part of the cancel function
+    # This command will cancel a session in appended list data
+    # Inputs, DayName, SessionID by int...
     dayName = content.split()[1]
     sessionId = content.split()[2]
     admin_func.CancelSessionById(chat_id, dayName, sessionId)

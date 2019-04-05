@@ -4,6 +4,11 @@ import parse_dates
 f = open("session_list.json" , "r")
 file_json = f.read()
 raw_data = json.loads(file_json)
+
+f = open("appended_sessions_list.json" , "r")
+file_json = f.read()
+append_raw_data = json.loads(file_json)
+
 session_count = len(raw_data["days"]["wednesday"]["sessions"])
 
 def getSessionCount(day):
@@ -23,6 +28,13 @@ def parseSessionData(session_id, day):
 		lectuer			= raw_data["days"][day]["sessions"][session_id][4]
 		venue			= raw_data["days"][day]["sessions"][session_id][5]
 		return(session_name, start_time, end_time, bring_laptop, lectuer, venue)
+
+def getCancelledSessionsByDay(day):
+	# get the cancelled session list
+	# inputs : DayName
+	session_list = append_raw_data["cancelled"][day.lower()]
+	return(session_list)
+
 
 def parseBooleans(raw_string):
 	# convert the string boolean values into
