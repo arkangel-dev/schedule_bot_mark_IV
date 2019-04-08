@@ -1,14 +1,13 @@
 import sys
 import json
 import telepot
-from env import TELEGRAM_BOT_API_KEY
-from datetime import datetime
 import traceback
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 import core_functions as core
 import time
 import parse_data as parsedata
-
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+from datetime import datetime
+from env import TELEGRAM_BOT_API_KEY
 
 # open the append-session file...
 f = open("appended_sessions_list.json" , "r")
@@ -27,7 +26,7 @@ af_version = 0.75
 # ####################################################################################
 
 def list_sess(chat_id, query_mode):
-    #
+    
     # List command
     # invoked by /list
     # any additional arugemnts are ignored
@@ -270,9 +269,12 @@ def SendCancelledSessionList(chat_id):
                 callbackData = "revert_cancellation " + dayList[dayIndex] + " " + str(testSession)
                 keyboardButtons.append([InlineKeyboardButton(text=buttonText, callback_data=callbackData)])
     if (len(keyboardButtons) == 0):
+        # if there are no session available
+        # just send a keyboard content saying so...
         keyboardButtons.append([InlineKeyboardButton(text="Go Back", callback_data='EnterInteractiveMode')])
         SendCustomKeyboard(chat_id, "*Revert Cancellation : * \nYou have no sessions cancelled. Please cancel a session so you can revert the cancellation :", keyboardButtons)
     else:
+        # or else send a keyboard that lists all the sessions...
         keyboardButtons.append([InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')])
         SendCustomKeyboard(chat_id, "*Revert Cancellation : * \nPlease select a session to revert its cancellation :", keyboardButtons)
 
@@ -284,8 +286,6 @@ def RevertCancellationById(chat_id, query_id, day, session_id):
     with open('appended_sessions_list.json', 'w') as outfile: # save the file
         json.dump(append_raw_data, outfile)
     SendCancelledSessionList(chat_id)
-
-
 
 
 def SendCustomKeyboard(chat_id, content, commands):

@@ -1,0 +1,5 @@
+TODO LIST
+
+✔ Fix bug with message ledger function for inline keyboard @done(19-04-08 11:36)
+☐ Test out a legder based method for accepting additional parameters
+☐ Add a cancel appended session function
