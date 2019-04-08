@@ -30,3 +30,6 @@ def deleteStatus_await(userid):
         admin_lib.SendCommandMain(userid, "NULL")
     else:
         bot.sendMessage(userid, "I wasn't doing anything anyway, *Zzzzzzz*", parse_mode="markdown")
+
+# Try not to mess with anything above this line...
+# please...

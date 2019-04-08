@@ -12,6 +12,8 @@ import traceback
 #     }, 'date': 1553597500, 'text': 'Hello World'
 # }
 
+bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
+
 def openJsonFile(filename):
     # open the json file...
     try:
@@ -77,7 +79,7 @@ def delLastMessage(chat_id):
     # keyboard from the chat. It does so
     # by getting the latest keyboard ID from
     # the message ledger and deleting it
-    bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
+
     last_id = getLastMessage(chat_id)
     if (last_id != None):
         try:
@@ -86,3 +88,5 @@ def delLastMessage(chat_id):
             bot.sendMessage(chat_id, "ERRx001 : (The specified keyboard was not found)")
             print("ERR : Message not found : (The specified keyboard was not found)")
 
+def sendCompleteCurrentOperation(chat_id):
+    bot.sendMessage(chat_id, "Please complete current function. Send /cancel to cancel current function.")

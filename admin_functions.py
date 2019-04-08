@@ -138,4 +138,7 @@ if (str(chat_id) not in awaiting_response_list):
         bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")
         
 else:
-    bot.sendMessage(chat_id, "Please complete current function. Send /cancel to cancel current function")
+    # fall back if there is a operation to be completed by the user...
+    # this is a function because there are other files that use the same opereation...
+    # yay
+    core.sendCompleteCurrentOperation(chat_id)

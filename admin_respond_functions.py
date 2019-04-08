@@ -38,9 +38,11 @@ if (content.split()[0] == "/cancel"):
 
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
-callbackfuntion = awaiting_response_list[str(chat_id)]
+callbackfuntion = awaiting_response_list[str(chat_id)]["callback_function"]
 
 # first lets make the append session function for
 # the await input method. I hope this works...
+
+
 
 
