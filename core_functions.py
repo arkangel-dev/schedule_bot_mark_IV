@@ -4,12 +4,32 @@ from datetime import datetime
 from env import TELEGRAM_BOT_API_KEY
 import sys
 import telepot
+import traceback
 
 
 # {'message_id': 2137, 'from': {'id': 649384853, 'is_bot': True, 'first_name': 'F.R.I.D.A.Y', 'username': 'ItsFuckingFriday'
 #     }, 'chat': {'id': 438938797, 'first_name': 'David', 'last_name': 'Bowie', 'username': 'PoopyButthole', 'type': 'private'
 #     }, 'date': 1553597500, 'text': 'Hello World'
 # }
+
+def openJsonFile(filename):
+    # open the json file...
+    try:
+        f = open(filename , "r")
+        file_json = f.read()
+        return_value = json.loads(file_json)
+        return(return_value)
+    except:
+        print("Operation error while opening file : " + filename)
+        exit()
+
+def saveJsonFile(data, filename):
+    try:
+        with open(filename, 'w') as outfile: # save the file
+            json.dump(data, outfile)
+    except:
+        print("Operation error while saving file")
+        exit()
 
 def appendChat(raw_json):
     # this function will add a message id
@@ -63,6 +83,6 @@ def delLastMessage(chat_id):
         try:
             bot.deleteMessage((chat_id, last_id))
         except:
-            # bot.sendMessage(chat_id, "ERR: Message Not Found!")
+            bot.sendMessage(chat_id, "ERRx001 : (The specified keyboard was not found)")
             print("ERR : Message not found : (The specified keyboard was not found)")
 

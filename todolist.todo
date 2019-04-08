@@ -1,5 +1,6 @@
 TODO LIST
 
 ✔ Fix bug with message ledger function for inline keyboard @done(19-04-08 11:36)
+☐ To get the reply ledger working I need to redesign the whole node-red workflow (this is bad)s
 ☐ Test out a legder based method for accepting additional parameters
 ☐ Add a cancel appended session function
