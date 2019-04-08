@@ -1,4 +1,8 @@
 import core_functions as core
+import telepot
+import env
+
+bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
 
 # There function will be needed 
 # to read and write to the user status data file
@@ -18,5 +22,9 @@ def appendStatus_await(userid, callback_function):
 def deleteStatus_await(userid):
     user_status_data = core.openJsonFile("user_status_data.json") # CopyCat ;)
     # We got he other one working... now we fix the other
-    del user_status_data["awaiting_response_users"][str(userid)]
-    core.saveJsonFile(user_status_data, "user_status_data.json")
+    if (userid in user_status_data["awaiting_response_users"]):
+        bot.sendMessage(chat_id, "Cancelling operation...")
+        del user_status_data["awaiting_response_users"][str(userid)]
+        core.saveJsonFile(user_status_data, "user_status_data.json")
+    else:
+        bot.sendMessage(userid, "I wasn't doing anything anyway, Zzzzzzz")

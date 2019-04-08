@@ -169,7 +169,7 @@ def SendCommandManipulate(chat_id, content):
     # invoked from the main keyboard...
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
                         [InlineKeyboardButton(text="Cancel Session", callback_data="cancel_session"),
-                        InlineKeyboardButton(text="Append Session", callback_data="WIP")],
+                        InlineKeyboardButton(text="Append Session", callback_data="append_interactive")],
                         [InlineKeyboardButton(text="Revert Cancelled", callback_data="revert_cancel_sendlist"),
                         InlineKeyboardButton(text="Cancel Appended", callback_data="WIP")],
                         [InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')]

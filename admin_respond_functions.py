@@ -10,8 +10,12 @@ raw = sys.argv[1]
 converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
+
 if (content.split()[0] == "/admin"):
     exit()
+
+if (content.split()[0] == "/cancel"):
+    respond_lib.deleteStatus_await(chat_id)
 
 
 # aight, lets go over how this will work.

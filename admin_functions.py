@@ -4,6 +4,7 @@ import telepot
 import traceback
 import admin_func_lib as admin_func
 import core_functions as core
+import respond_function_library as respond_lib
 from env import TELEGRAM_BOT_API_KEY
 from datetime import datetime
 
@@ -128,7 +129,12 @@ if (str(chat_id) not in awaiting_response_list):
         core.delLastMessage(chat_id)
         bot.sendMessage(chat_id, "Interactive mode disabled. You now have to use command lines. Send /admin to restart interactive mode.", parse_mode="markdown")
 
+    elif (command == "append_interactive"):
+        bot.sendMessage(chat_id, "Please send the data")
+        
+
     else: # fall back clause...
         bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")
+        respond_lib.appendStatus_await(chat_id, "append")
 else:
     bot.sendMessage(chat_id, "Im expecting an input from you!")
