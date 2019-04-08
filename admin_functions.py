@@ -36,7 +36,7 @@ print("Command : " + command) # debug the command in the node-red command lines.
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
 
-if (chat_id not in awaiting_response_list):
+if (str(chat_id) not in awaiting_response_list):
     # check commands...
     if (command == "append"):
         # append the sessions to the

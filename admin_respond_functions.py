@@ -1,19 +1,39 @@
 import sys
 import json
 import core_functions as core
+import env
+import telepot
+import respond_function_library as respond_lib
+
+bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
+raw = sys.argv[1]
+converted = json.loads(raw)
+chat_id = converted["chatId"]
+content = converted["content"]
+if (content.split()[0] == "/admin"):
+    exit()
 
 
-# raw = sys.argv[1]
-# converted = json.loads(raw)
-# chat_id = converted["chatId"]
-# content = converted["content"]
-# if (content.split()[0] == "/admin"):
-#     exit()
+# aight, lets go over how this will work.
+# when the user invokes a function that require
+# further input the userstatus data will be updated,
+# indicating that the system is expecting an input from
+# the user. 
 
+# if the user enters an input that is not acceptable then
+# the bot will send back a message saying the data is not acceptable
+# this is done by the admin_function.py file. It will check the user_status_data file
+# to check if any input is expected
+# to check if the input is usable by the function
+# it will sent to another function library file... (respond_function_library.py)
+
+# if the user enters valid input then the system will delete the user's entry
+# in the status file.
 
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
 
+# first lets make the append session function for
+# the await input method. I hope this works...
 
 
-print(len(awaiting_response_list))

@@ -1,4 +1,4 @@
-# Schedule Bot Mark IV
+# Schedule Bot Mark IV (TEST VERSION)
 
 There will be only a single bot controlling this entire project. The bot will recieve commands from the end user such as `/today`. The bot will
 also have a command that will not be listed in the command line interface. and that command is `/admin`. If used without any paramenters the
