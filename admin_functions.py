@@ -130,11 +130,12 @@ if (str(chat_id) not in awaiting_response_list):
         bot.sendMessage(chat_id, "Interactive mode disabled. You now have to use command lines. Send /admin to restart interactive mode.", parse_mode="markdown")
 
     elif (command == "append_interactive"):
-        bot.sendMessage(chat_id, "Please send the data")
-        
-
+        core.delLastMessage(chat_id)
+        respond_lib.appendStatus_await(chat_id, "append")
+        core.appendChat(bot.sendMessage(chat_id, "Please send the data in a good syntax, Send /cancel to cancel this operation"))
+    
     else: # fall back clause...
         bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")
-        respond_lib.appendStatus_await(chat_id, "append")
+        
 else:
-    bot.sendMessage(chat_id, "Im expecting an input from you!")
+    bot.sendMessage(chat_id, "Please complete current function. Send /cancel to cancel current function")

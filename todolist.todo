@@ -6,3 +6,4 @@ TODO LIST
 ☐ Add a cancel appended session function
 ✔ Create function to append data to the user_status_data file. @done(19-04-08 20:52)
 ✔ Create function to delete date from the user_status_data file @done(19-04-08 20:57)
+☐ Fix bug : Expect data from user doesn't work on the first try

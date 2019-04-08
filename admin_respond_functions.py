@@ -5,6 +5,7 @@ import env
 import telepot
 import respond_function_library as respond_lib
 
+
 bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
 raw = sys.argv[1]
 converted = json.loads(raw)
@@ -16,6 +17,7 @@ if (content.split()[0] == "/admin"):
 
 if (content.split()[0] == "/cancel"):
     respond_lib.deleteStatus_await(chat_id)
+
 
 
 # aight, lets go over how this will work.
@@ -36,6 +38,7 @@ if (content.split()[0] == "/cancel"):
 
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
+callbackfuntion = awaiting_response_list[str(chat_id)]
 
 # first lets make the append session function for
 # the await input method. I hope this works...
