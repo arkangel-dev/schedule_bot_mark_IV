@@ -3,7 +3,8 @@ import sys
 import json
 import core_functions as core
 
-
+# @todo Clean up manipulate_payload.py
+# @body The payload file is bare bones for the system to work.; Needs more work
 
 payload_raw = sys.argv[1]
 payload = json.loads(payload_raw)
