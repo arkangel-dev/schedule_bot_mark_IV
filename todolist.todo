@@ -7,3 +7,5 @@ TODO LIST
 ✔ Create function to append data to the user_status_data file. @done(19-04-08 20:52)
 ✔ Create function to delete date from the user_status_data file @done(19-04-08 20:57)
 ✔ Fix bug : Expect data from user doesn't work on the first try @done(19-04-08 21:54)
+✔ Create new node-red workflow so that it works @done(19-04-09 12:07)
+☐ Create python function to append awaiting variable to the dictionary
