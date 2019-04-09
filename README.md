@@ -11,18 +11,17 @@ commands.
 Yes, you'll need node red for this. Also you'll need to install the following nodes, You dont have to install the EXACT same versions.
 
 ```
-npm install node-red / 0.20.3
-npm install node-red-contrib-chatbot / 0.16.6
-npm install node-red-contrib-python3-function / 0.0.4
-npm install node-red-contrib-pythonshell / 1.5.4
-npm install node-red-contrib-telegrambot / 5.3.0
-npm install node-red-contrib-telegrambot-home / 0.5.1
-npm install node-red-node-email / 1.3.0 
-npm install node-red-node-feedparser / 0.1.14
-npm install node-red-node-rbe / 0.2.4
-npm install node-red-node-sentiment / 0.1.3
-npm install node-red-node-tail / 0.0.2
-npm install node-red-node-twitter / 1.1.4
+npm install node-red-contrib-chatbot
+npm install node-red-contrib-python3-function
+npm install node-red-contrib-pythonshell
+npm install node-red-contrib-telegrambot
+npm install node-red-contrib-telegrambot-home
+npm install node-red-node-email
+npm install node-red-node-feedparser
+npm install node-red-node-rbe
+npm install node-red-node-sentiment
+npm install node-red-node-tail 
+npm install node-red-node-twitter
 ```
 
 Then you'll need to import the following node configuration:
