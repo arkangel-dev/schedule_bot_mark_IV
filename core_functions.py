@@ -4,12 +4,42 @@ from datetime import datetime
 from env import TELEGRAM_BOT_API_KEY
 import sys
 import telepot
+import traceback
 
 
 # {'message_id': 2137, 'from': {'id': 649384853, 'is_bot': True, 'first_name': 'F.R.I.D.A.Y', 'username': 'ItsFuckingFriday'
 #     }, 'chat': {'id': 438938797, 'first_name': 'David', 'last_name': 'Bowie', 'username': 'PoopyButthole', 'type': 'private'
 #     }, 'date': 1553597500, 'text': 'Hello World'
 # }
+
+bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
+
+def openJsonFile(filename):
+    # open the json file...
+    # pretty explanatory...
+    try:
+        # try to open this file
+        f = open(filename , "r")
+        file_json = f.read()
+        return_value = json.loads(file_json)
+        return(return_value)
+    except:
+        # if it all goes south
+        # mostly by absent files
+        # or non valid data in said files
+        print("Operation error while opening file : " + filename)
+        exit()
+
+def saveJsonFile(data, filename):
+    # this is the save counterpart for
+    # the openJsonFile() function
+    # Yay!
+    try:
+        with open(filename, 'w') as outfile: # save the file
+            json.dump(data, outfile)
+    except:
+        print("Operation error while saving file to disk : " + filename)
+        exit()
 
 def appendChat(raw_json):
     # this function will add a message id
@@ -57,12 +87,17 @@ def delLastMessage(chat_id):
     # keyboard from the chat. It does so
     # by getting the latest keyboard ID from
     # the message ledger and deleting it
-    bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
+
     last_id = getLastMessage(chat_id)
     if (last_id != None):
         try:
             bot.deleteMessage((chat_id, last_id))
         except:
-            # bot.sendMessage(chat_id, "ERR: Message Not Found!")
+            bot.sendMessage(chat_id, "ERRx001 : (The specified keyboard was not found)")
             print("ERR : Message not found : (The specified keyboard was not found)")
 
+def sendCompleteCurrentOperation(chat_id):
+    # this is what is supposed to be done when
+    # user tries to execute commands when the 
+    # system is expecting input from the user...
+    bot.sendMessage(chat_id, "Please complete current operation. If you dont want to complete this operation send /cancel and get this over with. I have places to be.")

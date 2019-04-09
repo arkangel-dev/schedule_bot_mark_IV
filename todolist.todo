@@ -1,5 +1,15 @@
 TODO LIST
 
 ✔ Fix bug with message ledger function for inline keyboard @done(19-04-08 11:36)
-☐ Test out a legder based method for accepting additional parameters
+✔ To get the reply ledger working I need to redesign the whole node-red workflow (this is bad) @done(19-04-08 21:54)
+✔ Test out a legder based method for accepting additional parameters @done(19-04-08 20:32)
 ☐ Add a cancel appended session function
+✔ Create function to append data to the user_status_data file. @done(19-04-08 20:52)
+✔ Create function to delete date from the user_status_data file @done(19-04-08 20:57)
+✔ Fix bug : Expect data from user doesn't work on the first try @done(19-04-08 21:54)
+✔ Create new node-red workflow so that it works @done(19-04-09 12:07)
+✔ Create python function to append awaiting variable to the dictionary @done(19-04-09 12:23)
+✔ Add comments to files @done(19-04-09 14:41)
+✔ Make the append function to the respond_function_library.py @done(19-04-09 14:41)
+✔ Fix issues with trying to cancel and detecting execution of other commands @done(19-04-09 14:17)
+✘ Fix the function names in user_status_data.json @cancelled(19-04-09 14:41)

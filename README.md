@@ -1,9 +1,34 @@
-# Schedule Bot Mark IV
+# Schedule Bot Mark IV (TEST VERSION)
 
 There will be only a single bot controlling this entire project. The bot will recieve commands from the end user such as `/today`. The bot will
 also have a command that will not be listed in the command line interface. and that command is `/admin`. If used without any paramenters the
 bot will start using the inline keyboad to interact with the user. This will be useful for when the admin is not comfortable with manually entering
 commands.
+
+## Installing the bot
+### Node-Red Setup
+
+Yes, you'll need node red for this. Also you'll need to install the following nodes, You dont have to install the EXACT same versions.
+
+```
+npm install node-red-contrib-chatbot
+npm install node-red-contrib-python3-function
+npm install node-red-contrib-pythonshell
+npm install node-red-contrib-telegrambot
+npm install node-red-contrib-telegrambot-home
+npm install node-red-node-email
+npm install node-red-node-feedparser
+npm install node-red-node-rbe
+npm install node-red-node-sentiment
+npm install node-red-node-tail 
+npm install node-red-node-twitter
+```
+
+Then you'll need to import the following node configuration:
+
+```json
+[{"id":"32002f64.828618","type":"tab","label":"Telegram Schedule Bot (TESTING)","disabled":false,"info":""},{"id":"bbc79e48.4ce02","type":"telegram receiver","z":"32002f64.828618","name":"","bot":"c125d188.a3af18","saveDataDir":"","x":95,"y":276,"wires":[["3229d1cf.98e61e"],[]]},{"id":"fe9550f4.fcddd8","type":"pythonshell in","z":"32002f64.828618","name":"Main Processing Function","pyfile":"O:\\GitHub\\schedule_bot_mark_IV\\test_run.py","virtualenv":"","continuous":false,"stdInData":false,"x":1423.9000244140625,"y":290,"wires":[["9183db4f.0bfd1"]]},{"id":"a2371f9.da483e","type":"catch","z":"32002f64.828618","name":"","scope":null,"uncaught":false,"x":1472.5,"y":378.5999755859375,"wires":[["9183db4f.0bfd1"]]},{"id":"261ed448.d3e5b4","type":"pythonshell in","z":"32002f64.828618","name":"Adminsitrative Functions","pyfile":"O:\\GitHub\\schedule_bot_mark_IV\\admin_functions.py","virtualenv":"","continuous":false,"stdInData":false,"x":1425.5,"y":334.4000244140625,"wires":[["9183db4f.0bfd1"]]},{"id":"4eb8821d.5788e4","type":"json","z":"32002f64.828618","name":"Convert to string","property":"payload","action":"str","pretty":false,"x":1169.5,"y":333.4000244140625,"wires":[["261ed448.d3e5b4"]]},{"id":"d7289206.60aa48","type":"telegram event","z":"32002f64.828618","name":"Keyboard_Stuff","bot":"c125d188.a3af18","event":"callback_query","autoanswer":false,"x":85,"y":383.60003662109375,"wires":[["2642cf9b.6ee4f"]]},{"id":"9183db4f.0bfd1","type":"debug","z":"32002f64.828618","name":"Final Debugging","active":true,"tosidebar":true,"console":true,"tostatus":true,"complete":"true","targetType":"full","x":1764.5,"y":294.79998779296875,"wires":[]},{"id":"c431903f.a8749","type":"telegram command","z":"32002f64.828618","name":"/admin handler","command":"/admin","bot":"c125d188.a3af18","strict":false,"x":85,"y":329.5999755859375,"wires":[["2642cf9b.6ee4f"],[]]},{"id":"f170c9f7.41de98","type":"pythonshell in","z":"32002f64.828618","name":"Administrative Respond functions","pyfile":"O:\\GitHub\\schedule_bot_mark_IV\\admin_respond_functions.py","virtualenv":"","continuous":false,"stdInData":false,"x":1454.5,"y":248.20001220703125,"wires":[["9183db4f.0bfd1"]]},{"id":"3229d1cf.98e61e","type":"pythonshell in","z":"32002f64.828618","name":"Check if Awaiting Data","pyfile":"O:\\GitHub\\schedule_bot_mark_IV\\manipulate_payload.py","virtualenv":"","continuous":false,"stdInData":false,"x":408.5,"y":297,"wires":[["8a253e39.2bb5c8"]]},{"id":"1446f66e.7bae72","type":"switch","z":"32002f64.828618","name":"Switch if awaiting data","property":"payload.awaiting_data","propertyType":"msg","rules":[{"t":"true"},{"t":"false"}],"checkall":"true","repair":false,"outputs":2,"x":874.2000732421875,"y":264,"wires":[["1cd6bc7b.b365ac"],["3dc685ae.ecd012"]]},{"id":"2642cf9b.6ee4f","type":"pythonshell in","z":"32002f64.828618","name":"Check if Awaiting Data","pyfile":"O:\\GitHub\\schedule_bot_mark_IV\\manipulate_payload.py","virtualenv":"","continuous":false,"stdInData":false,"x":408.20001220703125,"y":337.20001220703125,"wires":[["a4199e6.6b948e"]]},{"id":"3dc685ae.ecd012","type":"json","z":"32002f64.828618","name":"Convert to string","property":"payload","action":"str","pretty":false,"x":1165,"y":291,"wires":[["fe9550f4.fcddd8"]]},{"id":"8a253e39.2bb5c8","type":"json","z":"32002f64.828618","name":"Convert to Object","property":"payload","action":"obj","pretty":false,"x":645,"y":277,"wires":[["1446f66e.7bae72"]]},{"id":"1cd6bc7b.b365ac","type":"json","z":"32002f64.828618","name":"Convert to string","property":"payload","action":"str","pretty":false,"x":1166,"y":252,"wires":[["f170c9f7.41de98"]]},{"id":"69b77233.d12264","type":"switch","z":"32002f64.828618","name":"Switch if awaiting data","property":"payload.awaiting_data","propertyType":"msg","rules":[{"t":"true"},{"t":"false"}],"checkall":"true","repair":false,"outputs":2,"x":875,"y":336,"wires":[[],["4eb8821d.5788e4"]]},{"id":"a4199e6.6b948e","type":"json","z":"32002f64.828618","name":"Convert to Object","property":"payload","action":"obj","pretty":false,"x":649.7999267578125,"y":339,"wires":[["69b77233.d12264"]]},{"id":"c125d188.a3af18","type":"telegram bot","z":"","botname":"FRIDAY","usernames":"","chatids":"","baseapiurl":"","updatemode":"polling","pollinterval":"1","usesocks":false,"sockshost":"","socksport":"6667","socksusername":"anonymous","sockspassword":"","bothost":"","localbotport":"8443","publicbotport":"8443","privatekey":"","certificate":"","useselfsignedcertificate":false,"verboselogging":false}]
+```
 
 ## Using the bot
 
