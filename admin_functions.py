@@ -15,9 +15,14 @@ content = converted["content"]
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
 if (converted["type"] == "callback_query"):
+    # check if the message is
+    # callback query or a 
+    # normal message
     queryMode = True
     query_id = converted["callbackQueryId"]
 else:
+    # aaaand the fallback
+    # cool? cool cool cool cool
     queryMode = False
     query_id = 0
 
@@ -31,9 +36,7 @@ else:
     # interactive mode
     command = "EnterInteractiveMode"
 
-
 print("Command : " + command) # debug the command in the node-red command lines...
-
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
 
@@ -130,11 +133,16 @@ if (str(chat_id) not in awaiting_response_list):
         bot.sendMessage(chat_id, "Interactive mode disabled. You now have to use command lines. Send /admin to restart interactive mode.", parse_mode="markdown")
 
     elif (command == "append_interactive"):
+        # this is the function to appened sessions
+        # via interactive mode...
         core.delLastMessage(chat_id)
-        respond_lib.appendStatus_await(chat_id, "append")
-        core.appendChat(bot.sendMessage(chat_id, "Please send the data in a good syntax, Send /cancel to cancel this operation"))
+        respond_lib.appendStatus_await(chat_id, "append_session")
+        core.appendChat(bot.sendMessage(chat_id, "*Append Session : * \nPlease send the session details in the appropriate syntax. Type /help to view the syntax \nSend /cancel to cancel this operation", parse_mode="markdown"))
     
-    else: # fall back clause...
+    else: 
+        # fall back clause...
+        # every conditional statement should have
+        # one... Subscribe to Pewdiepie
         bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")
         
 else:

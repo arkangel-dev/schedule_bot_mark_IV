@@ -16,21 +16,29 @@ bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
 def openJsonFile(filename):
     # open the json file...
+    # pretty explanatory...
     try:
+        # try to open this file
         f = open(filename , "r")
         file_json = f.read()
         return_value = json.loads(file_json)
         return(return_value)
     except:
+        # if it all goes south
+        # mostly by absent files
+        # or non valid data in said files
         print("Operation error while opening file : " + filename)
         exit()
 
 def saveJsonFile(data, filename):
+    # this is the save counterpart for
+    # the openJsonFile() function
+    # Yay!
     try:
         with open(filename, 'w') as outfile: # save the file
             json.dump(data, outfile)
     except:
-        print("Operation error while saving file")
+        print("Operation error while saving file to disk : " + filename)
         exit()
 
 def appendChat(raw_json):
@@ -89,4 +97,7 @@ def delLastMessage(chat_id):
             print("ERR : Message not found : (The specified keyboard was not found)")
 
 def sendCompleteCurrentOperation(chat_id):
-    bot.sendMessage(chat_id, "Please complete current function. Send /cancel to cancel current function.")
+    # this is what is supposed to be done when
+    # user tries to execute commands when the 
+    # system is expecting input from the user...
+    bot.sendMessage(chat_id, "Please complete current operation. If you dont want to complete this operation send /cancel and get this over with. I have places to be.")
