@@ -291,7 +291,6 @@ def RevertCancellationById(chat_id, query_id, day, session_id):
         json.dump(append_raw_data, outfile)
     SendCancelledSessionList(chat_id)
 
-
 def SendCustomKeyboard(chat_id, content, commands):
     # send a custom keyboard with custom commands
     # the commands will have to be sent as an array...

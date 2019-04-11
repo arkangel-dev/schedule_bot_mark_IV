@@ -40,7 +40,19 @@ def appendSession_enter(chat_id, content):
     # to the temporary library!
     # now the data struct is day,session_name,start_time,end_time,bring_laptop,lecturer_name,venue
     content_count = len(content.split(","))
+    split_content = content.split(",")
     if (content_count != 7):
         bot.sendMessage(chat_id, "The inputs you gave were insufficient. 7 inputs expected, " + str(content_count) + " inputs were recieved.")
     else:
-        bot.sendMessage(chat_id, "Input has been accepted. :)")
+        bot.sendMessage(chat_id, "Input accepted.\nProcessing...")
+    dayName = split_content[0]
+    sessionName = split_content[1]
+    startTime = split_content[2]
+    endTime = split_content[3]
+    bringLaptop = split_content[4]
+    lecturerName = split_content[5]
+    venue = split_content[6]
+
+    stringList = dayName + sessionName + startTime + endTime + bringLaptop + lecturerName + venue
+    bot.sendMessage(chat_id, stringList)
+    

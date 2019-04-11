@@ -12,19 +12,21 @@ converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
 bot.sendChatAction(chat_id, "typing")
-# if (content.split()[0] == "/cancel"):
-#     # check if this user is trying to cancel
-#     # the currrent operation. 
-#     respond_lib.deleteStatus_await(chat_id)
-#     # exit or else things will go wrong...
+if (content.split()[0] == "/cancel"):
+    # check if this user is trying to cancel
+    # the currrent operation. 
+    respond_lib.deleteStatus_await(chat_id)
+    # do not comment ^ this out
+    # because without it there is no
+    # way to break out of an infinite
+    # input request
 
 if (content.split()[0][0] == "/"):
     # see if the user is trying
     # execute a command...
     core.sendCompleteCurrentOperation(chat_id)
     exit() # be sure to exit. or else things can get messy
-
-
+    
 
 # aight, lets go over how this will work.
 # when the user invokes a function that require
