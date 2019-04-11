@@ -22,7 +22,8 @@ user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
 
 if (command == "/cancel"):
-	exit()
+    bot.sendMessage(chatId, "I wasn't doing anything anyway, *Zzzzzzz*", parse_mode="markdown")
+    exit()
 
 if (command == "/today"):
 	sendstring = ""

@@ -12,11 +12,11 @@ converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
 
-if (content.split()[0] == "/cancel"):
-    # check if this user is trying to cancel
-    # the currrent operation. 
-    respond_lib.deleteStatus_await(chat_id)
-    # exit or else things will go wrong...
+# if (content.split()[0] == "/cancel"):
+#     # check if this user is trying to cancel
+#     # the currrent operation. 
+#     respond_lib.deleteStatus_await(chat_id)
+#     # exit or else things will go wrong...
 
 if (content.split()[0][0] == "/"):
     # see if the user is trying

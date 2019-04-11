@@ -28,8 +28,8 @@ def deleteStatus_await(userid):
         core.saveJsonFile(user_status_data, "user_status_data.json")
         admin_lib.SendCommandMain(userid, "NULL")
         exit()
-    else:
-        bot.sendMessage(userid, "I wasn't doing anything anyway, *Zzzzzzz*", parse_mode="markdown")
+
+        
 
 # Try not to mess with anything above this line...
 # please... Just dont... You'll mess up something
