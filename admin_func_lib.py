@@ -113,8 +113,9 @@ def help_list(chat_id, query_mode, query_id):
     # any additional arguments are ignored
     #
     outputList = [] # create the help Lists
-    outputList.append("*HELP* \n\n")
-
+    outputList.append("*Help* \n\n")
+    outputList.append("*Append session* : \nTo append a session click manipulate sessions on the main keyboard, from there click on append session. And send the details of the session when requested. The details have to be syntaxed in the following way : Day Name, Session Name, Start Time, End Time, Bring Laptop Boolean, Professor Name, Venue \n\n")
+    outputList.append("*Cancel Session* : \nTo cancel a session, click on manipluate session on the main keyboard, from here click on cancel session, then you are presented with a list of days. Select a day and you'll be presented with a list of sessions. Click on a session to cancel it.")
     outputList.append("\n\n `Admin Functions Version : " + str(af_version) + "`")
 
     # convert it to a single string...

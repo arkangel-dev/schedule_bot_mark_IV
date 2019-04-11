@@ -13,6 +13,7 @@ converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
+bot.sendChatAction(chat_id, "typing")
 
 if (converted["type"] == "callback_query"):
     # check if the message is

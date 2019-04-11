@@ -17,13 +17,15 @@ converted = json.loads(raw)
 chatId = converted["chatId"]
 content = converted["content"]
 command = content.split()[0]
-
+bot.sendChatAction(chatId, "typing")
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
 
 if (command == "/cancel"):
-    bot.sendMessage(chatId, "I wasn't doing anything anyway, *Zzzzzzz*", parse_mode="markdown")
-    exit()
+	# this cancel function is here because if
+	# this file will not be invoked at all
+	bot.sendMessage(chatId, "No active command to cancel. I wasn't doing anything anyway. Zzzzz...", parse_mode="markdown")
+	exit()
 
 if (command == "/today"):
 	sendstring = ""

@@ -11,7 +11,7 @@ raw = sys.argv[1]
 converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
-
+bot.sendChatAction(chat_id, "typing")
 # if (content.split()[0] == "/cancel"):
 #     # check if this user is trying to cancel
 #     # the currrent operation. 
