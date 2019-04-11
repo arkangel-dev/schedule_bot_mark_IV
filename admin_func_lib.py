@@ -8,6 +8,7 @@ import parse_data as parsedata
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import datetime
 from env import TELEGRAM_BOT_API_KEY
+from env import BUILD_ID
 
 # open the append-session file...
 f = open("appended_sessions_list.json" , "r")
@@ -114,9 +115,11 @@ def help_list(chat_id, query_mode, query_id):
     #
     outputList = [] # create the help Lists
     outputList.append("*Help* \n\n")
-    outputList.append("*Append session* : \nTo append a session click manipulate sessions on the main keyboard, from there click on append session. And send the details of the session when requested. The details have to be syntaxed in the following way : Day Name, Session Name, Start Time, End Time, Bring Laptop Boolean, Professor Name, Venue \n\n")
-    outputList.append("*Cancel Session* : \nTo cancel a session, click on manipluate session on the main keyboard, from here click on cancel session, then you are presented with a list of days. Select a day and you'll be presented with a list of sessions. Click on a session to cancel it.")
+    outputList.append("*Append session* :  \nTo append a session click manipulate sessions on the main keyboard, from there click on append session. And send the details of the session when requested. The details have to be syntaxed in the following way : Day Name, Session Name, Start Time, End Time, Bring Laptop Boolean, Professor Name, Venue \n\n")
+    outputList.append("*Cancel Session* :  \nTo cancel a session, click on manipluate session on the main keyboard, from here click on cancel session, then you are presented with a list of days. Select a day and you'll be presented with a list of sessions. Click on a session to cancel it. \n\n")
+    outputList.append("*Revert Cancellation* : \nTo revert the effect of cancellation of sessions, click on manipulate sessions on the main keyboard. From here select Revert Cancellation and you'll be presented with a list of cancelled sessions. Click on one of them to revert the cancellation effect.")
     outputList.append("\n\n `Admin Functions Version : " + str(af_version) + "`")
+    outputList.append("\n  `Development Version : " + str(BUILD_ID) + "`")
 
     # convert it to a single string...
     finalString = ""
