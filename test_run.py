@@ -9,7 +9,6 @@ import sys
 import json
 import core_functions as core
  
-
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
 raw = sys.argv[1]
@@ -27,13 +26,29 @@ if (command == "/cancel"):
 	bot.sendMessage(chatId, "No active command to cancel. I wasn't doing anything anyway. Zzzzz...", parse_mode="markdown")
 	exit()
 
+elif (command == "/admin"):
+	# exit because this is an admin function and
+	# this file has no busness meddling with admin functions...
+	exit()
+
 if (command == "/today"):
+	# send the status data
+	# for today's data...
 	sendstring = ""
 	output = parse_nl.getFullTodayNL()
 	for x in output:
 		sendstring += x + "\n"
 	bot.sendMessage(chatId, sendstring, parse_mode="Markdown")
-	print("[+] Send Today Data...")
+	print("[+] Send Today Data...") 
 
-if (command == "/start"):
-	bot.sendMessage(chatId, "*Start Administrative Mode : * \nInteractive mode disabled. You now have to use command lines. Send /admin to start interactive mode. Send `/admin help` to get a list of commands.", parse_mode="markdown")
+elif (command == "/start"):
+	# send a the response for the 
+	# start commands
+	bot.sendMessage(chatId, "*Normie Mode : * \nUse this to get dates and junk. For normies", parse_mode="markdown")
+	bot.sendMessage(chatId, "*🔥 Administrative Mode 🔥 : * \nThis mode is only accessible by users with special access. If you are registered as an admin send /admin to start interactive mode.", parse_mode="markdown")
+
+else:
+	# this is the fallback
+	# condition. incase the command does not match
+	# any functions programmed in
+	bot.sendMessage(chatId, "I'm sorry, what?")

@@ -68,16 +68,18 @@ def append_session(chat_id, content):
     # append day,session_name,start_time,end_time,bring_laptop,lecturer_name,venue
     #
     try: # check if there are any errors
-        arguments = (content.split()[1]).split(",")
+        append_raw_data = core.openJsonFile("appended_sessions_list.json")
+        arguments = content[7:len(content)].split(",")
+        print(arguments)
         dataStuct_str = arguments[1] + "," + arguments[2] + "," + arguments[3] + "," + arguments[4] + "," + arguments[5] + "," + arguments[6] # create the data structure
         dataStuct = dataStuct_str.split(",") # convert the string data structure to a list
-        append_raw_data["appended"][arguments[0]].append(dataStuct) # append that list to the set date
-        with open('test_json.json', 'w') as outfile: # save the file
-            json.dump(append_raw_data, outfile)
-        bot.sendMessage(chat_id, "Session appended to " + arguments[0] + " as the set [" + dataStuct_str + "]")
+        append_raw_data["appended"][arguments[0].lower()].append(dataStuct) # append that list to the set date
+        core.saveJsonFile(append_raw_data, "appended_sessions_list.json")
+        bot.sendMessage(chat_id, "Session appended to *" + arguments[0].capitalize() + "* as the set `[" + dataStuct_str + "]`", parse_mode="markdown")
+        return(1)
     except Exception: # fall back for the errors : Can only be triggered by a bad request
         bot.sendMessage(chat_id, "ERROR : Malformed argument set reciveved")
-
+        return(0)
 # ####################################################################################
 # ####################################################################################
 
@@ -114,12 +116,15 @@ def help_list(chat_id, query_mode, query_id):
     # any additional arguments are ignored
     #
     outputList = [] # create the help Lists
-    outputList.append("*Help* \n\n")
-    outputList.append("*Append session* :  \nTo append a session click manipulate sessions on the main keyboard, from there click on append session. And send the details of the session when requested. The details have to be syntaxed in the following way : Day Name, Session Name, Start Time, End Time, Bring Laptop Boolean, Professor Name, Venue \n\n")
+    outputList.append("*🔥 THE TEXT THAT WILL TELL YOU WHAT TO DO 🔥* \n\n\n")
+    outputList.append("*Intoduction* : \nAs long as technology existed there existed folks who didn't know squat about said technology. So a group high minded interllectuals gathered and came up with the concept of the documentation. They wrote documentation for every piece of innovation they made. They even made a tutorial on how to lift up a chair. So anyway, the backend development of a telegram bot is pretty new to me and the code is pretty weird. So naturally me (@ArkangelDev) and Ice Bear (@athfan) had to create a documentation for this. But our documentation is pretty weird. Also we have a weird sense of humor and thus this un-nessesarily looong text. Soo yeah, you wasted 3 minutes reading this.\n\n")
+    outputList.append("*Append session* :  \nTo append a session click manipulate sessions on the main keyboard, from there click on append session. And send the details of the session when requested. The details have to be syntaxed in the following way : _Day Name, Session Name, Start Time, End Time, Bring Laptop Boolean, Professor Name, Venue_ \n\n")
     outputList.append("*Cancel Session* :  \nTo cancel a session, click on manipluate session on the main keyboard, from here click on cancel session, then you are presented with a list of days. Select a day and you'll be presented with a list of sessions. Click on a session to cancel it. \n\n")
-    outputList.append("*Revert Cancellation* : \nTo revert the effect of cancellation of sessions, click on manipulate sessions on the main keyboard. From here select Revert Cancellation and you'll be presented with a list of cancelled sessions. Click on one of them to revert the cancellation effect.")
-    outputList.append("\n\n `Admin Functions Version : " + str(af_version) + "`")
-    outputList.append("\n  `Development Version : " + str(BUILD_ID) + "`")
+    outputList.append("*Revert Cancellation* : \nTo revert the effect of cancellation of sessions, click on manipulate sessions on the main keyboard. From here select Revert Cancellation and you'll be presented with a list of cancelled sessions. Click on one of them to revert the cancellation effect.\n\n")
+    outputList.append("*Revert Appending* : \nTo revert an appended session. This function is not ready yet... So yeah... Subscribe to PewDiePie! \n\n")
+    outputList.append("`Admin Functions Version : " + str(af_version) + "`")
+    outputList.append("\n`Development Version : " + str(BUILD_ID) + "`")
+    outputList.append("\n`Created and Hosted by @ArkangelDev, @athfan`")
 
     # convert it to a single string...
     finalString = ""
@@ -179,11 +184,11 @@ def SendCommandManipulate(chat_id, content):
                         [InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')]
                    ])
     core.delLastMessage(chat_id)
-    core.appendChat(bot.sendMessage(chat_id, "*Cancel Session :* \nSelect a command : ", reply_markup = keyboard, parse_mode="markdown"))
+    core.appendChat(bot.sendMessage(chat_id, "*Manipulate Session :* \nSelect a command : ", reply_markup = keyboard, parse_mode="markdown"))
 
 def SendCommandMain(chat_id, content):
     # override the content variable
-    content = "*Main Menu : * \nPlease select a command to continue : "
+    content = "*Admin Main Menu : * \nPlease select a command to continue : "
     # this is the function that will be sent to the user when the /admin function is
     # first invoked...
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...

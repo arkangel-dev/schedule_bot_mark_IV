@@ -2,6 +2,7 @@ import core_functions as core
 import telepot
 import env
 import admin_func_lib as admin_lib
+import time
 
 bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
 
@@ -39,20 +40,28 @@ def appendSession_enter(chat_id, content):
     # so this is the function to enter sessions
     # to the temporary library!
     # now the data struct is day,session_name,start_time,end_time,bring_laptop,lecturer_name,venue
+    
+    if (content == "/done"):
+        deleteStatus_await(chat_id)
+        bot.sendMessage(chat_id, "Ok, the session have been appeneded")
+        admin_lib.SendCommandMain(chat_id, "Null")
+        time.sleep(3)
+        exit()
+    
     content_count = len(content.split(","))
-    split_content = content.split(",")
     if (content_count != 7):
         bot.sendMessage(chat_id, "The inputs you gave were insufficient. 7 inputs expected, " + str(content_count) + " inputs were recieved.")
     else:
-        bot.sendMessage(chat_id, "Input accepted.\nProcessing...")
-    dayName = split_content[0]
-    sessionName = split_content[1]
-    startTime = split_content[2]
-    endTime = split_content[3]
-    bringLaptop = split_content[4]
-    lecturerName = split_content[5]
-    venue = split_content[6]
+        fixed_charset = []
+        for x in content.split(","):
+            first_char = x[0]
+            if (first_char != " "):
+                fixed_charset.append(x)
+            else:
+                fixed_charset.append(x[1:len(x)])
+        send_data = "append " + fixed_charset[0] + "," + fixed_charset[1] + "," + fixed_charset[2] + "," + fixed_charset[3] + "," + fixed_charset[4] + "," + fixed_charset[5] + "," + fixed_charset[6]  
+        admin_lib.append_session(chat_id, send_data)
+        bot.sendMessage(chat_id, "Good job. If you have more sessions to append, keep sending them. If not send /done to finish up")
 
-    stringList = dayName + sessionName + startTime + endTime + bringLaptop + lecturerName + venue
-    bot.sendMessage(chat_id, stringList)
+
     

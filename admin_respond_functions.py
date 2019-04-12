@@ -21,12 +21,12 @@ if (content.split()[0] == "/cancel"):
     # way to break out of an infinite
     # input request
 
-if (content.split()[0][0] == "/"):
+if (content.split()[0][0] == "/") and (content.split()[0] != "/done"):
     # see if the user is trying
     # execute a command...
     core.sendCompleteCurrentOperation(chat_id)
     exit() # be sure to exit. or else things can get messy
-    
+
 
 # aight, lets go over how this will work.
 # when the user invokes a function that require

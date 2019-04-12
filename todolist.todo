@@ -14,5 +14,6 @@ TODO LIST
 ✔ Make the append function to the respond_function_library.py @done(19-04-09 14:41)
 ✔ Fix issues with trying to cancel and detecting execution of other commands @done(19-04-09 14:17)
 ✘ Fix the function names in user_status_data.json @cancelled(19-04-09 14:41)
-☐ Add append command details to the help function
+✔ Add append command details to the help function @done(19-04-12 15:31)
 ✔ Add chatstatus stuff @done(19-04-11 14:33)
+☐ Add user filters to prevent unauthorised access
