@@ -3,7 +3,6 @@ TODO LIST
 ✔ Fix bug with message ledger function for inline keyboard @done(19-04-08 11:36)
 ✔ To get the reply ledger working I need to redesign the whole node-red workflow (this is bad) @done(19-04-08 21:54)
 ✔ Test out a legder based method for accepting additional parameters @done(19-04-08 20:32)
-☐ Add a cancel appended session function
 ✔ Add cancel / double feature for fun @done(19-04-11 12:26)
 ✔ Create function to append data to the user_status_data file. @done(19-04-08 20:52)
 ✔ Create function to delete date from the user_status_data file @done(19-04-08 20:57)
@@ -16,4 +15,11 @@ TODO LIST
 ✘ Fix the function names in user_status_data.json @cancelled(19-04-09 14:41)
 ✔ Add append command details to the help function @done(19-04-12 15:31)
 ✔ Add chatstatus stuff @done(19-04-11 14:33)
-☐ Add user filters to prevent unauthorised access
+☐ Add user filters to prevent unauthorised access to /admin function
+☐ Add blast out function
+☐ Add logging feature to blast out function
+☐ Add a cancel appended session function
+☐ Improve /today funtion
+☐ Add /amifreeon function
+☐ Add more emojis to the chats...
+☐ Add interactive keyboards for the normies

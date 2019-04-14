@@ -192,8 +192,9 @@ def SendCommandMain(chat_id, content):
     # this is the function that will be sent to the user when the /admin function is
     # first invoked...
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
-                        [InlineKeyboardButton(text="List Sessions", callback_data='send_list_keyboard')],
-                        [InlineKeyboardButton(text="Manipulate Sessions", callback_data="send_manipulate_keyboard")],
+                        [InlineKeyboardButton(text="List Sessions", callback_data='send_list_keyboard'),
+                        InlineKeyboardButton(text="Manipulate Sessions", callback_data="send_manipulate_keyboard")],
+                        [InlineKeyboardButton(text="Send out blast", callback_data='WIP')],
                         [InlineKeyboardButton(text="Call for help", callback_data='help')],
                         [InlineKeyboardButton(text="Exit Interactive Mode", callback_data="disable_interactive")]
                    ])
