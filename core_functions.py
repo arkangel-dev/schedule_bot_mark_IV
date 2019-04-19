@@ -101,3 +101,13 @@ def sendCompleteCurrentOperation(chat_id):
     # user tries to execute commands when the 
     # system is expecting input from the user...
     bot.sendMessage(chat_id, "Please complete current operation. If you dont want to complete this operation send /cancel and get this over with. I have places to be.")
+
+def checkAuthlist(chat_id, list_name):
+    # this function will accept a chat_id and a list
+    # that will return if a user is authorised...
+    authList = openJsonFile("auth_list.json")
+    subList = authList[list_name]
+    if (chat_id in subList):
+        return(True)
+    else:
+        return(False)

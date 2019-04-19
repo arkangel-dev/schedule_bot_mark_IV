@@ -10,6 +10,9 @@ from datetime import datetime
 from env import TELEGRAM_BOT_API_KEY
 from env import BUILD_ID
 
+
+    
+
 # open the append-session file...
 f = open("appended_sessions_list.json" , "r")
 file_json = f.read()
@@ -229,6 +232,7 @@ def Cancel_SendSessionList(chat_id, DayName):
                 keyboard.append([InlineKeyboardButton(text=keyboard_text, callback_data=callback_text)])  # append the keyboard button into the keyboard
                 # Make the send the keyboard
 
+
         keyboard.append([InlineKeyboardButton(text="Go Back", callback_data='cancel_session')])
         SendCustomKeyboard(chat_id, "*Cancel Session : * \nPlease select a session from the list below to cancel it : ", keyboard)
         # add the cancel button
@@ -253,7 +257,6 @@ def Cancel_SendDayList(chat_id):
         [InlineKeyboardButton(text="Saturday", callback_data='cancel_getsessionid Saturday')],
         [InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')],
     ]
-
     SendCustomKeyboard(chat_id, "*Cancel Session :* \nSelect a day :", keyboardList)
 
 def CancelSessionById(chat_id, DayName, session_id):
@@ -287,6 +290,30 @@ def SendCancelledSessionList(chat_id):
         # or else send a keyboard that lists all the sessions...
         keyboardButtons.append([InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')])
         SendCustomKeyboard(chat_id, "*Revert Cancellation : * \nPlease select a session to revert its cancellation :", keyboardButtons)
+
+def SendAppendedSessionList(chat_id):
+    # function to send a list of cancelled sessions so
+    # that the effects of the cancellation will be reverted...
+    keyboardButtons = []
+    dayList = ("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
+    for dayIndex in range(0, 6):
+        testDay = dayList[dayIndex]
+        if (len(append_raw_data["appended"][testDay]) != 0):
+            for testSession in append_raw_data["appended"][testDay]:
+                dayData = parsedata.parseSessionData(int(testSession), dayList[dayIndex])
+                buttonText = dayList[dayIndex].capitalize() + " | " + dayData[0] + " | " + dayData[1] + " - " + dayData[2] + " | " + dayData[5]
+                callbackData = "revert_append " + dayList[dayIndex] + " " + str(testSession)
+                keyboardButtons.append([InlineKeyboardButton(text=buttonText, callback_data=callbackData)])
+    if (len(keyboardButtons) == 0):
+        # if there are no session available
+        # just send a keyboard content saying so...
+        keyboardButtons.append([InlineKeyboardButton(text="Go Back", callback_data='EnterInteractiveMode')])
+        SendCustomKeyboard(chat_id, "*Revert Append : * \nYou have no sessions appended. Please append a session so you can delete it, just like how my creator created me and will abandon me... :", keyboardButtons)
+    else:
+        # or else send a keyboard that lists all the sessions...
+        keyboardButtons.append([InlineKeyboardButton(text="Cancel", callback_data='EnterInteractiveMode')])
+        SendCustomKeyboard(chat_id, "*Revert Append : * \nPlease select an appended session to cancel it :", keyboardButtons)
+
 
 def RevertCancellationById(chat_id, query_id, day, session_id):
     # Revert the cancellation of a session

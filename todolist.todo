@@ -15,7 +15,8 @@ TODO LIST
 ✘ Fix the function names in user_status_data.json @cancelled(19-04-09 14:41)
 ✔ Add append command details to the help function @done(19-04-12 15:31)
 ✔ Add chatstatus stuff @done(19-04-11 14:33)
-☐ Add user filters to prevent unauthorised access to /admin function
+✔ Add user filters to prevent unauthorised access to /admin function @done(19-04-19 14:36)
+☐ Add a function to add administrators
 ☐ Add blast out function
 ☐ Add logging feature to blast out function
 ☐ Add a cancel appended session function

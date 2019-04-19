@@ -14,6 +14,13 @@ chat_id = converted["chatId"]
 content = converted["content"]
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
+# check if this user is authorised to access the admin
+# functions...
+if (not core.checkAuthlist(chat_id, "admin")):
+    bot.sendMessage(chat_id, "You are not authorised to access this function. Please contact an administrator to get registered as an admin.")
+    exit()
+
+
 if (converted["type"] == "callback_query"):
     # check if the message is
     # callback query or a 
