@@ -17,10 +17,11 @@ TODO LIST
 ✔ Add chatstatus stuff @done(19-04-11 14:33)
 ✔ Add user filters to prevent unauthorised access to /admin function @done(19-04-19 14:36)
 ☐ Add a function to add administrators
+☐ Add function to revoke admin rights from users
 ☐ Add blast out function
 ☐ Add logging feature to blast out function
 ☐ Add a cancel appended session function
 ☐ Improve /today funtion
 ☐ Add /amifreeon function
-☐ Add more emojis to the chats...
+☐ Add more emojis to the chats
 ☐ Add interactive keyboards for the normies

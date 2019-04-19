@@ -197,12 +197,30 @@ def SendCommandMain(chat_id, content):
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
                         [InlineKeyboardButton(text="List Sessions", callback_data='send_list_keyboard'),
                         InlineKeyboardButton(text="Manipulate Sessions", callback_data="send_manipulate_keyboard")],
-                        [InlineKeyboardButton(text="Send out blast", callback_data='WIP')],
+                        [InlineKeyboardButton(text="Send out blast", callback_data='WIP'),
+                        InlineKeyboardButton(text="Core Settings", callback_data="corefunctionkeyboard")],
                         [InlineKeyboardButton(text="Call for help", callback_data='help')],
                         [InlineKeyboardButton(text="Exit Interactive Mode", callback_data="disable_interactive")]
                    ])
     core.delLastMessage(chat_id)
     core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
+
+def sendCoreFunctKeyboard(chat_id):
+    if (not core.checkAuthlist(chat_id, "core_admin")):
+        bot.sendMessage(chat_id, "You are not authorised to access this function. Contact a high level admin to gain access to this function.")
+        SendCommandMain(chat_id, "Null")
+        exit()
+   
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+                        [InlineKeyboardButton(text="Add admin", callback_data="admin_add"),
+                        InlineKeyboardButton(text="Remove admin", callback_data="admin_remove")],
+                        [InlineKeyboardButton(text="Add high admin", callback_data="h_admin_add"),
+                        InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_remove")],
+                        [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
+                        [InlineKeyboardButton(text="Go back", callback_data="EnterInteractiveMode")]
+                    ])
+    core.delLastMessage(chat_id)
+    core.appendChat(bot.sendMessage(chat_id, "*Core functions : * \nPlease select a command to continue :", reply_markup=keyboard, parse_mode="markdown"))
 
 def Cancel_SendSessionList(chat_id, DayName):
     # send a list of keyboard button containing

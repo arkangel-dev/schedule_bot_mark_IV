@@ -20,7 +20,6 @@ if (not core.checkAuthlist(chat_id, "admin")):
     bot.sendMessage(chat_id, "You are not authorised to access this function. Please contact an administrator to get registered as an admin.")
     exit()
 
-
 if (converted["type"] == "callback_query"):
     # check if the message is
     # callback query or a 
@@ -146,11 +145,17 @@ if (str(chat_id) not in awaiting_response_list):
         respond_lib.appendStatus_await(chat_id, "append_session")
         core.appendChat(bot.sendMessage(chat_id, "*Append Session : * \nPlease send the session details in the appropriate syntax. Type /help to view the syntax \nSend /cancel to cancel this operation", parse_mode="markdown"))
     
+    elif (command == "corefunctionkeyboard"):
+        # this function is used to send a keyboard for the core functions.
+        # this will aslo be filtered from a list of authorised list
+        admin_func.sendCoreFunctKeyboard(chat_id)
+
     else: 
         # fall back clause...
         # every conditional statement should have
         # one... Subscribe to Pewdiepie
         bot.sendMessage(chat_id, "Command not found. Send `/admin help` for a list of commands", parse_mode="markdown")
+
         
 else:
     # fall back if there is a operation to be completed by the user...
