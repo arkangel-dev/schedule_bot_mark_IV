@@ -206,6 +206,9 @@ def SendCommandMain(chat_id, content):
     core.appendChat(bot.sendMessage(chat_id, content, reply_markup = keyboard, parse_mode="markdown"))
 
 def sendCoreFunctKeyboard(chat_id):
+    # Ok what this function does is that its will send a list
+    # of command that are like really not nessesary to edit but 
+    # crucial to the system. Like resetting json files, and junk
     if (not core.checkAuthlist(chat_id, "core_admin")):
         bot.sendMessage(chat_id, "You are not authorised to access this function. Contact a high level admin to gain access to this function.")
         SendCommandMain(chat_id, "Null")
@@ -217,10 +220,11 @@ def sendCoreFunctKeyboard(chat_id):
                         [InlineKeyboardButton(text="Add high admin", callback_data="h_admin_add"),
                         InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_remove")],
                         [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
+                        [InlineKeyboardButton(text="☠️   Shutdown system   ☠️", callback_data="shutdown_core")],
                         [InlineKeyboardButton(text="Go back", callback_data="EnterInteractiveMode")]
                     ])
     core.delLastMessage(chat_id)
-    core.appendChat(bot.sendMessage(chat_id, "*Core functions : * \nPlease select a command to continue :", reply_markup=keyboard, parse_mode="markdown"))
+    core.appendChat(bot.sendMessage(chat_id, "*Core functions (Dangerous): * \nPlease select a command to continue :", reply_markup=keyboard, parse_mode="markdown"))
 
 def Cancel_SendSessionList(chat_id, DayName):
     # send a list of keyboard button containing
