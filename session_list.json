@@ -1,36 +1,36 @@
-{ 
-"days" :
-	{ 
-		"sunday" :  {
-			"sessions" : [
-				["CNS","2000","2200","True","Mr.Krishnamoorthy","Computer Lab 2"]
-			]
-		},
-		"monday" :  {
-			"sessions" : []
-		},
-		"tuesday" : {
-			"sessions" : []
-		},
-		"wednesday" : {
-			"sessions" : []
-		},
-		"thursday" :  {
-			"sessions" : [
-				["CNS", "1800", "1900", "False", "Megnha", "NW207"],
-				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1"]
-			]
-		},
-		"friday" : {
-			"sessions" : [
-				["CNS", "1800", "1900", "False", "Megnha", "NW207"],
-				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1"]
-			]
-		},
-		"saturday" : {
-			"sessions" : [
-				["OOSD", "1800", "2000", "True", "Nihaadh", "Lab 1"]
-			]
+
+{
+	"2019" : {
+		"Bsc Hons Computer Science" : {
+			"january" : {
+				"sunday" :  {"sessions" : []},
+				"monday" :  {"sessions" : []},
+				"tuesday" : {"sessions" : []},
+				"wednesday" : {"sessions" : []},
+				"thursday" :  {"sessions" : []},
+				"friday" : {"sessions" : []},
+				"saturday" : {"sessions" : []}
+			},
+			
+			"september" : {
+				"sunday" :  {"sessions" : []},
+				"monday" :  {"sessions" : [["CNS","2000","2200","True","Mr.Krishnamoorthy","Computer Lab 2","Computer Lab 2"]]},
+				"tuesday" : {"sessions" : []},
+				"wednesday" : {"sessions" : []},
+				"thursday" :  {"sessions" : []},
+				"friday" : {"sessions" : []},
+				"saturday" : {"sessions" : []}
+			},
+
+			"may" : {
+				"sunday" :  {"sessions" : []},
+				"monday" :  {"sessions" : []},
+				"tuesday" : {"sessions" : []},
+				"wednesday" : {"sessions" : []},
+				"thursday" :  {"sessions" : []},
+				"friday" : {"sessions" : []},
+				"saturday" : {"sessions" : []}
+			}
 		}
 	}
 }

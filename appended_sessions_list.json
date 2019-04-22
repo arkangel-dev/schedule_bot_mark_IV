@@ -1,1 +1,20 @@
-{"cancelled": {"sunday": [], "monday": [], "tuesday": [], "wednesday": [], "thursday": [], "friday": ["0"], "saturday": []}, "appended": {"sunday": [["OOSD", "1900", "2000", "True", "David", "Lab 300"]], "monday": [["OOSD", "1900", "2000", "True", "David", "Lab 300"], ["OOSD", "1900", "2000", "True", "David", "Lab 300"]], "tuesday": [], "wednesday": [], "thursday": [], "friday": [], "saturday": []}}
+{
+    "cancelled": {
+        "sunday": [],
+        "monday": [],
+        "tuesday": [],
+        "wednesday": [],
+        "thursday": [],
+        "friday": [],
+        "saturday": []
+    },
+    "appended": {
+        "sunday": [],
+        "monday": [],
+        "tuesday": [],
+        "wednesday": [],
+        "thursday": [],
+        "friday": [],
+        "saturday": []
+    }
+}

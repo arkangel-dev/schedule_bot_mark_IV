@@ -93,7 +93,7 @@ def delLastMessage(chat_id):
         try:
             bot.deleteMessage((chat_id, last_id))
         except:
-            bot.sendMessage(chat_id, "ERRx001 : (The specified keyboard was not found)")
+            # bot.sendMessage(chat_id, "ERRx001 : (The specified keyboard was not found)")
             print("ERR : Message not found : (The specified keyboard was not found)")
 
 def sendCompleteCurrentOperation(chat_id):

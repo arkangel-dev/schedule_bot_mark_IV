@@ -35,7 +35,7 @@ if (command == "/today"):
 	# send the status data
 	# for today's data...
 	sendstring = ""
-	output = parse_nl.getFullTodayNL()
+	output = parse_nl.getFullTodayNL(chatId)
 	for x in output:
 		sendstring += x + "\n"
 	bot.sendMessage(chatId, sendstring, parse_mode="Markdown")
@@ -45,7 +45,7 @@ elif (command == "/start"):
 	# send a the response for the 
 	# start commands
 	bot.sendMessage(chatId, "*Normie Mode : * \nUse this to get dates and junk. For normies", parse_mode="markdown")
-	bot.sendMessage(chatId, "*🔥 Administrative Mode 🔥 : * \nThis mode is only accessible by users with special access. If you are registered as an admin send /admin to start interactive mode.", parse_mode="markdown")
+	bot.sendMessage(chatId, "*Administrative Mode : * \nThis mode is only accessible by users with special access. If you are registered as an admin send /admin to start interactive mode.", parse_mode="markdown")
 
 else:
 	# this is the fallback

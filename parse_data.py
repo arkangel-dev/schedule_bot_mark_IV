@@ -1,5 +1,6 @@
 import json
 import parse_dates
+import core_functions as core
 
 f = open("session_list.json" , "r")
 file_json = f.read()
@@ -11,23 +12,36 @@ append_raw_data = json.loads(file_json)
 
 # session_count = len(raw_data["days"]["wednesday"]["sessions"])
 
-def getSessionCount(day):
+def getUserSubscription(chat_id):
+	raw_subscription_file = core.openJsonFile("subscriptions.json")
+	subscription_data = raw_subscription_file["subscriptions"][str(chat_id)]
+	return(subscription_data)
+
+def getSessionCount(day, chat_id):
 	# returns a count of all session
 	# of a specified date...
-	count = len(raw_data["days"][day.lower()]["sessions"])
+	intake = getUserSubscription(chat_id)[0]
+	programme = getUserSubscription(chat_id)[1]
+	year = getUserSubscription(chat_id)[2]
+	count = len(raw_data[year][programme][intake][day.lower()]["sessions"])
 	return(count)
 
-def parseSessionData(session_id, day):
+def parseSessionData(chat_id, session_id, day):
 	# send detailed information about a specific
 	# specified session of a specified day...
-	if (getSessionCount(day) != 0):
-		session_name	= raw_data["days"][day]["sessions"][session_id][0]
-		start_time		= raw_data["days"][day]["sessions"][session_id][1]
-		end_time		= raw_data["days"][day]["sessions"][session_id][2]
-		bring_laptop	= parseBooleans(raw_data["days"][day]["sessions"][session_id][3])
-		lectuer			= raw_data["days"][day]["sessions"][session_id][4]
-		venue			= raw_data["days"][day]["sessions"][session_id][5]
+	intake = getUserSubscription(chat_id)[0]
+	programme = getUserSubscription(chat_id)[1]
+	year = getUserSubscription(chat_id)[2]
+	if (getSessionCount(day, chat_id) != 0):
+
+		session_name	= raw_data[year][programme][intake][day]["sessions"][session_id][0]
+		start_time		= raw_data[year][programme][intake][day]["sessions"][session_id][1]
+		end_time		= raw_data[year][programme][intake][day]["sessions"][session_id][2]
+		bring_laptop	= parseBooleans(raw_data[year][programme][intake][day]["sessions"][session_id][3])
+		lectuer			= raw_data[year][programme][intake][day]["sessions"][session_id][4]
+		venue			= raw_data[year][programme][intake][day]["sessions"][session_id][5]
 		return(session_name, start_time, end_time, bring_laptop, lectuer, venue)
+
 
 def getCancelledSessionsByDay(day):
 	# get the cancelled session list
