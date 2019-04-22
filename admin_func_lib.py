@@ -230,7 +230,7 @@ def Cancel_SendSessionList(chat_id, DayName):
     # send a list of keyboard button containing
     # all the session of a day that is specified
     # as an argument...
-    session_count = parsedata.getSessionCount(DayName)
+    session_count = parsedata.getSessionCount(chat_id, DayName)
     cancelled_session_list = parsedata.getCancelledSessionsByDay(DayName)
 
     if (session_count != 0 and len(cancelled_session_list) != session_count):
@@ -242,7 +242,7 @@ def Cancel_SendSessionList(chat_id, DayName):
                 # the loop runs from 0 to session_count
                 # parse a the details of the sessions
                 # so the data can be parsed into a keyboard
-                data = parsedata.parseSessionData(sessionid, DayName.lower())
+                data = parsedata.parseSessionData(chat_id,sessionid, DayName.lower())
                 session_name    = data[0]
                 session_start   = data[1]
                 session_end     = data[2]
@@ -299,7 +299,7 @@ def SendCancelledSessionList(chat_id):
         testDay = dayList[dayIndex]
         if (len(append_raw_data["cancelled"][testDay]) != 0):
             for testSession in append_raw_data["cancelled"][testDay]:
-                dayData = parsedata.parseSessionData(int(testSession), dayList[dayIndex])
+                dayData = parsedata.parseSessionData(chat_id, int(testSession), dayList[dayIndex])
                 buttonText = dayList[dayIndex].capitalize() + " | " + dayData[0] + " | " + dayData[1] + " - " + dayData[2] + " | " + dayData[5]
                 callbackData = "revert_cancellation " + dayList[dayIndex] + " " + str(testSession)
                 keyboardButtons.append([InlineKeyboardButton(text=buttonText, callback_data=callbackData)])
@@ -322,7 +322,7 @@ def SendAppendedSessionList(chat_id):
         testDay = dayList[dayIndex]
         if (len(append_raw_data["appended"][testDay]) != 0):
             for testSession in append_raw_data["appended"][testDay]:
-                dayData = parsedata.parseSessionData(int(testSession), dayList[dayIndex])
+                dayData = parsedata.parseSessionData(chat_id, int(testSession), dayList[dayIndex])
                 buttonText = dayList[dayIndex].capitalize() + " | " + dayData[0] + " | " + dayData[1] + " - " + dayData[2] + " | " + dayData[5]
                 callbackData = "revert_append " + dayList[dayIndex] + " " + str(testSession)
                 keyboardButtons.append([InlineKeyboardButton(text=buttonText, callback_data=callbackData)])
@@ -346,11 +346,14 @@ def RevertCancellationById(chat_id, query_id, day, session_id):
         json.dump(append_raw_data, outfile)
     SendCancelledSessionList(chat_id)
 
-def SendCustomKeyboard(chat_id, content, commands):
+def SendCustomKeyboard(chat_id, content, commands, log = True):
     # send a custom keyboard with custom commands
     # the commands will have to be sent as an array...
     keyboard = InlineKeyboardMarkup(inline_keyboard=commands)
-    core.delLastMessage(chat_id)
-    core.appendChat(bot.sendMessage( chat_id, content, reply_markup=keyboard, parse_mode="markdown"))
+    if (log):
+        core.delLastMessage(chat_id)
+        core.appendChat(bot.sendMessage( chat_id, content, reply_markup=keyboard, parse_mode="markdown"))
+    else:
+        bot.sendMessage(chat_id, content, reply_markup=keyboard, parse_mode="markdown")
 
 

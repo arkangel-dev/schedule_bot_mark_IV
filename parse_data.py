@@ -1,6 +1,8 @@
 import json
 import parse_dates
 import core_functions as core
+import env
+import telepot
 
 f = open("session_list.json" , "r")
 file_json = f.read()
@@ -14,8 +16,13 @@ append_raw_data = json.loads(file_json)
 
 def getUserSubscription(chat_id):
 	raw_subscription_file = core.openJsonFile("subscriptions.json")
-	subscription_data = raw_subscription_file["subscriptions"][str(chat_id)]
-	return(subscription_data)
+	if (str(chat_id) in raw_subscription_file["subscriptions"]):
+		subscription_data = raw_subscription_file["subscriptions"][str(chat_id)]
+		return(subscription_data)
+	else:
+		bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
+		bot.sendMessage(chat_id, "Hmm, It seems that you are not registered. Please send /register to register your account to a programme and an intake.")
+		exit()
 
 def getSessionCount(day, chat_id):
 	# returns a count of all session

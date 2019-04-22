@@ -8,6 +8,7 @@ import telepot
 import sys
 import json
 import core_functions as core
+import normie_functions as normie
  
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
@@ -19,6 +20,14 @@ command = content.split()[0]
 bot.sendChatAction(chatId, "typing")
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
+
+if (converted["type"] == "callback_query"):
+    exit()
+else:
+    # aaaand the fallback
+    # cool? cool cool cool cool
+    queryMode = False
+    query_id = 0
 
 if (command == "/cancel"):
 	# this cancel function is here because if
@@ -46,6 +55,12 @@ elif (command == "/start"):
 	# start commands
 	bot.sendMessage(chatId, "*Normie Mode : * \nUse this to get dates and junk. For normies", parse_mode="markdown")
 	bot.sendMessage(chatId, "*Administrative Mode : * \nThis mode is only accessible by users with special access. If you are registered as an admin send /admin to start interactive mode.", parse_mode="markdown")
+
+elif (command == "/register"):
+	# send a keyboard so the user can register
+	# their account to a programme
+	context = len(content.split()) - 1
+	normie.registerUser(chatId, context, content)
 
 else:
 	# this is the fallback
