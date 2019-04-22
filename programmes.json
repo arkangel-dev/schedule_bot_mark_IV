@@ -1,13 +1,34 @@
 {
     "listings" : {
         "2019" : {
-            "Bsc Hons Computer Science" : [
+            "Diploma in Multimedia Technology " : [
+                "January",
+                "May",
+                "September"
+            ],
+            "BSC (Hons) Computer Science" : [
+                "January",
+                "May",
+                "September"
+            ],
+            "BSC Computer Science" : [
                 "January",
                 "Dae"
             ],
-            "Phycology" : [
+            "BSC Business Information Technology" : [
                 "January",
-                "May"
+                "May",
+                "September"
+            ],
+            "Diploma in Computing " : [
+                "January",
+                "May",
+                "September"
+            ],
+            "MSc Information Technology " : [
+                "January",
+                "May",
+                "September"
             ]
         }
     }
