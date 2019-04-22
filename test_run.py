@@ -59,8 +59,7 @@ elif (command == "/start"):
 elif (command == "/register"):
 	# send a keyboard so the user can register
 	# their account to a programme
-	context = len(content.split()) - 1
-	normie.registerUser(chatId, context, content)
+	normie.registerUser(chatId, content)
 
 else:
 	# this is the fallback

@@ -133,6 +133,12 @@ if (str(chat_id) not in awaiting_response_list):
         # send a list of commands available
         admin_func.help_list(chat_id, queryMode, query_id)
 
+    elif (command == "/register"):
+        # send a keyboard so the user can register
+        # their account to a programme
+        normie.registerUser(chat_id, content)
+
+
     elif (command == "disable_interactive"):
         # disable the interactive mode...
         # Fun!

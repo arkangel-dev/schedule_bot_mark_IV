@@ -1,12 +1,14 @@
 {
-    "2019" : {
-        "Bsc Hons Computer Science" : [
-            "January",
-            "Dae"
-        ],
-        "Phycology" : [
-            "January",
-            "May"
-        ]
+    "listings" : {
+        "2019" : {
+            "Bsc Hons Computer Science" : [
+                "January",
+                "Dae"
+            ],
+            "Phycology" : [
+                "January",
+                "May"
+            ]
+        }
     }
 }
