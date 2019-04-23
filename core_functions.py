@@ -107,7 +107,7 @@ def checkAuthlist(chat_id, list_name):
     # that will return if a user is authorised...
     authList = openJsonFile("auth_list.json")
     subList = authList[list_name]
-    if (chat_id in subList):
+    if (str(chat_id) in subList):
         return(True)
     else:
         return(False)
@@ -118,3 +118,16 @@ def checkAuthMessage(chat_id):
     if (not checkAuthlist(chat_id, "admin")):
         bot.sendMessage(chat_id, "You are not authorised to access this function. Please contact an administrator to get registered as an admin.")
         exit()
+
+def getUserDetails(chat_id):
+    return(bot.getChat(chat_id))
+
+def lookUpUser(username, add_buffer=False):
+    raw_user_list = openJsonFile("user_list.json")
+    for x in raw_user_list["users"]:
+        if raw_user_list["users"][x][0] == username:
+            if (add_buffer):
+                return("Null ," + x)
+            else:
+                return(x)
+    return(False)

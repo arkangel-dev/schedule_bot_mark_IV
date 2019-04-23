@@ -53,3 +53,6 @@ callbackfuntion = awaiting_response_list[str(chat_id)]["callback_function"]
 
 if (callbackfuntion == "append_session"):
     respond_lib.appendSession_enter(chat_id, content)
+
+if (callbackfuntion == "admin_add"):
+    respond_lib.admin_add(chat_id, content)

@@ -10,7 +10,7 @@ from datetime import datetime
 from env import TELEGRAM_BOT_API_KEY
 from env import BUILD_ID
 import env
-
+import respond_function_library as respond_lib
 
     
 
@@ -358,4 +358,65 @@ def SendCustomKeyboard(chat_id, content, commands, log = True):
     else:
         bot.sendMessage(chat_id, content, reply_markup=keyboard, parse_mode="markdown")
 
+def admin_add(chat_id, context):
+    #
+    # so lets go over how this will work... the bot will keep a list of all the users
+    # it has listed. this can be done by making the 'manipulate_playload.py' keep a track of
+    # all the user's names (first and last) and userid in a json file. This may seem shady but its
+    # REALLY not
 
+    content_count = len(context.split(",")) - 1
+    content = context.split(",")
+    programmes_list = core.openJsonFile("programmes.json")
+
+    print(content)
+
+    if (content_count == 0):
+        respond_lib.appendStatus_await(chat_id, "admin_add")
+        core.delLastMessage(chat_id)
+        core.appendChat(bot.sendMessage(chat_id, "*Add admin :* \nPlease enter the username of the user whom you wish to add as an admin.", parse_mode="markdown"))
+    
+    elif (content_count == 1):
+        keyboardList = []
+        user_id = content[1]
+        for x in programmes_list["listings"]:
+            keyboardList.append([InlineKeyboardButton(text=x, callback_data='admin_add ,' + user_id + "," + x)])
+        # keyboardList.append([InlineKeyboardButton(text="Cancel", callback_data='WIP')])
+        bot.sendMessage(chat_id, "*Add admin : * \nWe are now selecting which class this admin has control over. You have to specify the year, intake month and the programme.", parse_mode="markdown")
+        SendCustomKeyboard(chat_id, "*Add admin : * \nSelect the year of you enrollment : ", keyboardList)
+
+    elif (content_count == 2):
+        keyboardList = []
+
+        user_id = content[1]
+        year = content[2]
+
+        for x in programmes_list["listings"][year]:
+            keyboardList.append([InlineKeyboardButton(text=x, callback_data='admin_add ,' + user_id + "," + year + "," + x)])
+        # keyboardList.append([InlineKeyboardButton(text="Go back to select an year", callback_data='register')])
+        SendCustomKeyboard(chat_id, "*Registration : * \nSelect a programme : ", keyboardList)
+
+    elif (content_count == 3):
+        #
+        # ok so this is the block of
+        # code that will enter the intake month
+        #
+        keyboardList = []
+        user_id = content[1]
+        year = content[2]
+        programme = content[3]
+
+        for x in programmes_list["listings"][year][programme]:
+            keyboardList.append([InlineKeyboardButton(text=x, callback_data='admin_add ,' + user_id + "," + year + "," + programme + "," + x)])
+        keyboardList.append([InlineKeyboardButton(text="Go back to select a programme", callback_data='admin_add,' + user_id + "," + year)])
+        SendCustomKeyboard(chat_id, "*Registration : * \nSelect an intake month : ", keyboardList)
+
+    elif (content_count == 4):
+        user_id = content[1]
+        year = content[2]
+        programme = content[3]
+        intake = content[4]
+
+        bot.sendMessage(chat_id, str(user_id) + " " + year + " " + programme + " " + intake)
+
+    

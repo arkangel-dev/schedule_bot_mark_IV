@@ -21,14 +21,15 @@ def appendStatus_await(userid, callback_function):
     user_status_data["awaiting_response_users"].update({ str(userid) : { "callback_function" : callback_function }})
     core.saveJsonFile(user_status_data, "user_status_data.json")
 
-def deleteStatus_await(userid):
+def deleteStatus_await(userid, mainAndExit=True):
     user_status_data = core.openJsonFile("user_status_data.json") # CopyCat ;)
     # We got he other one working... now we fix the other
     if (str(userid) in user_status_data["awaiting_response_users"]):
         del user_status_data["awaiting_response_users"][str(userid)]
         core.saveJsonFile(user_status_data, "user_status_data.json")
-        admin_lib.SendCommandMain(userid, "NULL")
-        exit()
+        if mainAndExit:
+            admin_lib.SendCommandMain(userid, "NULL")
+            exit()
 
         
 
@@ -63,5 +64,13 @@ def appendSession_enter(chat_id, content):
         admin_lib.append_session(chat_id, send_data)
         bot.sendMessage(chat_id, "Good job. If you have more sessions to append, keep sending them. If not send /done to finish up")
 
+def admin_add(chat_id, content):
+    if (core.lookUpUser(content)):
+        core.delLastMessage(chat_id)
+        bot.sendMessage(chat_id, "User @" + content + " found. Please wait.")
+        deleteStatus_await(chat_id, False)
+        admin_lib.admin_add(chat_id, core.lookUpUser(content, True))
+    else:
+        bot.sendMessage(chat_id, "User @" + content + " not found. Make sure that this user has started a chat with me prior to attempting adding him as an admin.")
 
     

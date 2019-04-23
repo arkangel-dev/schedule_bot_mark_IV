@@ -1,19 +1,9 @@
 {
-    "admin" : [
-        488976797
-    ],
-    "core_admin" : [
-        488976797
-    ],
-    
-    "session_data" : {
-        "2019" : {
-            "January" : {
-                "Computer Science Bsc (Hons)" : [
-
-                ]
-            }
-        }
+    "admin" : {
+        "488976797" : []
+    },
+    "core_admin" : {
+        "488976797" : []
     }
     
 }

@@ -66,14 +66,13 @@ if (str(chat_id) not in awaiting_response_list):
 
     elif (command == "help"):
         # send a list of commands available
-        admin_func.help_list(chat_id, queryMode, query_id)
+        admin_func.admin_help_list(chat_id, queryMode, query_id)
         
     elif (command == "EnterInteractiveMode"): 
         # this is the function that activates the command keybaord...
         # will be activated by sending the /admin command alone...
         core.checkAuthMessage(chat_id)
         admin_func.SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
-
 
 
     else: 

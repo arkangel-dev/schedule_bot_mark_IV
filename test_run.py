@@ -20,7 +20,7 @@ converted = json.loads(raw)
 # the request so that it can be used to utilize the
 # check functions.
 #
-chatId = converted["chatId"]
+chat_id = converted["chatId"]
 content = converted["content"]
 command = content.split()[0]
 #
@@ -29,7 +29,7 @@ command = content.split()[0]
 # user. This will make delays in send the
 # responses more natural
 #
-bot.sendChatAction(chatId, "typing")
+bot.sendChatAction(chat_id, "typing")
 #
 # open the nessesary files. the user_status_data.json will
 # store whether the bot is expecting the user to enter parameter
@@ -59,7 +59,7 @@ if (converted["type"] == "callback_query"):
 if (command == "/cancel"):
 	# this cancel function is here because if
 	# this file will not be invoked at all
-	bot.sendMessage(chatId, "No active command to cancel. I wasn't doing anything anyway. Zzzzz...", parse_mode="markdown")
+	bot.sendMessage(chat_id, "No active command to cancel. I wasn't doing anything anyway. Zzzzz...", parse_mode="markdown")
 	exit()
 
 elif (command == "/admin"):
@@ -86,10 +86,10 @@ if (command == "/today"):
 	# problems.
 	#
 	sendstring = ""
-	output = parse_nl.getFullTodayNL(chatId)
+	output = parse_nl.getFullTodayNL(chat_id)
 	for x in output:
 		sendstring += x + "\n"
-	bot.sendMessage(chatId, sendstring, parse_mode="Markdown")
+	bot.sendMessage(chat_id, sendstring, parse_mode="Markdown")
 	print("[+] Send Today Data...") 
 
 elif (command == "/start"):
@@ -98,8 +98,9 @@ elif (command == "/start"):
 	# this is the messange that will be sent to the bot. And will be triggered
 	# by the "/start" command, which is sent by telegram by default
 	#
-	bot.sendMessage(chatId, "*Student Mode : * \nUse this to get college dates (not that kind of date, because not even I can fix your broken love life) and stuff. Basic usage : /today . For more help send /help", parse_mode="markdown")
-	# bot.sendMessage(chatId, "*Administrative Mode : * \nThis mode is only accessible by students with special access to the bot. Admin students can manipulate sessions and other capabilities. Send /admin to activate interactive mode", parse_mode="markdown")
+	bot.sendMessage(chat_id, "*Student Mode : * \nUse this to get college dates (not that kind of date, because not even I can fix your broken love life) and stuff. Basic usage : /today . For more help send /help", parse_mode="markdown")
+	if (core.checkAuthlist(chat_id, "admin")):
+		bot.sendMessage(chat_id, "*Administrative Mode : * \nHmm, it seems your account is registered as an administrator, Congratulations!. This mode is only accessible by students with special access to the bot. Admin students can manipulate sessions and other tasks. Send /admin to activate interactive mode", parse_mode="markdown")
 	# bot.sendMessage(chatId, "*I'm a God Mode : * \nThis mode is for developers only and is accessible by special hidden codes. Good luck finding them >:D", parse_mode="markdown")
 	# bot.sendMessage(chatId, "*High Admin Mode : *\nThis mode is college faculty members only.", parse_mode="markdown")
 
@@ -107,17 +108,17 @@ elif (command == "/register"):
 	# send a keyboard so the user can register
 	# their account to a programme, an intake and an year
 	#
-	normie.registerUser(chatId, content)
+	normie.registerUser(chat_id, content)
 
 elif (command == "/help"):
 	# the help function. Because everyone needs help sometimes
 	# Especially if they are operating a program that was written by me
 	# you'll also need mental help. My documentation is that bad...
 	#
-	normie.normie_help_list(chatId)
+	normie.normie_help_list(chat_id)
 
 else:
 	# this is the fallback
 	# condition. incase the command does not match
 	# any functions programmed in
-	bot.sendMessage(chatId, "I'm sorry, what?")
+	bot.sendMessage(chat_id, "I'm sorry, what?")

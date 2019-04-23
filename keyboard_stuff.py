@@ -151,6 +151,15 @@ if (str(chat_id) not in awaiting_response_list):
         core.delLastMessage(chat_id)
         bot.sendMessage(chat_id, "Interactive mode disabled. You now have to use command lines. Send /admin to restart interactive mode.", parse_mode="markdown")
 
+    elif (command == "append_interactive"):
+        # this is the function to appened sessions
+        # via interactive mode...
+        core.delLastMessage(chat_id)
+        respond_lib.appendStatus_await(chat_id, "append_session")
+        core.appendChat(bot.sendMessage(chat_id, "*Append Session : * \nPlease send the session details in the appropriate syntax. Type /help to view the syntax \nSend /cancel to cancel this operation", parse_mode="markdown"))
+
+    elif (command == "admin_add"):
+        admin_func.admin_add(chat_id, content)
 
     else:
         bot.sendMessage(chat_id, "⚠️ Button check for '" + command + "' is not programmed in yet ⚠️")
