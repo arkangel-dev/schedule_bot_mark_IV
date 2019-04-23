@@ -9,6 +9,7 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import datetime
 from env import TELEGRAM_BOT_API_KEY
 from env import BUILD_ID
+import env
 
 
     
@@ -113,20 +114,20 @@ def raw_list(chat_id, query_mode):
 # ####################################################################################
 # ####################################################################################
 
-def help_list(chat_id, query_mode, query_id):
+def admin_help_list(chat_id, query_mode = False, query_id = 0):
     #
     # Help command...
     # Invoked by /append help
     # any additional arguments are ignored
     #
     outputList = [] # create the help Lists
-    outputList.append("*🔥 THE TEXT THAT WILL TELL YOU WHAT TO DO 🔥* \n\n\n")
-    outputList.append("*Intoduction* : \nAs long as technology existed there existed folks who didn't know squat about said technology. So a group high minded interllectuals gathered and came up with the concept of the documentation. They wrote documentation for every piece of innovation they made. They even made a tutorial on how to lift up a chair. So anyway, the backend development of a telegram bot is pretty new to me and the code is pretty weird. So naturally me (@ArkangelDev) and Ice Bear (@athfan) had to create a documentation for this. But our documentation is pretty weird. Also we have a weird sense of humor and thus this un-nessesarily looong text. Soo yeah, you wasted 3 minutes reading this.\n\n")
+    outputList.append("*Help & Support (For Admins)* \n\n")
+    #outputList.append("*Intoduction* : \nAs long as technology existed there existed folks who didn't know squat about said technology. So a group high minded interllectuals gathered and came up with the concept of the documentation. They wrote documentation for every piece of innovation they made. They even made a tutorial on how to lift up a chair. So anyway, the backend development of a telegram bot is pretty new to me and the code is pretty weird. So naturally me (@ArkangelDev) and Ice Bear (@athfan) had to create a documentation for this. But our documentation is pretty weird. Also we have a weird sense of humor and thus this un-nessesarily looong text. Soo yeah, you wasted 3 minutes reading this.\n\n")
     outputList.append("*Append session* :  \nTo append a session click manipulate sessions on the main keyboard, from there click on append session. And send the details of the session when requested. The details have to be syntaxed in the following way : _Day Name, Session Name, Start Time, End Time, Bring Laptop Boolean, Professor Name, Venue_ \n\n")
     outputList.append("*Cancel Session* :  \nTo cancel a session, click on manipluate session on the main keyboard, from here click on cancel session, then you are presented with a list of days. Select a day and you'll be presented with a list of sessions. Click on a session to cancel it. \n\n")
     outputList.append("*Revert Cancellation* : \nTo revert the effect of cancellation of sessions, click on manipulate sessions on the main keyboard. From here select Revert Cancellation and you'll be presented with a list of cancelled sessions. Click on one of them to revert the cancellation effect.\n\n")
     outputList.append("*Revert Appending* : \nTo revert an appended session. This function is not ready yet... So yeah... Subscribe to PewDiePie! \n\n")
-    outputList.append("`Admin Functions Version : " + str(af_version) + "`")
+    outputList.append("`Admin Functions Version : " + str(env.ADMIN_BUILD_ID) + "`")
     outputList.append("\n`Development Version : " + str(BUILD_ID) + "`")
     outputList.append("\n`Created and Hosted by @ArkangelDev, @athfan`")
 

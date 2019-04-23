@@ -9,6 +9,7 @@ import sys
 import json
 import core_functions as core
 import normie_functions as normie
+import admin_func_lib as admin_func
  
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
@@ -97,14 +98,23 @@ elif (command == "/start"):
 	# this is the messange that will be sent to the bot. And will be triggered
 	# by the "/start" command, which is sent by telegram by default
 	#
-	bot.sendMessage(chatId, "*Student Mode : * \nUse this to get dates and junk. Basic use : /today . Made for normies", parse_mode="markdown")
-	bot.sendMessage(chatId, "*Administrative Mode : * \nThis mode is only accessible by users with special access. If you are registered as an admin send /admin to start interactive mode.", parse_mode="markdown")
+	bot.sendMessage(chatId, "*Student Mode : * \nUse this to get college dates (not that kind of date, because not even I can fix your broken love life) and stuff. Basic usage : /today . For more help send /help", parse_mode="markdown")
+	# bot.sendMessage(chatId, "*Administrative Mode : * \nThis mode is only accessible by students with special access to the bot. Admin students can manipulate sessions and other capabilities. Send /admin to activate interactive mode", parse_mode="markdown")
+	# bot.sendMessage(chatId, "*I'm a God Mode : * \nThis mode is for developers only and is accessible by special hidden codes. Good luck finding them >:D", parse_mode="markdown")
+	# bot.sendMessage(chatId, "*High Admin Mode : *\nThis mode is college faculty members only.", parse_mode="markdown")
 
 elif (command == "/register"):
 	# send a keyboard so the user can register
 	# their account to a programme, an intake and an year
 	#
 	normie.registerUser(chatId, content)
+
+elif (command == "/help"):
+	# the help function. Because everyone needs help sometimes
+	# Especially if they are operating a program that was written by me
+	# you'll also need mental help. My documentation is that bad...
+	#
+	normie.normie_help_list(chatId)
 
 else:
 	# this is the fallback

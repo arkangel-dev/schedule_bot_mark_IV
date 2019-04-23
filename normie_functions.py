@@ -113,3 +113,22 @@ def registerUser(chat_id, content):
         subscribe_file = core.openJsonFile("subscriptions.json")
         subscribe_file["subscriptions"].update({str(chat_id) : [intake.lower(), programme, year]})
         core.saveJsonFile(subscribe_file, "subscriptions.json")
+
+def normie_help_list(chat_id, query_mode = False, query_id = 0):
+    #
+    # Help command...
+    # Invoked by /append help
+    # any additional arguments are ignored
+    #
+    outputList = [] # create the help Lists
+    outputList.append("*Help & Support (For Normies)* \n\n")
+    #outputList.append("*Intoduction* : \nAs long as technology existed there existed folks who didn't know squat about said technology. So a group high minded interllectuals gathered and came up with the concept of the documentation. They wrote documentation for every piece of innovation they made. They even made a tutorial on how to lift up a chair. So anyway, the backend development of a telegram bot is pretty new to me and the code is pretty weird. So naturally me (@ArkangelDev) and Ice Bear (@athfan) had to create a documentation for this. But our documentation is pretty weird. Also we have a weird sense of humor and thus this un-nessesarily looong text. Soo yeah, you wasted 3 minutes reading this.\n\n")
+    outputList.append("`Normie Functions Version : " + str(env.NORMIE_BUILD_ID) + "`")
+    outputList.append("\n`Development Version : " + str(env.BUILD_ID) + "`")
+    outputList.append("\n`Created and Hosted by @ArkangelDev, @athfan`")
+
+    # convert it to a single string...
+    finalString = ""
+    for x in outputList:
+        finalString += x
+    bot.sendMessage(chat_id, finalString, parse_mode="markdown") # enable markdown and send it...
