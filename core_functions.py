@@ -111,3 +111,10 @@ def checkAuthlist(chat_id, list_name):
         return(True)
     else:
         return(False)
+
+def checkAuthMessage(chat_id):
+    # check if this user is authorised to access the admin
+    # functions...
+    if (not checkAuthlist(chat_id, "admin")):
+        bot.sendMessage(chat_id, "You are not authorised to access this function. Please contact an administrator to get registered as an admin.")
+        exit()

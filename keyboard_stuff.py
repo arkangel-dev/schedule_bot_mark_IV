@@ -15,11 +15,6 @@ chat_id = converted["chatId"]
 content = converted["content"]
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
-# check if this user is authorised to access the admin
-# functions...
-if (not core.checkAuthlist(chat_id, "admin")):
-    bot.sendMessage(chat_id, "You are not authorised to access this function. Please contact an administrator to get registered as an admin.")
-    exit()
 
 
 if (converted["type"] == "callback_query"):
@@ -54,22 +49,27 @@ if (str(chat_id) not in awaiting_response_list):
         # append the sessions to the
         # main sessions list system
         admin_func.append_session(chat_id, content)
+        core.checkAuthMessage(chat_id)
 
     elif (command == "cancel_session"):
         # This function is a part of the cancel functions...
         # this command will send a list of all the days
         # from which you can send one to cancel that
         # day's session(s)
+        core.checkAuthMessage(chat_id)
         admin_func.Cancel_SendDayList(chat_id)
+        
 
     elif (command == "EnterInteractiveMode"): 
         # this is the function that activates the command keybaord...
         # will be activated by sending the /admin command alone...
+        core.checkAuthMessage(chat_id)
         admin_func.SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
     elif (command == "send_manipulate_keyboard"):
         # this will send a list of
         # manipulation funtions that you can use
+        core.checkAuthMessage(chat_id)
         admin_func.SendCommandManipulate(chat_id, "Choose command : ")
 
     elif (command == "cancel_getsessionid"):
@@ -77,6 +77,7 @@ if (str(chat_id) not in awaiting_response_list):
         # This command will send a list of all sessions
         # on that day...
         # inputs : DayName
+        core.checkAuthMessage(chat_id)
         dayname = content.split()[1]
         admin_func.Cancel_SendSessionList(chat_id, dayname)
 
@@ -84,6 +85,7 @@ if (str(chat_id) not in awaiting_response_list):
         # This function is a part of the cancel function
         # This command will cancel a session in appended list data
         # Inputs, DayName, SessionID by int...
+        core.checkAuthMessage(chat_id)
         dayName = content.split()[1]
         sessionId = content.split()[2]
         admin_func.CancelSessionById(chat_id, dayName, sessionId)
@@ -97,6 +99,7 @@ if (str(chat_id) not in awaiting_response_list):
     elif (command == "revert_cancellation"):
         # this function will be used to revert cancellation by
         # day name and the id. Cool? Cool
+        core.checkAuthMessage(chat_id)
         dayName = content.split()[1]
         sessionId = content.split()[2]
         admin_func.RevertCancellationById(chat_id, query_id, dayName, sessionId)
@@ -122,11 +125,13 @@ if (str(chat_id) not in awaiting_response_list):
 
     elif (command == "send_list_keyboard"):
         # this is the main keyboard...
+        core.checkAuthMessage(chat_id)
         admin_func.SendCommandList(chat_id, "Choose command : ")
 
     elif (command == "corefunctionkeyboard"):
         # this function is used to send a keyboard for the core functions.
         # this will aslo be filtered from a list of authorised list
+        core.checkAuthMessage(chat_id)
         admin_func.sendCoreFunctKeyboard(chat_id)
 
     elif (command == "help"):
@@ -142,6 +147,7 @@ if (str(chat_id) not in awaiting_response_list):
     elif (command == "disable_interactive"):
         # disable the interactive mode...
         # Fun!
+        core.checkAuthMessage(chat_id)
         core.delLastMessage(chat_id)
         bot.sendMessage(chat_id, "Interactive mode disabled. You now have to use command lines. Send /admin to restart interactive mode.", parse_mode="markdown")
 

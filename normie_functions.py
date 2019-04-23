@@ -17,6 +17,12 @@ def registerUser(chat_id, content):
     programmes_list = core.openJsonFile("programmes.json")
 
     if (enteredKeys == 0):
+        subscribe_file = core.openJsonFile("subscriptions.json")
+        if (str(chat_id) in subscribe_file["subscriptions"]):
+            year = subscribe_file["subscriptions"][str(chat_id)][2]
+            programme = subscribe_file["subscriptions"][str(chat_id)][1]
+            intake = subscribe_file["subscriptions"][str(chat_id)][0]
+            bot.sendMessage(chat_id, "*Warning : * \nYou are already subscribed under the *" + intake.capitalize() + "* intake of *" + programme + "* of the year *" + year + "*. Your previous registration will be overwritten by the new subscribtion and not appended by it", parse_mode="markdown")
         # how this check system works is interesting
         # when the first check is executed the input (content)
         # will be register
@@ -41,7 +47,7 @@ def registerUser(chat_id, content):
             keyboardList.append([InlineKeyboardButton(text=x, callback_data='register ,' + x)])
         keyboardList.append([InlineKeyboardButton(text="Cancel", callback_data='WIP')])
 
-        admin_lib.SendCustomKeyboard(chat_id, "*Registration : * \nSelect an year : ", keyboardList)
+        admin_lib.SendCustomKeyboard(chat_id, "*Registration : * \nSelect the year of you enrollment : ", keyboardList)
 
     elif (enteredKeys == 1):
         # so when the first if check is done the operator len(content.split(",")) - 1
@@ -100,10 +106,10 @@ def registerUser(chat_id, content):
         # delete the messeages
         #
         core.delLastMessage(chat_id)
-        bot.sendMessage(chat_id, "*Registration : * \nRegistering you under *" + year + "* - *" + programme + "* - *" + intake + "* intake", parse_mode="markdown")
+        bot.sendMessage(chat_id, "*Registration : * \nRegistering you under *" + year + "* - *" + programme + "* - *" + intake + "* intake. You can now use /today to access your daily schedule. If you wish to change your registration details, send /register again to overwrite the details.", parse_mode="markdown")
         #
         # update the subscription file...
         #
         subscribe_file = core.openJsonFile("subscriptions.json")
-        subscribe_file["subscriptions"].update({str(chat_id) : [intake, programme, year]})
+        subscribe_file["subscriptions"].update({str(chat_id) : [intake.lower(), programme, year]})
         core.saveJsonFile(subscribe_file, "subscriptions.json")
