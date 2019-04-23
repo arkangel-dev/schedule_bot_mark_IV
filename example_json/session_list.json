@@ -1,0 +1,67 @@
+
+{
+	"2019" : {
+		"BSC (Hons) Computer Science" : {
+
+			"january" : {
+				"sunday" :  {"sessions" : []},
+				"monday" :  {"sessions" : [["OOSD", "1800", "2000", "True", "Java", "Lab1", "False"]]},
+				"tuesday" : {"sessions" : []},
+				"wednesday" : {"sessions" : []},
+				"thursday" :  {"sessions" : []},
+				"friday" : {"sessions" : []},
+				"saturday" : {"sessions" : []},
+				
+				"appended": {
+					"sunday": [],
+					"monday": [],
+					"tuesday": [],
+					"wednesday": [],
+					"thursday": [],
+					"friday": [],
+					"saturday": []
+				}
+			},
+
+			"may" : {
+				"sunday" :  {"sessions" : []},
+				"monday" :  {"sessions" : []},
+				"tuesday" : {"sessions" : []},
+				"wednesday" : {"sessions" : []},
+				"thursday" :  {"sessions" : []},
+				"friday" : {"sessions" : []},
+				"saturday" : {"sessions" : []},
+				
+				"appended": {
+					"sunday": [],
+					"monday": [],
+					"tuesday": [],
+					"wednesday": [],
+					"thursday": [],
+					"friday": [],
+					"saturday": []
+				}
+			},
+
+			"september" : {
+				"sunday" :  {"sessions" : []},
+				"monday" :  {"sessions" : []},
+				"tuesday" : {"sessions" : []},
+				"wednesday" : {"sessions" : []},
+				"thursday" :  {"sessions" : []},
+				"friday" : {"sessions" : []},
+				"saturday" : {"sessions" : []},
+				
+				"appended": {
+					"sunday": [],
+					"monday": [],
+					"tuesday": [],
+					"wednesday": [],
+					"thursday": [],
+					"friday": [],
+					"saturday": []
+				}
+			}
+		}
+	}
+}

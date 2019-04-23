@@ -1,10 +1,6 @@
 {
-    "admin" : [
-        488976797
-    ],
-    "core_admin" : [
-        488976797
-    ],
+    "admin" : [],
+    "core_admin" : [],
     
     "session_data" : {
         "2019" : {
