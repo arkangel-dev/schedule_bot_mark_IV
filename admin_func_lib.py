@@ -141,6 +141,7 @@ def admin_help_list(chat_id, query_mode = False, query_id = 0):
         bot.answerCallbackQuery(query_id , "Here's your help. Have a good day")
         SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
+
 # ####################################################################################
 # ####################################################################################
 
@@ -153,7 +154,7 @@ def admin_help_list(chat_id, query_mode = False, query_id = 0):
 
 # ["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]
 # ATHFAN'S CODE
-#=========================================================================
+# =========================================================================
 # import telepot
 # from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -165,7 +166,8 @@ def admin_help_list(chat_id, query_mode = False, query_id = 0):
 
 # bot = telepot.Bot("641334893:AAF1_MJ2ou9nGt4MIbAYSIWMUxfKPDCpDAw")
 # bot.sendMessage(488976797, "Hello", reply_markup = keyboard)
-#===========================================================================
+# ===========================================================================
+
 
 def SendCommandList(chat_id, content):
     # this is the keyboard that will be sent to the user when the list command is sent from the
@@ -269,8 +271,10 @@ def Cancel_SendSessionList(chat_id, DayName):
         SendCustomKeyboard(chat_id, "*Cancel Session : * \nYou have no sessions on the selected day. Revert any cancelled sessions to view them here : ", keyboard)
        
 def Cancel_SendDayList(chat_id):
+    #
     # send the day list so that the user can
     # choose a day and recieve a session list
+    #
     keyboardList = [
         [InlineKeyboardButton(text="Sunday", callback_data='cancel_getsessionid Sunday'),
         InlineKeyboardButton(text="Monday", callback_data='cancel_getsessionid Monday')],
@@ -284,8 +288,10 @@ def Cancel_SendDayList(chat_id):
     SendCustomKeyboard(chat_id, "*Cancel Session :* \nSelect a day :", keyboardList)
 
 def CancelSessionById(chat_id, DayName, session_id):
+    #
     # function to send modify the session list
     # so that the session will be cancelled...
+    #
     bot.sendMessage(chat_id, "*Status Return : * \n" + str(DayName).capitalize() + "'s session ID " + session_id + " has been cancelled. A blast out will be sent out in a few minutes.", parse_mode="markdown")
     SendCommandMain(chat_id, "Null Data")
     append_raw_data["cancelled"][DayName].append(session_id)
@@ -293,8 +299,10 @@ def CancelSessionById(chat_id, DayName, session_id):
         json.dump(append_raw_data, outfile)
 
 def SendCancelledSessionList(chat_id):
+    #
     # function to send a list of cancelled sessions so
     # that the effects of the cancellation will be reverted...
+    #
     keyboardButtons = []
     dayList = ("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
     for dayIndex in range(0, 6):
@@ -306,8 +314,10 @@ def SendCancelledSessionList(chat_id):
                 callbackData = "revert_cancellation " + dayList[dayIndex] + " " + str(testSession)
                 keyboardButtons.append([InlineKeyboardButton(text=buttonText, callback_data=callbackData)])
     if (len(keyboardButtons) == 0):
+        #
         # if there are no session available
         # just send a keyboard content saying so...
+        #
         keyboardButtons.append([InlineKeyboardButton(text="Go Back", callback_data='EnterInteractiveMode')])
         SendCustomKeyboard(chat_id, "*Revert Cancellation : * \nYou have no sessions cancelled. Please cancel a session so you can revert the cancellation :", keyboardButtons)
     else:
@@ -316,8 +326,10 @@ def SendCancelledSessionList(chat_id):
         SendCustomKeyboard(chat_id, "*Revert Cancellation : * \nPlease select a session to revert its cancellation :", keyboardButtons)
 
 def SendAppendedSessionList(chat_id):
+    #
     # function to send a list of cancelled sessions so
     # that the effects of the cancellation will be reverted...
+    #
     keyboardButtons = []
     dayList = ("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
     for dayIndex in range(0, 6):
@@ -329,8 +341,10 @@ def SendAppendedSessionList(chat_id):
                 callbackData = "revert_append " + dayList[dayIndex] + " " + str(testSession)
                 keyboardButtons.append([InlineKeyboardButton(text=buttonText, callback_data=callbackData)])
     if (len(keyboardButtons) == 0):
+        #
         # if there are no session available
         # just send a keyboard content saying so...
+        #
         keyboardButtons.append([InlineKeyboardButton(text="Go Back", callback_data='EnterInteractiveMode')])
         SendCustomKeyboard(chat_id, "*Revert Append : * \nYou have no sessions appended. Please append a session so you can delete it, just like how my creator created me and will abandon me... :", keyboardButtons)
     else:
@@ -340,8 +354,10 @@ def SendAppendedSessionList(chat_id):
 
 
 def RevertCancellationById(chat_id, query_id, day, session_id):
+    #
     # Revert the cancellation of a session
     # via the day and session_id
+    #
     objectIndex = append_raw_data["cancelled"][day.lower()].index(str(session_id))
     del append_raw_data["cancelled"][day.lower()][objectIndex]
     with open('appended_sessions_list.json', 'w') as outfile: # save the file
@@ -349,8 +365,10 @@ def RevertCancellationById(chat_id, query_id, day, session_id):
     SendCancelledSessionList(chat_id)
 
 def SendCustomKeyboard(chat_id, content, commands, log = True):
+    #
     # send a custom keyboard with custom commands
     # the commands will have to be sent as an array...
+    #
     keyboard = InlineKeyboardMarkup(inline_keyboard=commands)
     if (log):
         core.delLastMessage(chat_id)
@@ -360,11 +378,23 @@ def SendCustomKeyboard(chat_id, content, commands, log = True):
 
 def admin_add(chat_id, context):
     #
-    # so lets go over how this will work... the bot will keep a list of all the users
-    # it has listed. this can be done by making the 'manipulate_playload.py' keep a track of
-    # all the user's names (first and last) and userid in a json file. This may seem shady but its
-    # REALLY not
-
+    # all right lets go over how this function works before
+    # I forget how it works because it seems I only know how
+    # it works when Im high on a sugar rush and Im out of
+    # Munchy cookies.
+    #
+    # So this function keeps track of which which stage its on
+    # is by counting the number of objects the variable 'context'
+    # contain (yes context is a bad name for the varaible but whatever)
+    # 
+    # Soou the first time the function is executed the context will be
+    # plain command. When the function 'len(context.split(",")) - 1 is used
+    # it'll spit out the number of useful data the context variable is containing
+    # . the function splits the context variable by the using the commas as a separator
+    # So using commas in the Usernames, programme names is a big no no. Then we find the
+    # length of it which on the first try will be 1. then we subtract 1 from it because 
+    # the command is not a really useful piece of information.
+    #
     content_count = len(context.split(",")) - 1
     content = context.split(",")
     programmes_list = core.openJsonFile("programmes.json")
@@ -372,28 +402,67 @@ def admin_add(chat_id, context):
     print(content)
 
     if (content_count == 0):
+        #
+        # if the content count variable is zero then it means
+        # that there is not data in the context variable and
+        # we should ask the user to input the data.
+        # how ever this not any data input. We are requesting
+        # the user to send information and lock the user in a
+        # loop until s/he gives a valid input for uses an escape command
+        #
         respond_lib.appendStatus_await(chat_id, "admin_add")
         core.delLastMessage(chat_id)
         core.appendChat(bot.sendMessage(chat_id, "*Add admin :* \nPlease enter the username of the user whom you wish to add as an admin.", parse_mode="markdown"))
     
     elif (content_count == 1):
+        #
+        # from here its pretty straight forward. The user is presented
+        # with a list of buttons with is read from the programmes.json
+        # file.
+        #
+        # then the user makes choices and every time the user clicks
+        # button it will go to the next stage with the data from the
+        # previous stage as an element of a list which is stored in the
+        # variable 'context'
+        #
         keyboardList = []
         user_id = content[1]
         for x in programmes_list["listings"]:
             keyboardList.append([InlineKeyboardButton(text=x, callback_data='admin_add ,' + user_id + "," + x)])
-        # keyboardList.append([InlineKeyboardButton(text="Cancel", callback_data='WIP')])
+            #
+            # note in the above line the for loops
+            # inline keyboard line has added a comma
+            # between the data. this is because without the comma
+            # the split(',') function will not work.
+            #
+        keyboardList.append([InlineKeyboardButton(text="Go back to enter username", callback_data='admin_add')])
+        #
+        # this additional button is here to send the user back to selecting
+        # username. because of reasons...
+        #
         bot.sendMessage(chat_id, "*Add admin : * \nWe are now selecting which class this admin has control over. You have to specify the year, intake month and the programme.", parse_mode="markdown")
+        #
+        # Send this line because why the hell not ^
+        #
         SendCustomKeyboard(chat_id, "*Add admin : * \nSelect the year of you enrollment : ", keyboardList)
 
     elif (content_count == 2):
         keyboardList = []
-
+        #
+        # ^ Init the keyboard array
+        # because we have... or do we?
+        #
         user_id = content[1]
         year = content[2]
-
+        #
+        # make the content from from the context
+        # data. This content is put into user id and
+        # year variable to streamline the process of
+        # making the keyboard
+        #
         for x in programmes_list["listings"][year]:
             keyboardList.append([InlineKeyboardButton(text=x, callback_data='admin_add ,' + user_id + "," + year + "," + x)])
-        # keyboardList.append([InlineKeyboardButton(text="Go back to select an year", callback_data='register')])
+        keyboardList.append([InlineKeyboardButton(text="Go back to select an year", callback_data='register' + ',' + user_id)])
         SendCustomKeyboard(chat_id, "*Registration : * \nSelect a programme : ", keyboardList)
 
     elif (content_count == 3):
@@ -405,7 +474,10 @@ def admin_add(chat_id, context):
         user_id = content[1]
         year = content[2]
         programme = content[3]
-
+        #
+        # So this stage is same as the two previous function
+        # so nothing here to explain... soou yeah...
+        #
         for x in programmes_list["listings"][year][programme]:
             keyboardList.append([InlineKeyboardButton(text=x, callback_data='admin_add ,' + user_id + "," + year + "," + programme + "," + x)])
         keyboardList.append([InlineKeyboardButton(text="Go back to select a programme", callback_data='admin_add,' + user_id + "," + year)])

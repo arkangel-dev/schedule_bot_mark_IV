@@ -9,8 +9,8 @@ bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
 
 def registerUser(chat_id, content):
     #
-    # Arkangel's Method to get a conditional layed string from multiple keyboards from a single function.
-    # Or A.M.G.C.C.F.M.K.S.F for short. This method can be used to make a choice based avventure
+    # Arkangel's Technique to get a conditional layed string from multiple keyboards from a single function.
+    # Or A.T.G.C.C.F.M.K.S.F for short. This method can be used to make a choice based avventure
     # game on telegram or something... >:D
     #
     enteredKeys = len(content.split(",")) - 1
