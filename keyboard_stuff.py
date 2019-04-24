@@ -70,7 +70,11 @@ if (str(chat_id) not in awaiting_response_list):
         # this will send a list of
         # manipulation funtions that you can use
         core.checkAuthMessage(chat_id)
-        admin_func.SendCommandManipulate(chat_id, "Choose command : ")
+        if core.checkAuthlist(chat_id, "admin"):
+            admin_func.SendCommandManipulate(chat_id, "Choose command : ")
+        else:
+            bot.sendMessage(chat_id, "It seems you are not an admin to a class. Please add your self to one to control it.")
+            admin_func.SendCommandMain(chat_id, "Null")
 
     elif (command == "cancel_getsessionid"):
         # This function is part of the cancel function
