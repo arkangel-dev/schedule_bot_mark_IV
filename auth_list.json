@@ -1,9 +1,12 @@
 {
-    "admin" : {
-        "488976797" : []
+    "admin": {
+        "488976797": [
+            "2019",
+            "BSC (Hons) Computer Science",
+            "January"
+        ]
     },
-    "core_admin" : {
+    "core_admin": {
         "488976797" : []
     }
-    
 }

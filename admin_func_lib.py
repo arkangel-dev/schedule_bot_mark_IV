@@ -195,7 +195,22 @@ def SendCommandManipulate(chat_id, content):
 
 def SendCommandMain(chat_id, content):
     # override the content variable
-    content = "*Admin Main Menu : * \nPlease select a command to continue : "
+    raw_chat_data = bot.getChat(chat_id)
+    username = raw_chat_data["first_name"]
+
+    authority_list = core.openJsonFile("auth_list.json")
+
+    
+    if not (chat_id in authority_list["admin"]):
+        authority_string = "\nYou have complete control over *everything*"
+    else:
+        auth_year = authority_list["admin"][str(chat_id)][0]
+        auth_programme = authority_list["admin"][str(chat_id)][1]
+        auth_intake = authority_list["admin"][str(chat_id)][2]
+        authority_string = "\nYou have complete control over the *" + auth_intake + "* intake of *" + auth_programme + "* of the year *" + auth_year + "*"
+    
+
+    content = "*Admin Main Menu : * \nHello " + username + ", Please select a command to continue :" + authority_string
     # this is the function that will be sent to the user when the /admin function is
     # first invoked...
     keyboard = InlineKeyboardMarkup(inline_keyboard=[ # define the inline keyboard before we can use it...
@@ -223,12 +238,13 @@ def sendCoreFunctKeyboard(chat_id):
                         InlineKeyboardButton(text="Remove admin", callback_data="admin_remove")],
                         [InlineKeyboardButton(text="Add high admin", callback_data="h_admin_add"),
                         InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_remove")],
-                        [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
-                        [InlineKeyboardButton(text="☠️   Shutdown system   ☠️", callback_data="shutdown_core")],
+                        # [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
+                        # [InlineKeyboardButton(text="☠️   Shutdown system   ☠️", callback_data="shutdown_core")],
+                        # removed ^ these because ice bear doesn't approve
                         [InlineKeyboardButton(text="Go back", callback_data="EnterInteractiveMode")]
                     ])
     core.delLastMessage(chat_id)
-    core.appendChat(bot.sendMessage(chat_id, "*Core functions (Dangerous): * \nPlease select a command to continue :", reply_markup=keyboard, parse_mode="markdown"))
+    core.appendChat(bot.sendMessage(chat_id, "*Core functions : * \nPlease select a command to continue :", reply_markup=keyboard, parse_mode="markdown"))
 
 def Cancel_SendSessionList(chat_id, DayName):
     # send a list of keyboard button containing
@@ -488,7 +504,17 @@ def admin_add(chat_id, context):
         year = content[2]
         programme = content[3]
         intake = content[4]
+        #
+        # DEV Note : The SendCustomKeyboard() function has its own core.DeleteLastMessage()
+        # line. Idk why it was added there...
+        #
+        # bot.sendMessage(chat_id, str(user_id) + " " + year + " " + programme + " " + intake)
+        core.delLastMessage(chat_id)
+        bot.sendMessage(chat_id, "*Registration : * \n I am now adding the user to admin list, with the authority of full control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*", parse_mode="markdown")
 
-        bot.sendMessage(chat_id, str(user_id) + " " + year + " " + programme + " " + intake)
+        raw_auth_list = core.openJsonFile("auth_list.json")
+        raw_auth_list["admin"].update({user_id : [year, programme, intake]})
+        core.saveJsonFile(raw_auth_list, "auth_list.json")
+        SendCommandMain(chat_id, "Null")
 
     

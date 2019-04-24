@@ -24,13 +24,6 @@ chat_id = converted["chatId"]
 content = converted["content"]
 command = content.split()[0]
 #
-# send the request to telegram to send
-# the 'typing...' status to the 
-# user. This will make delays in send the
-# responses more natural
-#
-bot.sendChatAction(chat_id, "typing")
-#
 # open the nessesary files. the user_status_data.json will
 # store whether the bot is expecting the user to enter parameter
 # to the bot. It will also store other stuff in future updates.
@@ -71,6 +64,15 @@ elif (command == "/admin"):
 	# highly unlikely )
 	#
 	exit()
+
+#
+# send the request to telegram to send
+# the 'typing...' status to the 
+# user. This will make delays in send the
+# responses more natural
+#
+bot.sendChatAction(chat_id, "typing")
+
 
 if (command == "/today"):
 	# send the status data

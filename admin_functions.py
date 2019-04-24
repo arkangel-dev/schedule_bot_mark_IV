@@ -14,12 +14,13 @@ converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
-
-# check if this user is authorised to access the admin
-# functions...
-if (not core.checkAuthlist(chat_id, "admin")):
-    bot.sendMessage(chat_id, "You are not authorised to access this function. Please contact an administrator to get registered as an admin.")
-    exit()
+#
+# send the request to telegram to send
+# the 'typing...' status to the 
+# user. This will make delays in send the
+# responses more natural
+#
+bot.sendChatAction(chat_id, "typing")
 
 if (converted["type"] == "callback_query"):
     # check if the message is
