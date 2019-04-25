@@ -1,5 +1,6 @@
 from env import TELEGRAM_BOT_API_KEY
 from env import MY_ID
+import env
 import parse_modified_data as p_modified_d
 import parse_natural_language as parse_nl
 from datetime import datetime
@@ -81,7 +82,7 @@ if (command == "/today"):
 	# this check is used to send the session
 	# details for the current day of the week.
 	#
-	# note how there is for loop doohicky is there.
+	# please note how there is for loop doohicky is there.
 	# that is because originally thre getFullTodayNL()
 	# function was coded so that the function will send the
 	# details as a list. How ever this caused some... 'aesthetic'
@@ -100,8 +101,10 @@ elif (command == "/start"):
 	# this is the messange that will be sent to the bot. And will be triggered
 	# by the "/start" command, which is sent by telegram by default
 	#
-	bot.sendMessage(chat_id, "*Student Mode : * \nUse this to get college dates (not that kind of date, because not even I can fix your broken love life) and stuff. Basic usage : /today . For more help send /help", parse_mode="markdown")
-	if (core.checkAuthlist(chat_id, "admin")):
+	username = core.getUserDetails(chat_id)["first_name"]
+	bot.sendSticker(chat_id, "CAADBQADbwADnTElHQWbMb385htTAg")
+	bot.sendMessage(chat_id, "Hello *" + username + "*,\nUse this to get college dates (not that kind of date, because not even I can fix your broken love life) and stuff. Basic usage : /today . For more help send /help", parse_mode="markdown")
+	if (core.checkAuthlist(chat_id, "admin") or core.checkAuthlist(chat_id, "core_admin")):
 		bot.sendMessage(chat_id, "*Administrative Mode : * \nHmm, it seems your account is registered as an administrator, Congratulations!. This mode is only accessible by students with special access to the bot. Admin students can manipulate sessions and other tasks. Send /admin to activate interactive mode", parse_mode="markdown")
 	# bot.sendMessage(chatId, "*I'm a God Mode : * \nThis mode is for developers only and is accessible by special hidden codes. Good luck finding them >:D", parse_mode="markdown")
 	# bot.sendMessage(chatId, "*High Admin Mode : *\nThis mode is college faculty members only.", parse_mode="markdown")

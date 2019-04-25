@@ -131,3 +131,6 @@ def lookUpUser(username, add_buffer=False):
             else:
                 return(x)
     return(False)
+
+def sendImg(chat_id, file):
+	bot.sendPhoto(chat_id, open(file, 'rb'))

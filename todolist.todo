@@ -25,3 +25,8 @@ TODO LIST
 ☐ Add /amifreeon function
 ☐ Add more emojis to the chats
 ☐ Add interactive keyboards for the normies
+✔ Add function to add admins @done(19-04-25 10:40)
+☐ Fix parsing data and natural language module
+☐ Add delete to delete admin
+☐ Add function to add high level admins
+☐ Add function to delete high level admins

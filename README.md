@@ -52,6 +52,7 @@ help - Get help
 start - Starts the bot, duh
 register - Register your account to a programme
 admin - Start interactive mode
+cancel - Cancels current operation
 ```
 
 

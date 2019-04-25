@@ -12,9 +12,16 @@ converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
 bot.sendChatAction(chat_id, "typing")
+
+user_status_data = core.openJsonFile("user_status_data.json")
+awaiting_response_list = user_status_data["awaiting_response_users"]
+callbackfuntion = awaiting_response_list[str(chat_id)]["callback_function"]
+
 if (content.split()[0] == "/cancel"):
+
     # check if this user is trying to cancel
-    # the currrent operation. 
+    # the currrent operation.
+    bot.sendMessage(chat_id, "*Cancelling Operation : * \nOperation has been cancelled. Is there anything else you want me to do?", parse_mode="markdown")
     respond_lib.deleteStatus_await(chat_id)
     # do not comment ^ this out
     # because without it there is no
@@ -43,10 +50,6 @@ if (content.split()[0][0] == "/") and (content.split()[0] != "/done"):
 
 # if the user enters valid input then the system will delete the user's entry
 # in the status file.
-
-user_status_data = core.openJsonFile("user_status_data.json")
-awaiting_response_list = user_status_data["awaiting_response_users"]
-callbackfuntion = awaiting_response_list[str(chat_id)]["callback_function"]
 
 # first lets make the append session function for
 # the await input method. I hope this works...

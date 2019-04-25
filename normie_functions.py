@@ -31,7 +31,7 @@ def registerUser(chat_id, content):
         # is executed the result will be 0.
         #
         # Now the callback of the buttons will be register ,{year}
-        # note how there is a space between the command and the word
+        # please note how there is a space between the command and the word
         # register, but not between the word the comma and the year.
         # this is so it wont mess the check that executes this block
         # of code by identifying the word register, in the same time, so

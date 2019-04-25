@@ -67,7 +67,6 @@ def appendSession_enter(chat_id, content):
 def admin_add(chat_id, content):
     if (core.lookUpUser(content)):
         core.delLastMessage(chat_id)
-        bot.sendMessage(chat_id, "User @" + content + " found. Please wait.")
         deleteStatus_await(chat_id, False)
         admin_lib.admin_add(chat_id, core.lookUpUser(content, True))
     else:

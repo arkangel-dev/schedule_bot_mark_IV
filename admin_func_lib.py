@@ -11,6 +11,7 @@ from env import TELEGRAM_BOT_API_KEY
 from env import BUILD_ID
 import env
 import respond_function_library as respond_lib
+import security as sec
 
     
 
@@ -32,7 +33,7 @@ af_version = 0.75
 
 
 def list_sess(chat_id, query_mode):
-    
+    #
     # List command
     # invoked by /list
     # any additional arugemnts are ignored
@@ -71,7 +72,7 @@ def append_session(chat_id, content):
     #
     # The argument syntax should be as the following...
     # append day,session_name,start_time,end_time,bring_laptop,lecturer_name,venue
-    #
+    # 
     try: # check if there are any errors
         append_raw_data = core.openJsonFile("appended_sessions_list.json")
         arguments = content[7:len(content)].split(",")
@@ -201,7 +202,7 @@ def SendCommandMain(chat_id, content):
     authority_list = core.openJsonFile("auth_list.json")
 
     
-    if not (chat_id in authority_list["admin"]):
+    if not (str(chat_id) in authority_list["admin"]):
         authority_string = "\nYou have complete control over *everything*"
     else:
         auth_year = authority_list["admin"][str(chat_id)][0]
@@ -446,7 +447,7 @@ def admin_add(chat_id, context):
         for x in programmes_list["listings"]:
             keyboardList.append([InlineKeyboardButton(text=x, callback_data='admin_add ,' + user_id + "," + x)])
             #
-            # note in the above line the for loops
+            # please note in the above line the for loops
             # inline keyboard line has added a comma
             # between the data. this is because without the comma
             # the split(',') function will not work.
@@ -456,7 +457,12 @@ def admin_add(chat_id, context):
         # this additional button is here to send the user back to selecting
         # username. because of reasons...
         #
-        bot.sendMessage(chat_id, "*Add admin : * \nWe are now selecting which class this admin has control over. You have to specify the year, intake month and the programme.", parse_mode="markdown")
+        username = core.openJsonFile("user_list.json")["users"][content[1]][0]
+        if (core.checkAuthlist(content[1], "admin")):
+            bot.sendMessage(chat_id, "*Add admin : * \nUser @" + username + " is already registered. Proceeding will overwrite the previous registration. If you wish to /cancel , do it. \n\nWe are now selecting which class this admin has control over. You have to specify the year, intake month and the programme.", parse_mode="markdown")
+        else:
+            bot.sendMessage(chat_id, "*Add admin : * \nUser @" + username + " found. We are now selecting which class this admin has control over. You have to specify the year, intake month and the programme.", parse_mode="markdown")
+        
         #
         # Send this line because why the hell not ^
         #
@@ -513,7 +519,27 @@ def admin_add(chat_id, context):
         bot.sendMessage(chat_id, "*Registration : * \n I am now adding the user to admin list, with the authority of full control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*", parse_mode="markdown")
 
         raw_auth_list = core.openJsonFile("auth_list.json")
-        raw_auth_list["admin"].update({user_id : [year, programme, intake]})
+
+        user_32bitKey = sec.generateKey()
+
+
+        raw_auth_list["admin"].update({user_id : [year, programme, intake, user_32bitKey]})
+        #
+        # we are now adding the the user's 32 bit key and authority data to the
+        # the json file
+        #
+
+        username = bot.getChat(chat_id)["first_name"]
+        url_data = sec.generateOtpAppUrl(user_32bitKey, username, "Friday Schedule Bot")
+        sec.generateAndSaveQrCode(url_data, "qr_code.png")
+        bot.sendMessage(chat_id, "🎉*Congratulations : *🎉 \nYou have been added to my system as an administrator, with the authority of full session control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*.\n\n Here is the QR code for your One-Time-Password (OTP) application. Scan the QR code and *DELETE* it. Do not share the QR code with *ANYONE*. I will not ask you for your OTP QR code.", parse_mode="markdown")
+        core.sendImg(chat_id, "qr_code.png")
+        #
+        # So now we are going to send the new admin the good news that he has been added
+        # to the system as an administrator
+        #
+
+
         core.saveJsonFile(raw_auth_list, "auth_list.json")
         SendCommandMain(chat_id, "Null")
 
