@@ -519,16 +519,12 @@ def admin_add(chat_id, context):
         bot.sendMessage(chat_id, "*Registration : * \n I am now adding the user to admin list, with the authority of full control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*", parse_mode="markdown")
 
         raw_auth_list = core.openJsonFile("auth_list.json")
-
         user_32bitKey = sec.generateKey()
-
-
         raw_auth_list["admin"].update({user_id : [year, programme, intake, user_32bitKey]})
         #
         # we are now adding the the user's 32 bit key and authority data to the
         # the json file
         #
-
         username = bot.getChat(chat_id)["first_name"]
         url_data = sec.generateOtpAppUrl(user_32bitKey, username, "Friday Schedule Bot")
         sec.generateAndSaveQrCode(url_data, "qr_code.png")
@@ -538,8 +534,6 @@ def admin_add(chat_id, context):
         # So now we are going to send the new admin the good news that he has been added
         # to the system as an administrator
         #
-
-
         core.saveJsonFile(raw_auth_list, "auth_list.json")
         SendCommandMain(chat_id, "Null")
 
