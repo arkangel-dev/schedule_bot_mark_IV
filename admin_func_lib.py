@@ -131,6 +131,7 @@ def admin_help_list(chat_id, query_mode = False, query_id = 0):
     outputList.append("`Admin Functions Version : " + str(env.ADMIN_BUILD_ID) + "`")
     outputList.append("\n`Development Version : " + str(BUILD_ID) + "`")
     outputList.append("\n`Created and Hosted by @ArkangelDev, @athfan`")
+        
 
     # convert it to a single string...
     finalString = ""
