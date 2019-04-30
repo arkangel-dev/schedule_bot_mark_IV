@@ -635,7 +635,7 @@ def h_admin_add(chat_id, context):
 
         auth_file["core_admin"].update({str(user_id) : [user_code]})
         core.saveJsonFile(auth_file, "auth_list.json")
-        bot.sendMessage(chat_id, "I have added the user @" + bot.getChat(int(chat_id))["username"] + " to the system as a core administrator")
+        bot.sendMessage(chat_id, "I have added the user @" + bot.getChat(int(user_id))["username"] + " to the system as a core administrator")
         SendCommandMain(chat_id, "null")
 
 def verifyOtp(chat_id, content):
