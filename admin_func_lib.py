@@ -237,7 +237,7 @@ def sendCoreFunctKeyboard(chat_id):
    
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
                         [InlineKeyboardButton(text="Add admin", callback_data="admin_add"),
-                        InlineKeyboardButton(text="Remove admin", callback_data="admin_remove")],
+                        InlineKeyboardButton(text="Remove admin", callback_data="admin_revoke")],
                         [InlineKeyboardButton(text="Add high admin", callback_data="h_admin_add"),
                         InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_remove")],
                         # [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
@@ -527,15 +527,69 @@ def admin_add(chat_id, context):
         # the json file
         #
         username = bot.getChat(chat_id)["first_name"]
-        url_data = sec.generateOtpAppUrl(user_32bitKey, username, "Friday Schedule Bot")
-        sec.generateAndSaveQrCode(url_data, "qr_code.png")
-        bot.sendMessage(chat_id, "🎉*Congratulations : *🎉 \nYou have been added to my system as an administrator, with the authority of full session control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*.\n\n Here is the QR code for your One-Time-Password (OTP) application. Scan the QR code and *DELETE* it. Do not share the QR code with *ANYONE*. I will not ask you for your OTP QR code.", parse_mode="markdown")
-        core.sendImg(chat_id, "qr_code.png")
+        bot.sendMessage(chat_id, "🎉*Congratulations : *🎉 \nYou have been added to my system as an administrator, with the authority of full session control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*.", parse_mode="markdown")
         #
         # So now we are going to send the new admin the good news that he has been added
         # to the system as an administrator
         #
         core.saveJsonFile(raw_auth_list, "auth_list.json")
         SendCommandMain(chat_id, "Null")
-
     
+def admin_revoke(chat_id, context):
+    #
+    # Now we make use the method that we used for the /admmin_add function
+    # to fit the entire process in a single function. But splitting the context
+    # of each stage and splitting and counting the parts...
+    #
+    content_count = len(context.split(",")) - 1
+    content = context.split(",")
+
+    if (content_count == 0):
+        #
+        # all right so the first thing we have to do is make a list
+        # of usernames and their authority details. Maybe the programme name
+        # and year will suffice. ( on second thought, I'll just leave it as is
+        # for now and send only the usernames)
+        #
+        auth_admin_list = core.openJsonFile("auth_list.json")["admin"]
+        #
+        # first we make a list of all the chatids with them converted to
+        # acutal numbers intead of strings
+        #
+        # but first lets check if there are admins to begin with...
+        if len(auth_admin_list) == 0:
+            bot.sendMessage(chat_id, "*Revoke Admin : * \nThere are no admins registered to my system. Add an admin to kick them out.", parse_mode="markdown")
+            SendCommandMain(chat_id, "null")
+            exit()
+        # then we move on
+        userlist = []
+        for x in auth_admin_list:
+            userlist.append(int(x))
+        #
+        # now that we have a list of the chat ids we can not make
+        # a list of all the usernames for the keyboard...
+        # We'll use the getChat() function of telepot to get that
+        #
+        keyboardList = []
+        for x in userlist:
+            username_curr = bot.getChat(x)["username"]
+            keyboardList.append([InlineKeyboardButton(text="@"+username_curr, callback_data='admin_revoke ,' + str(x))])
+        SendCustomKeyboard(chat_id, "*Revoke Admin : * \nSelect a username : ", keyboardList)
+
+    elif content_count == 1:
+        #
+        # now we see if user has given us a user name. and if he has we will delete their
+        # entry is the json file
+        #
+        authlist = core.openJsonFile("auth_list.json")
+        del authlist["admin"][str(content[1])]
+        print(authlist)
+        core.saveJsonFile(authlist, "auth_list.json")
+        core.delLastMessage(chat_id)
+        bot.sendMessage(chat_id, "*Revoke Admin : * \nUser has been revoked of adminstrative rights.", parse_mode="markdown")
+        bot.sendMessage(str(content[1]), "*Notice* \nYour adminstrative rights have been revoked. Sorry.", parse_mode="markdown")
+        SendCommandMain(chat_id, "null")
+
+
+
+

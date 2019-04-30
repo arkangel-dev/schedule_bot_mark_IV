@@ -165,6 +165,10 @@ if (str(chat_id) not in awaiting_response_list):
     elif (command == "admin_add"):
         admin_func.admin_add(chat_id, content)
 
+    elif (command == "admin_revoke"):
+        admin_func.admin_revoke(chat_id, content)
+        
+
     else:
         bot.sendMessage(chat_id, "⚠️ Button check for '" + command + "' is not programmed in yet ⚠️")
 
