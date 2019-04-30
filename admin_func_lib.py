@@ -239,7 +239,7 @@ def sendCoreFunctKeyboard(chat_id):
                         [InlineKeyboardButton(text="Add admin", callback_data="admin_add"),
                         InlineKeyboardButton(text="Remove admin", callback_data="admin_revoke")],
                         [InlineKeyboardButton(text="Add high admin", callback_data="h_admin_add"),
-                        InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_remove")],
+                        InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_revoke")],
                         # [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
                         # [InlineKeyboardButton(text="☠️   Shutdown system   ☠️", callback_data="shutdown_core")],
                         # removed ^ these because ice bear doesn't approve
@@ -417,8 +417,6 @@ def admin_add(chat_id, context):
     content = context.split(",")
     programmes_list = core.openJsonFile("programmes.json")
 
-    print(content)
-
     if (content_count == 0):
         #
         # if the content count variable is zero then it means
@@ -587,9 +585,75 @@ def admin_revoke(chat_id, context):
         core.saveJsonFile(authlist, "auth_list.json")
         core.delLastMessage(chat_id)
         bot.sendMessage(chat_id, "*Revoke Admin : * \nUser has been revoked of adminstrative rights.", parse_mode="markdown")
-        bot.sendMessage(str(content[1]), "*Notice* \nYour adminstrative rights have been revoked. Sorry. 😞💔", parse_mode="markdown")
+        bot.sendMessage(int(content[1]), "*Notice* \nYour adminstrative rights have been revoked. Sorry. 😞💔", parse_mode="markdown")
+        #
+        # send the admin who got revoked the news of him getting kicked out of the system.
+        # I wonder if I can do shit like this when I get an actual job
+        #
         SendCommandMain(chat_id, "null")
 
+def h_admin_add(chat_id, context):
+    #
+    # so the first step is the same as when adding normal
+    # midlevel admins to the system. Getting the username
+    #
+    # but before we can do that we have to check if the username
+    # has already been provided. you following? no? cool!
+    #
+    content_count = len(context.split(",")) - 1
+    content = context.split(",")
 
+    if (content_count == 0):
+        #
+        # aaalllright.. now the first thing we have to do when getting string input from the system is
+        # locking him a time loop. Dr strange style... then we bargain...
+        #
+        # but to be more serious we lock them is a loop that is in a separate function.
+        # Then the input is verified and the user is released from the loop. or else 
+        # the user will re-prompted to re-enter the data.
+        # The only other way to exit this time loop is to send the trusty old /cancel command
+        #
+        respond_lib.appendStatus_await(chat_id, "h_admin_add")
+        core.delLastMessage(chat_id)
+        core.appendChat(bot.sendMessage(chat_id, "*Add core admin :* \nPlease enter the username of the user whom you wish to add as an admin. If you wish to cancel please /cancel", parse_mode="markdown"))
 
+    elif (content_count == 1):
+        #
+        # all right now we have got the user we need to generate a OTP key so that 
+        # this core admin will have secure access to the system
+        #
+        user_code = sec.generateKey()
+        auth_file = core.openJsonFile("auth_list.json")
+        user_id = content[1]
 
+        otp_url = sec.generateOtpAppUrl(user_code, bot.getChat(user_id)["first_name"], "FRIDAY Schedule Bot")
+        sec.generateAndSaveQrCode(otp_url, "qr_code.png")
+
+        bot.sendMessage(int(user_id), "🎉*Congratulations :*🎉\nHello " + bot.getChat(int(user_id))["first_name"] + ", You have been added to my system as a core admin. As a core admin you have (almost) complete control over my system. Here is a QR Code with the OTP url, please scan this and store it on a secure device as you'll need it now that you're a core admin. \nYou can send /admin to activate interactive mode.", parse_mode="markdown")
+
+        core.sendImg(int(user_id), "qr_code.png")
+
+        auth_file["core_admin"].update({str(user_id) : [user_code]})
+        core.saveJsonFile(auth_file, "auth_list.json")
+        bot.sendMessage(chat_id, "I have added the user @" + bot.getChat(int(chat_id))["username"] + " to the system as a core administrator")
+        SendCommandMain(chat_id, "null")
+
+def verifyOtp(chat_id, content):
+    #
+    # so this function is used to verify the qr code without actually doing any
+    # core functions...
+    #
+    if not core.checkAuthlist(chat_id, "core_admin"):
+        #
+        # in case a normie admin finds this function and tries
+        # do something they're not capable of
+        #
+        bot.sendMessage(chat_id, "You are not a core admin and you don't even have an OTP url. So just dont")
+        SendCommandMain(chat_id, "null")
+        exit()
+    verification_code = content.split()[1]
+    if (sec.verifyOtp(chat_id, verification_code)):
+        bot.sendMessage(chat_id, "OTP code verification passed, Your OTP codes are still valid. 👍")
+    else:
+        bot.sendMessage(chat_id, "OTP code verification failed, Please update your OTP application as soon as possible. 👎")
+    SendCommandMain(chat_id, "Null")

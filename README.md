@@ -1,3 +1,15 @@
+# Schedule Bot Mark IV
+
+There will be only a single bot controlling this entire project. The bot will recieve commands from the end user such as `/today`. The bot will
+also have a command that will not be listed in the command line interface. and that command is `/admin`. If used without any paramenters the
+bot will start using the inline keyboad to interact with the user. This will be useful for when the admin is not comfortable with manually entering
+commands.
+
+# Security (OTP Verification)
+
+The bot will generate one-time-passwords only for core admins that will be prompted only when core admins attempt to add other admins or core admins to
+the system or other high priority functions.
+
 # Update Multi Level Data Processing (MLDP)
 ## Introduction
 
@@ -9,16 +21,10 @@ parsing scripts and natural language files, mainly data parsing script.
 ### How it works
 
 So it works by asking the user to send a username without the '@'. Then it will check if the entered username is in the `user_list.json` file
-which contains a list of all the users and their user ids. (nothing shady >:D). So the user file is maintained by the `maniplate_payload.py` file
+which contains a list of all the users and their user ids. (nothing shady there >:D). So the user file is maintained by the `maniplate_payload.py` file
 because all the data that gets sent to the bot passes trough the node that is linked to `manipulate_payload.py` file. So this will store the user
 data as its secondary function. From here its just standard 'putting data in the callback data` stuff.
 
-# Schedule Bot Mark IV
-
-There will be only a single bot controlling this entire project. The bot will recieve commands from the end user such as `/today`. The bot will
-also have a command that will not be listed in the command line interface. and that command is `/admin`. If used without any paramenters the
-bot will start using the inline keyboad to interact with the user. This will be useful for when the admin is not comfortable with manually entering
-commands.
 
 ## Installing the bot
 ### Node-Red Setup
@@ -31,12 +37,6 @@ npm install node-red-contrib-python3-function
 npm install node-red-contrib-pythonshell
 npm install node-red-contrib-telegrambot
 npm install node-red-contrib-telegrambot-home
-npm install node-red-node-email
-npm install node-red-node-feedparser
-npm install node-red-node-rbe
-npm install node-red-node-sentiment
-npm install node-red-node-tail 
-npm install node-red-node-twitter
 ```
 
 Then you'll need to import the following node configuration:
@@ -56,9 +56,7 @@ admin - Start interactive mode
 cancel - Cancels current operation
 ```
 
-
 ## Using the bot
-
 ### Interactive Mode
 
 When the admin starts using the `/admin` function without any parameters the interactive mode is started. When the buttons of the keyboard redirect user to another keyboard or message the current keyboard will delete itself before or after executing its designated task. Hence the suicide keyboards. You can disable the interactive mode by clicking on the button that says disable interactive mode or send the command `/admin disable_interactive`. This will disable the suicide keyboards and you'll have to use manual command like commands. To bring back interactive mode just send `/admin` again. Like so : 

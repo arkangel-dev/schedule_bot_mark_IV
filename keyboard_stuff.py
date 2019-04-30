@@ -163,10 +163,20 @@ if (str(chat_id) not in awaiting_response_list):
         core.appendChat(bot.sendMessage(chat_id, "*Append Session : * \nPlease send the session details in the appropriate syntax. Type /help to view the syntax \nSend /cancel to cancel this operation", parse_mode="markdown"))
 
     elif (command == "admin_add"):
+        # this function is used to add mid level admins
+        # to the system. These admins have limted authority
+        # over editing the sessions of the system
         admin_func.admin_add(chat_id, content)
 
     elif (command == "admin_revoke"):
+        # this function is used to revoke the authority that
+        # was not meant to be given to power hungry users.
+        # Always have kill function... always
         admin_func.admin_revoke(chat_id, content)
+
+    elif (command == "h_admin_add"):
+        # not its time to add a higher core admin...
+        admin_func.h_admin_add(chat_id, content)
         
 
     else:

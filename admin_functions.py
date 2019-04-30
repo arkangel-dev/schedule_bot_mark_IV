@@ -75,6 +75,10 @@ if (str(chat_id) not in awaiting_response_list):
         core.checkAuthMessage(chat_id)
         admin_func.SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
+    elif (command == "verify-otp"):
+        # so this function will be used to verify the OTP code of the user
+        # without completing a core function
+        admin_func.verifyOtp(chat_id, content)
 
     else: 
         # fall back clause...

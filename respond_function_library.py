@@ -65,6 +65,14 @@ def appendSession_enter(chat_id, content):
         bot.sendMessage(chat_id, "Good job. If you have more sessions to append, keep sending them. If not send /done to finish up")
 
 def admin_add(chat_id, content):
+    #
+    # all right it seems that there is not proper commenting
+    # on this file. So lets comment this up before I move on
+    # with the next function
+    #
+    # so in a nutshell is this just a function to add a normie admin.
+    # that all
+    #
     if (core.lookUpUser(content)):
         core.delLastMessage(chat_id)
         deleteStatus_await(chat_id, False)
@@ -72,4 +80,14 @@ def admin_add(chat_id, content):
     else:
         bot.sendMessage(chat_id, "User @" + content + " not found. Make sure that this user has started a chat with me prior to attempting adding him as an admin.")
 
-    
+def h_admin_add(chat_id, content):
+    #
+    # Since this is the same as the admin add function but slightly different
+    # I'll just copy paste the code block... Sooo yeah dont tell anyone... ;)
+    #
+    if (core.lookUpUser(content)):
+        core.delLastMessage(chat_id)
+        deleteStatus_await(chat_id, False)
+        admin_lib.h_admin_add(chat_id, core.lookUpUser(content, True))
+    else:
+        bot.sendMessage(chat_id, "User @" + content + " not found. Make sure that this user has started a chat with me prior to attempting adding him as an admin.")

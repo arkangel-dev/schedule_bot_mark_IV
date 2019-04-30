@@ -57,5 +57,8 @@ if (content.split()[0][0] == "/") and (content.split()[0] != "/done"):
 if (callbackfuntion == "append_session"):
     respond_lib.appendSession_enter(chat_id, content)
 
-if (callbackfuntion == "admin_add"):
+elif (callbackfuntion == "admin_add"):
     respond_lib.admin_add(chat_id, content)
+
+elif (callbackfuntion == "h_admin_add"):
+    respond_lib.h_admin_add(chat_id, content)
