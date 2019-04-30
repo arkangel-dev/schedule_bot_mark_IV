@@ -526,8 +526,8 @@ def admin_add(chat_id, context):
         # we are now adding the the user's 32 bit key and authority data to the
         # the json file
         #
-        username = bot.getChat(chat_id)["first_name"]
-        bot.sendMessage(chat_id, "🎉*Congratulations : *🎉 \nYou have been added to my system as an administrator, with the authority of full session control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*.", parse_mode="markdown")
+        username = bot.getChat(int(user_id))["first_name"]
+        bot.sendMessage(int(user_id), "🎉*Congratulations : *🎉 \nHello " + username + ", You have been added to my system as an administrator, with the authority of full session control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*.", parse_mode="markdown")
         #
         # So now we are going to send the new admin the good news that he has been added
         # to the system as an administrator
@@ -587,7 +587,7 @@ def admin_revoke(chat_id, context):
         core.saveJsonFile(authlist, "auth_list.json")
         core.delLastMessage(chat_id)
         bot.sendMessage(chat_id, "*Revoke Admin : * \nUser has been revoked of adminstrative rights.", parse_mode="markdown")
-        bot.sendMessage(str(content[1]), "*Notice* \nYour adminstrative rights have been revoked. Sorry.", parse_mode="markdown")
+        bot.sendMessage(str(content[1]), "*Notice* \nYour adminstrative rights have been revoked. Sorry. 😞💔", parse_mode="markdown")
         SendCommandMain(chat_id, "null")
 
 
