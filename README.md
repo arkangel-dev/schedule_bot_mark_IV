@@ -10,7 +10,7 @@ commands.
 I REALLY dont want to, so here is a flow chart
 
 <p align="center">
-<img src="documentation/FlowDiagram.drawio.png", width="50%">
+<img src="documentation/FlowDiagram.drawio.png", width="80%">
 </p>
 
 # Security (OTP Verification)
