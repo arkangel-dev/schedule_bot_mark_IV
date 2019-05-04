@@ -5,6 +5,14 @@ also have a command that will not be listed in the command line interface. and t
 bot will start using the inline keyboad to interact with the user. This will be useful for when the admin is not comfortable with manually entering
 commands.
 
+## How it works
+
+I REALLY dont want to, so here is a flow chart
+
+<p align="center">
+<img src="documentation/FlowDiagram.drawio.png", width="80%">
+</p>
+
 # Security (OTP Verification)
 
 The bot will generate one-time-passwords only for core admins that will be prompted only when core admins attempt to add other admins or core admins to
