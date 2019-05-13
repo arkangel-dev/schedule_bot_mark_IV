@@ -3,6 +3,7 @@ import telepot
 import env
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 import admin_func_lib as admin_lib
+import parse_natural_language as parse_nl
 import core_functions as core
 
 bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
@@ -132,3 +133,23 @@ def normie_help_list(chat_id, query_mode = False, query_id = 0):
     for x in outputList:
         finalString += x
     bot.sendMessage(chat_id, finalString, parse_mode="markdown") # enable markdown and send it...
+
+def sendTodaySessionList(chat_id):
+    # send the status data
+	# for today's data...
+	#
+	# this check is used to send the session
+	# details for the current day of the week.
+	#
+	# please note how there is for loop doohicky is there.
+	# that is because originally thre getFullTodayNL()
+	# function was coded so that the function will send the
+	# details as a list. How ever this caused some... 'aesthetic'
+	# problems.
+	#
+	sendstring = ""
+	output = parse_nl.getFullTodayNL(chat_id)
+	for x in output:
+		sendstring += x + "\n"
+	bot.sendMessage(chat_id, sendstring, parse_mode="Markdown")
+	print("[+] Send Today Data...") 

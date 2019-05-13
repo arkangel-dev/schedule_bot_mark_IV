@@ -177,6 +177,12 @@ if (str(chat_id) not in awaiting_response_list):
     elif (command == "h_admin_add"):
         # not its time to add a higher core admin...
         admin_func.h_admin_add(chat_id, content)
+
+    elif (command == "update_otp"):
+        # ok so this is the function to update the otp
+        # qr code because a core admin fucked up and leaked
+        # his otp key somehow...
+        admin_func.updateOtpCodes(chat_id)
         
 
     else:

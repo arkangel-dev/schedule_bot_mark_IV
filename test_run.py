@@ -2,7 +2,8 @@ from env import TELEGRAM_BOT_API_KEY
 from env import MY_ID
 import env
 import parse_modified_data as p_modified_d
-import parse_natural_language as parse_nl
+
+import natural_language_processor as nlp
 from datetime import datetime
 import parse_dates as p_dates
 import telepot
@@ -76,24 +77,7 @@ bot.sendChatAction(chat_id, "typing")
 
 
 if (command == "/today"):
-	# send the status data
-	# for today's data...
-	#
-	# this check is used to send the session
-	# details for the current day of the week.
-	#
-	# please note how there is for loop doohicky is there.
-	# that is because originally thre getFullTodayNL()
-	# function was coded so that the function will send the
-	# details as a list. How ever this caused some... 'aesthetic'
-	# problems.
-	#
-	sendstring = ""
-	output = parse_nl.getFullTodayNL(chat_id)
-	for x in output:
-		sendstring += x + "\n"
-	bot.sendMessage(chat_id, sendstring, parse_mode="Markdown")
-	print("[+] Send Today Data...") 
+	normie.sendTodaySessionList(chat_id)
 
 elif (command == "/start"):
 	# send a the response for the 
@@ -123,7 +107,10 @@ elif (command == "/help"):
 	normie.normie_help_list(chat_id)
 
 else:
-	# this is the fallback
-	# condition. incase the command does not match
-	# any functions programmed in
-	bot.sendMessage(chat_id, "I'm sorry, what?")
+	# # this is the fallback
+	# # condition. incase the command does not match
+	# # any functions programmed in
+	# bot.sendMessage(chat_id, "I'm sorry, what?")
+
+	# lets try something else:
+	nlp.match_functions(content, chat_id)

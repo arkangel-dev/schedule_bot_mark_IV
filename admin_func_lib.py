@@ -144,16 +144,6 @@ def admin_help_list(chat_id, query_mode = False, query_id = 0):
         SendCommandMain(chat_id, "\n *Interactive Mode Enabled* : \n Welcome, please choose a command : ")
 
 
-# ####################################################################################
-# ####################################################################################
-
-# def cancelSession(chat_id, arguments):
-#     # the arguments will be Day, SessionID
-#     x = None
-
-# ####################################################################################
-# ####################################################################################
-
 # ["SESSION_NAME", "STARTING_TIME", "ENDING_TIME", "BRING_LAPTOP_BOOLEAN", "LECTURER_NAME", "VENUE"]
 # ATHFAN'S CODE
 # =========================================================================
@@ -240,6 +230,7 @@ def sendCoreFunctKeyboard(chat_id):
                         InlineKeyboardButton(text="Remove admin", callback_data="admin_revoke")],
                         [InlineKeyboardButton(text="Add high admin", callback_data="h_admin_add"),
                         InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_revoke")],
+                        [InlineKeyboardButton(text="Update OTP code", callback_data="update_otp")],
                         # [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
                         # [InlineKeyboardButton(text="☠️   Shutdown system   ☠️", callback_data="shutdown_core")],
                         # removed ^ these because ice bear doesn't approve
@@ -651,9 +642,21 @@ def verifyOtp(chat_id, content):
         bot.sendMessage(chat_id, "You are not a core admin and you don't even have an OTP url. So just dont")
         SendCommandMain(chat_id, "null")
         exit()
-    verification_code = content.split()[1]
-    if (sec.verifyOtp(chat_id, verification_code)):
-        bot.sendMessage(chat_id, "OTP code verification passed, Your OTP codes are still valid. 👍")
+    if len(content.split()) == 2:
+        verification_code = content.split()[1]
+        if (sec.verifyOtp(chat_id, verification_code)):
+            bot.sendMessage(chat_id, "OTP code verification passed, Your OTP codes are still valid. 👍")
+        else:
+            bot.sendMessage(chat_id, "OTP code verification failed, Please update your OTP application as soon as possible. 👎")
     else:
-        bot.sendMessage(chat_id, "OTP code verification failed, Please update your OTP application as soon as possible. 👎")
+        bot.sendMessage(chat_id, "You didnt send a test key, dumbass")
     SendCommandMain(chat_id, "Null")
+
+def updateOtpCodes(chat_id):
+    #
+    # this is the function to update the user's otp qr code because he fucking lost it!
+    # 
+    bot.sendMessage(chat_id, "What the fuck did you do with your old OTP qr code? Whatever here is your new OTP QR code. Dont leak it this time dumbass")
+    sec.updateQrCode(chat_id)
+    core.sendImg(chat_id, "qr_code.png")
+    sendCoreFunctKeyboard(chat_id)
