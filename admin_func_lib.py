@@ -650,7 +650,7 @@ def verifyOtp(chat_id, content):
             bot.sendMessage(chat_id, "OTP code verification failed, Please update your OTP application as soon as possible. 👎")
     else:
         bot.sendMessage(chat_id, "You didnt send a test key, dumbass")
-    SendCommandMain(chat_id, "Null")
+    # SendCommandMain(chat_id, "Null")
 
 def updateOtpCodes(chat_id):
     #

@@ -32,3 +32,5 @@ TODO LIST
 ☐ Fix append and delete sesssion function
 ✔ Add function to regenerate a new OTP QR Code @done(19-05-13 13:39)
 ✔ Add natural language processing for input from the user @started(19-05-13 13:42) @done(19-05-13 14:29) @lasted(47m40s)
+✔ Add reminder system @started(19-05-19 14:51) @done(19-05-19 17:02) @lasted(2h11m34s)
+✔ Improve reminder system @started(19-05-19 17:02) @done(19-05-19 17:36) @lasted(34m21s)

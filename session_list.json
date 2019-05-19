@@ -5,7 +5,7 @@
 
 			"january" : {
 				"sunday" :  {"sessions" : []},
-				"monday" :  {"sessions" : [["OOSD", "1800", "2000", "True", "Java", "Lab1", "False"]]},
+				"monday" :  {"sessions" : [["OOSD", "1733", "2000", "True", "Java", "Lab1", "False"]]},
 				"tuesday" : {"sessions" : []},
 				"wednesday" : {"sessions" : []},
 				"thursday" :  {"sessions" : [["OOSD", "1800", "2000", "True", "Java", "Lab1", "False"]]},

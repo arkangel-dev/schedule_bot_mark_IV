@@ -1,1 +1,11 @@
-{"subscriptions": {"488976797": ["january", "BSC (Hons) Computer Science", "2019"]}}
+{
+    "subscriptions": {
+        "488976797": [
+            "january",
+            "BSC (Hons) Computer Science",
+            "2019",
+            "True",
+            "0"
+        ]
+    }
+}

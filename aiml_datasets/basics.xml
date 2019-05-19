@@ -30,12 +30,10 @@
         <pattern>HELP</pattern>
         <template>GET_HELP</template>
     </category>
-
     <category>
         <pattern>HELP ME</pattern>
         <template>GET_HELP</template>
     </category>
-
     <category>
         <pattern>*</pattern>
         <template>MISMATCH</template>
