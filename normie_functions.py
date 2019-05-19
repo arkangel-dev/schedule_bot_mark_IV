@@ -107,12 +107,12 @@ def registerUser(chat_id, content):
         # delete the messeages
         #
         core.delLastMessage(chat_id)
-        bot.sendMessage(chat_id, "*Registration : * \nRegistering you under *" + year + "* - *" + programme + "* - *" + intake + "* intake. You can now use /today to access your daily schedule. If you wish to change your registration details, send /register again to overwrite the details.", parse_mode="markdown")
+        bot.sendMessage(chat_id, "*Registration : * \nRegistering you under *" + year + "* - *" + programme + "* - *" + intake + "* intake. You can now use /today to access your daily schedule and I will remind you of sessions 30 minutes before each session. You can totally opt out of this by sending /dontremindme , also you can change how long before I notify of sessions by sending /remindmein followed by the duration in minutes.\n\nIf you wish to change your registration details, send /register again to overwrite the details.", parse_mode="markdown")
         #
         # update the subscription file...
         #
         subscribe_file = core.openJsonFile("subscriptions.json")
-        subscribe_file["subscriptions"].update({str(chat_id) : [intake.lower(), programme, year]})
+        subscribe_file["subscriptions"].update({str(chat_id) : [intake.lower(), programme, year, "True", "30"]})
         core.saveJsonFile(subscribe_file, "subscriptions.json")
 
 def normie_help_list(chat_id, query_mode = False, query_id = 0):
@@ -156,10 +156,24 @@ def sendTodaySessionList(chat_id):
 	print("[+] Send Today Data...") 
 
 def sendWut(chat_id):
-    #
     # this is from the NLP system
-    #
     bot.sendMessage(chat_id, "I'm sorry, What?")
 
 def forwardMessage(chat_id, message_content):
+    # this too is from the NLP system
     bot.sendMessage(chat_id, message_content)
+
+def reminderToggle(chat_id, state):
+    #
+    # this function is used to enable or disable the
+    # reminder system by changing the boolean value of the
+    # array in the subscriptions file
+    #
+    subscribe_file = core.openJsonFile("subscriptions.json")
+    user_deets = subscribe_file["subscriptions"][str(chat_id)]
+    subscribe_file["subscriptions"].update({str(chat_id) : [user_deets[0],user_deets[1],user_deets[2],str(state),user_deets[4]]})
+    core.saveJsonFile(subscribe_file,"subscriptions.json")
+    if state:
+        bot.sendMessage(chat_id, "Ok I'll notify you of sessions *" + user_deets[4] + "* minutes before class.", parse_mode="Markdown")
+    else:
+        bot.sendMessage(chat_id, "Alrighty, you wont be reminded of sessions again. Just dont forget about you classes. If you want to re-enable reminders send /remindme")

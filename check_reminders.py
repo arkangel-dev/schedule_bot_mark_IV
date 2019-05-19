@@ -21,7 +21,7 @@ subscriptions = core.openJsonFile("subscriptions.json")
 # subscriptions. And just... you know... do stuff
 for user in subscriptions["subscriptions"]:
 
-    # define the subscriptiion details...
+    # define the subscription details...
     intake = subscriptions["subscriptions"][user][0]
     programme = subscriptions["subscriptions"][user][1]
     year = subscriptions["subscriptions"][user][2]
@@ -33,8 +33,7 @@ for user in subscriptions["subscriptions"]:
     # first we check if user even wants reminders
     if parse_data.parseBooleans(notifciationIsEnabled):
         print("Reminder System Is Enabled For User ID " + user) 
-        # todayDay = datetime.today().strftime("%A").lower()
-        todayDay = "monday"
+        todayDay = datetime.today().strftime("%A").lower()
 
         # loop trough all the sessions
         for sessions in session_json[year][programme][intake][todayDay]["sessions"]:
@@ -44,9 +43,12 @@ for user in subscriptions["subscriptions"]:
             latest_time = (start_time - timedelta(minutes = int(offsetTime))).time()
 
             # check if current time is less than the latest time and if the current time is less than the (latest time + 5 seconds)
-            # that 5 seconds is synced with the node red system so that multiple message wont be sent to the user.
+            # that 5 seconds is synced with the node red system so that multiple messages wont be sent to the user.
             if (latest_time <= datetime.now().time()) and (datetime.now().time() < (latest_time_date + timedelta(seconds = 5)).time() ):
-                bot.sendMessage(int(user), "Hey man, You have your *" + session_name + "* class in *" + str(offsetTime) + "* minutes. ", parse_mode="Markdown")
+
+                username = core.getUserDetails(int(user))["first_name"]
+
+                bot.sendMessage(int(user), "Hey " + username + ", Your *" + session_name + "* class starts in *" + str(offsetTime) + "* minutes. ", parse_mode="Markdown")
                 print("Message Sent!")
 
  

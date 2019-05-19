@@ -62,6 +62,9 @@ start - Starts the bot, duh
 register - Register your account to a programme
 admin - Start interactive mode
 cancel - Cancels current operation
+dontremindme - Stop sending reminders
+remindme - Re-enable reminders
+remindmein - Set offset for reminders
 ```
 
 ## Using the bot
