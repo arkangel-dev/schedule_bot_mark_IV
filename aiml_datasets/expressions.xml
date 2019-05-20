@@ -1,0 +1,48 @@
+<aiml>
+    <category>
+        <pattern>THANKS</pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+            <random>
+                <li>Cool</li>
+                <li>No prob</li>
+                <li>Yeah sure</li>
+            </random>
+            <random>
+                <li>, Ok bye</li>
+                <li>, Ok now go away</li>
+                <li>, now shoo</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>THANK YOU</pattern>
+        <template><srai>THANKS</srai></template>
+    </category>
+
+    <category>
+        <pattern>OK</pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+            <random>
+                <li>Ok</li>
+                <li>Yeah</li>
+                <li>mmmhm</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>OK *</pattern>
+        <template><srai>OK</srai></template>
+    </category>
+
+    <category>
+        <pattern>OKAY</pattern>
+        <template><srai>OK</srai></template>
+    </category>
+
+    <category>
+        <pattern>OKAY *</pattern>
+        <template><srai>OK</srai></template>
+    </category>
+</aiml>

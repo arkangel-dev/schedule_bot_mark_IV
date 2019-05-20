@@ -1,14 +1,14 @@
 
 {
 	"2019" : {
-		"BSC (Hons) Computer Science" : {
+		"Bsc Hons Computer Science" : {
 
 			"january" : {
-				"sunday" :  {"sessions" : [["OOSD", "1909", "2000", "True", "Java", "Lab1", "False"]]},
-				"monday" :  {"sessions" : [["OOSD", "1748", "2000", "True", "Java", "Lab1", "False"]]},
+				"sunday" :  {"sessions" : []},
+				"monday" :  {"sessions" : []},
 				"tuesday" : {"sessions" : []},
 				"wednesday" : {"sessions" : []},
-				"thursday" :  {"sessions" : [["OOSD", "1800", "2000", "True", "Java", "Lab1", "False"]]},
+				"thursday" :  {"sessions" : []},
 				"friday" : {"sessions" : []},
 				"saturday" : {"sessions" : []},
 				

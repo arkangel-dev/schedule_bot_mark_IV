@@ -1,0 +1,10 @@
+{
+    "session_a" : {
+        "name" : "Reminder Test 1",
+        "type" : "reminder_session",
+        "timestamp" : 1558257841.123335,
+        "user_id" : 488976797,
+        "context_data" : ["2019","BSC (Hons) Computer Science","january","monday",0],
+        "offset" : 30
+    }
+}

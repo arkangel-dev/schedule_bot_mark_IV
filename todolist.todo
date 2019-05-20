@@ -10,18 +10,27 @@ TODO LIST
 ✔ Create new node-red workflow so that it works @done(19-04-09 12:07)
 ✔ Create python function to append awaiting variable to the dictionary @done(19-04-09 12:23)
 ✔ Add comments to files @done(19-04-09 14:41)
-✔ Make the append function to the respond_function_library.py @done(19-04-09 14:41)
-✔ Fix issues with trying to cancel and detecting execution of other commands @done(19-04-09 14:17)
+✔ Make the append trying to cancel and detecting execution of other commands @done(19-04-09 14:17)
 ✘ Fix the function names in user_status_data.json @cancelled(19-04-09 14:41)
 ✔ Add append command details to the help function @done(19-04-12 15:31)
 ✔ Add chatstatus stuff @done(19-04-11 14:33)
 ✔ Add user filters to prevent unauthorised access to /admin function @done(19-04-19 14:36)
-☐ Add a function to add administrators
-☐ Add function to revoke admin rights from users
+✔ Add a function to add administrators @done(19-04-30 19:47)
+✔ Add function to revoke admin rights from users @done(19-04-30 19:50)
 ☐ Add blast out function
 ☐ Add logging feature to blast out function
 ☐ Add a cancel appended session function
-☐ Improve /today funtion
+✔ Improve /today funtion @done(19-04-30 19:50)
 ☐ Add /amifreeon function
 ☐ Add more emojis to the chats
 ☐ Add interactive keyboards for the normies
+✔ Add function to add admins @done(19-04-25 10:40)
+☐ Fix parsing data and natural language module
+✔ Add function to delete admin @done(19-04-30 19:50
+✔ Add function to add high level admins @done(19-04-30 20:06)
+☐ Add function to delete high level admins
+☐ Fix append and delete sesssion function
+✔ Add function to regenerate a new OTP QR Code @done(19-05-13 13:39)
+✔ Add natural language processing for input from the user @started(19-05-13 13:42) @done(19-05-13 14:29) @lasted(47m40s)
+✔ Add reminder system @started(19-05-19 14:51) @done(19-05-19 17:02) @lasted(2h11m34s)
+✔ Improve reminder system @started(19-05-19 17:02) @done(19-05-19 17:36) @lasted(34m21s)

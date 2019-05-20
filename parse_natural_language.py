@@ -4,7 +4,7 @@ import parse_modified_data as p_modified_d
 from datetime import datetime
 
 
-def getFullTodayNL():
+def getFullTodayNL(chat_id):
 	output_list = []
 	bring_laptop = False
 	todayDay = pda.convertDateToDay(datetime.today())
@@ -18,11 +18,11 @@ def getFullTodayNL():
 	else:
 		appended_session_list_count = len(appended_session_list)
 
-	session_count = pd.getSessionCount(todayDay) # - len(cancelled_session_list) # tampering with this variable for the double for loops will cause issues
+	session_count = pd.getSessionCount(todayDay, chat_id) # - len(cancelled_session_list) # tampering with this variable for the double for loops will cause issues
 	if session_count != 0: # check if there are any sessions...
 		output_list.append("You have " + str((session_count - cancelled_session_list_count) + appended_session_list_count) + " session(s) today. They are the following : \n")
 		for x in range(0, session_count):
-			dayData = pd.parseSessionData(x, todayDay)
+			dayData = pd.parseSessionData(chat_id, x, todayDay)
 			if str(x) in cancelled_session_list: # check if the session was cancelled via the modified json file..
 				output_list.append("* >  Your " + dayData[0] + " session have been cancelled.*") # if cancelled add this line to the append...
 			else:
@@ -43,19 +43,19 @@ def getFullTodayNL():
 		output_list.append("You don't have any sessions today.")
 	return(output_list)
 
-def checkFutureDateNL(raw_string):
-	# This function will be used to check if there any sessions of a future date...
-	output_list = []
-	raw_date = pda.convertStringToDatetime(raw_string)
-	date_weekday = pda.convertDateToDay(raw_date)
-	raw_data = pd.parseSessionData
-	session_count = pd.getSessionCount(date_weekday)
+# def checkFutureDateNL(raw_string):
+# 	# This function will be used to check if there any sessions of a future date...
+# 	output_list = []
+# 	raw_date = pda.convertStringToDatetime(raw_string)
+# 	date_weekday = pda.convertDateToDay(raw_date)
+# 	raw_data = pd.parseSessionData
+# 	session_count = pd.getSessionCount(date_weekday)
 
-	if (session_count != 0):
-		output_list.append("You have " + str(session_count) + " sessions that day. They are the following : \n")
-		for x in range(0, session_count):
-			dayData = raw_data(x, date_weekday)
-			output_list.append("* >   " + dayData[0] + " from " + dayData[1] + " hours to " + dayData[2] + " hours with " + dayData[4] + ". Class will be held at " + str(dayData[5]) + ".*")
-	else:
-		output_list.append("You dont have any sessions on that day.")
-	return(output_list)
+# 	if (session_count != 0):
+# 		output_list.append("You have " + str(session_count) + " sessions that day. They are the following : \n")
+# 		for x in range(0, session_count):
+# 			dayData = raw_data(x, date_weekday)
+# 			output_list.append("* >   " + dayData[0] + " from " + dayData[1] + " hours to " + dayData[2] + " hours with " + dayData[4] + ". Class will be held at " + str(dayData[5]) + ".*")
+# 	else:
+# 		output_list.append("You dont have any sessions on that day.")
+# 	return(output_list)

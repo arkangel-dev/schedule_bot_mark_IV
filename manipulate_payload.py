@@ -15,6 +15,13 @@ chat_id = payload["chatId"]
 content = payload["content"]
 status_data = core.openJsonFile("user_status_data.json")
 
+user_list = core.openJsonFile("user_list.json")
+if not str(chat_id) in user_list["users"]:
+    username = core.getUserDetails(chat_id)["username"]
+    user_list["users"].update({str(chat_id):[]})
+    user_list["users"][str(chat_id)].append(username)
+    core.saveJsonFile(user_list, "user_list.json")
+
 if (str(chat_id) in status_data["awaiting_response_users"]):
     # if the system is expecting an input from this user
     # enter the awaiting data with the value as True

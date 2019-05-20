@@ -1,0 +1,4 @@
+telegram==0.0.1
+telepot==12.7
+Pillow==5.4.1
+pyotp==2.2.7

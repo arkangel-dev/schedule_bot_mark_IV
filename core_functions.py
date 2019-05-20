@@ -93,7 +93,7 @@ def delLastMessage(chat_id):
         try:
             bot.deleteMessage((chat_id, last_id))
         except:
-            bot.sendMessage(chat_id, "ERRx001 : (The specified keyboard was not found)")
+            # bot.sendMessage(chat_id, "ERRx001 : (The specified keyboard was not found)")
             print("ERR : Message not found : (The specified keyboard was not found)")
 
 def sendCompleteCurrentOperation(chat_id):
@@ -107,7 +107,30 @@ def checkAuthlist(chat_id, list_name):
     # that will return if a user is authorised...
     authList = openJsonFile("auth_list.json")
     subList = authList[list_name]
-    if (chat_id in subList):
+    if (str(chat_id) in subList):
         return(True)
     else:
         return(False)
+
+def checkAuthMessage(chat_id):
+    # check if this user is authorised to access the admin
+    # functions...
+    if not (checkAuthlist(chat_id, "admin") or checkAuthlist(chat_id, "core_admin")):
+        bot.sendMessage(chat_id, "You are not authorised to access this function. Please contact an administrator to get registered as an admin.")
+        exit()
+
+def getUserDetails(chat_id):
+    return(bot.getChat(chat_id))
+
+def lookUpUser(username, add_buffer=False):
+    raw_user_list = openJsonFile("user_list.json")
+    for x in raw_user_list["users"]:
+        if raw_user_list["users"][x][0] == username:
+            if (add_buffer):
+                return("Null ," + x)
+            else:
+                return(x)
+    return(False)
+
+def sendImg(chat_id, file):
+	bot.sendPhoto(chat_id, open(file, 'rb'))

@@ -1,0 +1,42 @@
+<aiml>
+    <!-- Get today session list function -->
+    <category>
+        <pattern>WHAT CLASSES DO I HAVE TODAY</pattern>
+        <template>SEND_TODAY</template>
+    </category>
+    <category>
+        <pattern>WHAT DO I HAVE TODAY</pattern>
+        <template><srai>WHAT CLASSES DO I HAVE TODAY</srai></template>
+    </category>
+    <category>
+        <pattern>WHAT DO I HAVE TONIGHT</pattern>
+        <template><srai>WHAT CLASSES DO I HAVE TODAY</srai></template>
+    </category>
+    <category>
+        <pattern>HOW IS MY SCHEDULE TODAY</pattern>
+        <template><srai>WHAT CLASSES DO I HAVE TODAY</srai></template>
+    </category>
+    <category>
+        <pattern>WHAT CLASSES DO I HAVE TONIGHT</pattern>
+        <template><srai>WHAT CLASSES DO I HAVE TODAY</srai></template>
+    </category>
+    <category>
+        <pattern>HOW IS MY SCHEDULE TONIGHT</pattern>
+        <template><srai>WHAT CLASSES DO I HAVE TODAY</srai></template>
+    </category>
+    
+    <!-- HELP -->
+    <category>
+        <pattern>HELP</pattern>
+        <template>GET_HELP</template>
+    </category>
+    <category>
+        <pattern>HELP ME</pattern>
+        <template>GET_HELP</template>
+    </category>
+    <category>
+        <pattern>*</pattern>
+        <template>MISMATCH</template>
+    </category>
+    
+</aiml>

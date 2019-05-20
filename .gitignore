@@ -38,6 +38,7 @@ pip-delete-this-directory.txt
 # user made junk
 test_json.json
 test_pyth.py
+qr_code.png
 .vscode
 
 # Unit test / coverage reports

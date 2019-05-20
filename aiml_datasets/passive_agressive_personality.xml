@@ -1,0 +1,10 @@
+<aiml>
+    <category>
+        <pattern>HOW DO I *</pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+            <random>
+                <li>What do I look like? Your assistant?</li>
+            </random>
+        </template>
+    </category>
+</aiml>

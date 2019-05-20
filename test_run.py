@@ -1,54 +1,124 @@
 from env import TELEGRAM_BOT_API_KEY
 from env import MY_ID
+import env
 import parse_modified_data as p_modified_d
-import parse_natural_language as parse_nl
+
+import natural_language_processor as nlp
 from datetime import datetime
 import parse_dates as p_dates
 import telepot
 import sys
 import json
 import core_functions as core
+import normie_functions as normie
+import admin_func_lib as admin_func
  
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
 raw = sys.argv[1]
 converted = json.loads(raw)
-chatId = converted["chatId"]
+#
+# convert the essential information about
+# the request so that it can be used to utilize the
+# check functions.
+#
+chat_id = converted["chatId"]
 content = converted["content"]
 command = content.split()[0]
-bot.sendChatAction(chatId, "typing")
+#
+# open the nessesary files. the user_status_data.json will
+# store whether the bot is expecting the user to enter parameter
+# to the bot. It will also store other stuff in future updates.
+#
 user_status_data = core.openJsonFile("user_status_data.json")
 awaiting_response_list = user_status_data["awaiting_response_users"]
+
+#
+# check if the request is a callback query. aka check if the request
+# originated from a telegram keyboard. if it is from a keyboard exit
+# because all keyboard request are handled by the keyboard_stuff.py
+# file
+#
+if (converted["type"] == "callback_query"):
+    exit()
+# else:
+#     # aaaand the fallback
+#     # cool? cool cool cool cool
+#     queryMode = False
+#     query_id = 0
+#
+# the above fallback was when the node-red server was configued to
+# accept keyboard request from only admin function keyboards. Now 
+# it is not required, but I'll be leaving it just in case.
 
 if (command == "/cancel"):
 	# this cancel function is here because if
 	# this file will not be invoked at all
-	bot.sendMessage(chatId, "No active command to cancel. I wasn't doing anything anyway. Zzzzz...", parse_mode="markdown")
+	bot.sendMessage(chat_id, "No active command to cancel. I wasn't doing anything anyway. Zzzzz...", parse_mode="markdown")
 	exit()
 
 elif (command == "/admin"):
 	# exit because this is an admin function and
 	# this file has no busness meddling with admin functions...
+	#
+	# I'll be leaving this if check here just in case if this
+	# file gets a request to access the admin keyboard ( which is
+	# highly unlikely )
+	#
 	exit()
 
+#
+# send the request to telegram to send
+# the 'typing...' status to the 
+# user. This will make delays in send the
+# responses more natural
+#
+bot.sendChatAction(chat_id, "typing")
+
+
 if (command == "/today"):
-	# send the status data
-	# for today's data...
-	sendstring = ""
-	output = parse_nl.getFullTodayNL()
-	for x in output:
-		sendstring += x + "\n"
-	bot.sendMessage(chatId, sendstring, parse_mode="Markdown")
-	print("[+] Send Today Data...") 
+	normie.sendTodaySessionList(chat_id)
 
 elif (command == "/start"):
 	# send a the response for the 
 	# start commands
-	bot.sendMessage(chatId, "*Normie Mode : * \nUse this to get dates and junk. For normies", parse_mode="markdown")
-	bot.sendMessage(chatId, "*🔥 Administrative Mode 🔥 : * \nThis mode is only accessible by users with special access. If you are registered as an admin send /admin to start interactive mode.", parse_mode="markdown")
+	# this is the messange that will be sent to the bot. And will be triggered
+	# by the "/start" command, which is sent by telegram by default
+	#
+	username = core.getUserDetails(chat_id)["first_name"]
+	bot.sendSticker(chat_id, "CAADAgADNAMAAsSraAtL-201ahgGBQI")
+	bot.sendMessage(chat_id, "Hello *" + username + "*,\nI can help you get college schedules and stuff. I can also remind you of sessions, as soon as you /register to a programme and an intake. If you are already registered you can send /today to get todays sessions. I will also notify you of any changes the IT Faculty rolls out. For more help send /help", parse_mode="markdown")
+	if (core.checkAuthlist(chat_id, "admin") or core.checkAuthlist(chat_id, "core_admin")):
+		bot.sendMessage(chat_id, "*Administrative Mode : * \nHmm, it seems your account is registered as an administrator, Congratulations!. This mode is only accessible by students with special access to the bot. Admin students can manipulate sessions and other tasks. Send /admin to activate interactive mode", parse_mode="markdown")
+	# bot.sendMessage(chatId, "*I'm a God Mode : * \nThis mode is for developers only and is accessible by special hidden codes. Good luck finding them >:D", parse_mode="markdown")
+	# bot.sendMessage(chatId, "*High Admin Mode : *\nThis mode is college faculty members only.", parse_mode="markdown")
+
+elif (command == "/register"):
+	# send a keyboard so the user can register
+	# their account to a programme, an intake and an year
+	#
+	normie.registerUser(chat_id, content)
+
+elif (command == "/help"):
+	# the help function. Because everyone needs help sometimes
+	# Especially if they are operating a program that was written by me
+	# you'll also need mental help. My documentation is that bad...
+	#
+	normie.normie_help_list(chat_id)
+
+elif (command == "/dontremindme"):
+	# this function is used to disable the remind function
+	normie.reminderToggle(chat_id, False)
+
+elif (command == "/remindme"):
+	# this function is used to enable the remind function once its been disabled
+	normie.reminderToggle(chat_id, True)
 
 else:
-	# this is the fallback
-	# condition. incase the command does not match
-	# any functions programmed in
-	bot.sendMessage(chatId, "I'm sorry, what?")
+	# # this is the fallback
+	# # condition. incase the command does not match
+	# # any functions programmed in
+	# bot.sendMessage(chat_id, "I'm sorry, what?")
+
+	# lets try something else:
+	nlp.match_functions(content, chat_id)
