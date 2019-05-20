@@ -3,9 +3,15 @@
 Schedule bot Mark IV (also dubbed as FRIDAY) is the 4th version of a sheduling system integerated with the Telegram bot API platform and is the first version of the  series to work without giving the maintainer and/or the end-user an aneurysm. This version of the system has the following capabilites:
 
 - Fetching schedules
+- Multiple programmes, intakes and years
 - Interpreting schedules in a natural language
 - Reminding of users of schedules n minutes before a session starts
-- 
+- Multiple core admins
+- OTP verification for core admin functions
+- Multiple admins for programmes, years and intakes
+- Primitive natural language processing via AIML
+- Agressive personality
+- Append / Cancel sessions on the fly
 
 ## Installing the bot
 ### Node-Red Setup
@@ -33,9 +39,19 @@ Then you'll need to need to link the python nodes to their python files.
 | Check if Awaiting Data | `manipulate_payload.py` |
 | Administrative Respond functions | `admin_respond_functions.py`|
 | Main Processing Function | `test_run.py` |
-| Adminsitrative Functions | ``admin_functions.py` |
+| Adminsitrative Functions | `admin_functions.py` |
 | Keyboard Buttons | `keyboard_stuff.py` |
 
+And finally you'll need the following python libraries
+
+```
+pip install telegram
+pip intall telepot
+pip intall pillow
+pip install pyotp
+pip install qrcode
+pip install aiml
+```
 
 ### Telegram bot commands
 
@@ -66,7 +82,6 @@ When the admin starts using the `/admin` function without any parameters the int
 
 There are some functions that interactive mode cannot work with ( for now ). And those functions include all functions that require additional parameters that the bot cannot predict. Such as appending sessions and blasting out messages. Other functions such as cancel sessions, which the bot can suggest options via the keyboard.
 
-
 ---
 
 ### Appending and Cancelling Session Via Interactive Mode
@@ -90,21 +105,12 @@ Now click on a day and you'll presented with a list of sessions available on tha
 
 ---
 
-
 ## Additional Notes
 When using to send message use the `parse_natural_language.py` file like the following:
 ```python
 import parse_natural_language as parse_nl
 print(parse_nl.getFullTodayNL())
 ```
-
-## How it works
-
-I REALLY dont want to, so here is a flow chart
-
-<p align="center">
-<img src="documentation/FlowDiagram.drawio.png", width="80%">
-</p>
 
 ---
 
