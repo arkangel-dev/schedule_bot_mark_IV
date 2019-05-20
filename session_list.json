@@ -4,11 +4,11 @@
 		"BSC (Hons) Computer Science" : {
 
 			"january" : {
-				"sunday" :  {"sessions" : [["OOSD", "1909", "2000", "True", "Java", "Lab1", "False"]]},
-				"monday" :  {"sessions" : [["OOSD", "1748", "2000", "True", "Java", "Lab1", "False"]]},
-				"tuesday" : {"sessions" : []},
-				"wednesday" : {"sessions" : []},
-				"thursday" :  {"sessions" : [["OOSD", "1800", "2000", "True", "Java", "Lab1", "False"]]},
+				"sunday" :  {"sessions" : [["Intoduction to OO System Development", "2100", "2230", "True", "Ibrahim Shahid", "Computer Lab 3", "False"]]},
+				"monday" :  {"sessions" : [["Intoduction to Artificial Intelligence", "2100", "2300", "True", "Lecturer 8", "EW501 (36 St)", "False"]]},
+				"tuesday" : {"sessions" : [["Principles of Computing", "2100", "2200", "False", "Lecuturer 9", "Classroom 10 (36 St)", "False"]]},
+				"wednesday" : {"sessions" : [["Computer Network Systems", "2100", "2200", "True", "Lecturer 7", "EW503 (24 St)", "False"]]},
+				"thursday" :  {"sessions" : []},
 				"friday" : {"sessions" : []},
 				"saturday" : {"sessions" : []},
 				

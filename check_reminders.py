@@ -39,6 +39,8 @@ for user in subscriptions["subscriptions"]:
         for sessions in session_json[year][programme][intake][todayDay]["sessions"]:
             start_time = datetime.strptime(sessions[1], '%H%M')
             session_name = sessions[0]
+            laptop_needed = sessions[3]
+            venue = sessions[5]
             latest_time_date = (start_time - timedelta(minutes = int(offsetTime)))
             latest_time = (start_time - timedelta(minutes = int(offsetTime))).time()
 
@@ -47,8 +49,23 @@ for user in subscriptions["subscriptions"]:
             if (latest_time <= datetime.now().time()) and (datetime.now().time() < (latest_time_date + timedelta(seconds = 5)).time() ):
 
                 username = core.getUserDetails(int(user))["first_name"]
+                message_list = []
+                message_list.append("Hey " + username + ", Your *" + session_name + "* class starts in *" + str(offsetTime) + "* minutes, and its at *" + venue + "*. ")
 
-                bot.sendMessage(int(user), "Hey " + username + ", Your *" + session_name + "* class starts in *" + str(offsetTime) + "* minutes. ", parse_mode="Markdown")
+                if parse_data.parseBooleans(laptop_needed):
+                    # check if laptop is needed if so remind the user to plug it in...
+                    message_list.append("Also you'll be needing your laptop, so make sure it is charged.")
+                
+
+                combined = ""
+                for x in message_list:
+                    # combine the listed strings
+                    # so that things will... work?
+                    # I dont know how to document this stuff
+                    combined = combined + x
+                
+                # send that..
+                bot.sendMessage(int(user),combined , parse_mode="Markdown")
                 print("Message Sent!")
 
  

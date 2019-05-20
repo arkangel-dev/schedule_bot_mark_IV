@@ -86,8 +86,9 @@ elif (command == "/start"):
 	# by the "/start" command, which is sent by telegram by default
 	#
 	username = core.getUserDetails(chat_id)["first_name"]
-	bot.sendSticker(chat_id, "CAADAgADNAMAAsSraAtL-201ahgGBQI")
-	bot.sendMessage(chat_id, "Hello *" + username + "*,\nI can help you get college schedules and stuff. I can also remind you of sessions, as soon as you /register to a programme and an intake. If you are already registered you can send /today to get todays sessions. I will also notify you of any changes the IT Faculty rolls out. For more help send /help", parse_mode="markdown")
+	bot.sendMessage(chat_id, "*Warning :*️️️ \nThis bot is its development stages. Please take everything it says with a grain of salt. Maybe a teaspoon.", parse_mode="Markdown")
+	bot.sendSticker(chat_id, "CAADAQADDAADLRrhIIbDD93dFdKeAg")
+	bot.sendMessage(chat_id, "Hello *" + username + "*,\nI can help you get college schedules and stuff. I can also remind you of sessions, as soon as you /register to a programme and an intake. I will also notify you of any changes the IT Faculty rolls out. For more help send /help", parse_mode="markdown")
 	if (core.checkAuthlist(chat_id, "admin") or core.checkAuthlist(chat_id, "core_admin")):
 		bot.sendMessage(chat_id, "*Administrative Mode : * \nHmm, it seems your account is registered as an administrator, Congratulations!. This mode is only accessible by students with special access to the bot. Admin students can manipulate sessions and other tasks. Send /admin to activate interactive mode", parse_mode="markdown")
 	# bot.sendMessage(chatId, "*I'm a God Mode : * \nThis mode is for developers only and is accessible by special hidden codes. Good luck finding them >:D", parse_mode="markdown")

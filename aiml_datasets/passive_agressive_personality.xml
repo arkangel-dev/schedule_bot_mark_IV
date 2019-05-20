@@ -7,4 +7,13 @@
             </random>
         </template>
     </category>
+    <category>
+        <pattern>* IS STUPID</pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+            <random>
+                <li>No, You are stupid</li>
+                <li>No YOU!</li>
+            </random>
+        </template>
+    </category>
 </aiml>
