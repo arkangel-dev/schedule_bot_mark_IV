@@ -4,13 +4,14 @@ import core_functions as core
 import env
 import telepot
 
-f = open("session_list.json" , "r")
-file_json = f.read()
-raw_data = json.loads(file_json)
+# f = open("user_list.json" , "r")
+# file_json = f.read()
+# raw_data = json.loads(file_json)
+raw_data = core.openJsonFile("session_list.json")
 
-f = open("appended_sessions_list.json" , "r")
-file_json = f.read()
-append_raw_data = json.loads(file_json)
+# f = open("appended_session_list.json" , "r")
+# file_json = f.read()
+append_raw_data = core.openJsonFile("appended_sessions_list.json")
 
 # session_count = len(raw_data["days"]["wednesday"]["sessions"])
 

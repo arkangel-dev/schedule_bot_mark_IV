@@ -15,6 +15,8 @@ chat_id = converted["chatId"]
 content = converted["content"]
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
+print("[!] Incoming : " + str(chat_id) + " (" + core.getUserDetails(chat_id)["username"] + ")") 
+print("[!] Content (KEYBOARD) : " + content)
 
 
 if (converted["type"] == "callback_query"):

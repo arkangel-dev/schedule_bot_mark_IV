@@ -13,6 +13,9 @@ raw = sys.argv[1]
 converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
+
+print("[!] Incoming : " + str(chat_id) + " (" + core.getUserDetails(chat_id)["username"] + ")") 
+print("[!] Content : " + content)
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 #
 # send the request to telegram to send

@@ -51,7 +51,6 @@ for user in subscriptions["subscriptions"]:
                 username = core.getUserDetails(int(user))["first_name"]
                 message_list = []
                 message_list.append("Hey " + username + ", Your *" + session_name + "* class starts in *" + str(offsetTime) + "* minutes, and its at *" + venue + "*. ")
-
                 if parse_data.parseBooleans(laptop_needed):
                     # check if laptop is needed if so remind the user to plug it in...
                     message_list.append("Also you'll be needing your laptop, so make sure it is charged.")
@@ -66,6 +65,7 @@ for user in subscriptions["subscriptions"]:
                 
                 # send that..
                 bot.sendMessage(int(user),combined , parse_mode="Markdown")
-                print("Message Sent!")
+                print("Reminder sent to " + user)
+    # print("TIMER")
 
  

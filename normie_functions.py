@@ -124,10 +124,9 @@ def normie_help_list(chat_id, query_mode = False, query_id = 0):
     outputList = [] # create the help Lists
     outputList.append("*Help & Support (For Normies)* \n\n")
     #outputList.append("*Intoduction* : \nAs long as technology existed there existed folks who didn't know squat about said technology. So a group high minded interllectuals gathered and came up with the concept of the documentation. They wrote documentation for every piece of innovation they made. They even made a tutorial on how to lift up a chair. So anyway, the backend development of a telegram bot is pretty new to me and the code is pretty weird. So naturally me (@ArkangelDev) and Ice Bear (@athfan) had to create a documentation for this. But our documentation is pretty weird. Also we have a weird sense of humor and thus this un-nessesarily looong text. Soo yeah, you wasted 3 minutes reading this.\n\n")
-    outputList.append("*Introduction* : \nYou can either talk to me in a normal way the same way you talk to your self or you can use commands such as /today to get information. That doesn't mean I can answer all your stupid questions, I'm just supposed to better than those clowns at the student desk.\n\n")
+    outputList.append("*Introduction* : \nYou can either talk to me in a normal way the same way you talk to your self or you can use commands such as /today to get information. That doesn't mean I can answer all your questions, I'm just supposed to better at relaying schedules than those two at the student desk.\n\nSo first of all you have to register. You can do so sending /register. Then you have to complete the registration. That's all there is to it. From there I will automatically notify you of classes 30 minutes before a session starts. If you do not want to be notified send /dontremindme. You can send /today to get todays schedule.\n\n")
     outputList.append("`Normie Functions Version : " + str(env.NORMIE_BUILD_ID) + "`")
     outputList.append("\n`Development Version : " + str(env.BUILD_ID) + "`")
-    outputList.append("\n`Created and Hosted by @ArkangelDev, @athfan`")
 
     # convert it to a single string...
     finalString = ""
