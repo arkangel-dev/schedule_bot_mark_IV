@@ -1,17 +1,103 @@
-
 {
-	"2019" : {
-		"BSC (Hons) Computer Science" : {
+	"2019": {
+		"BSC (Hons) Computer Science": {
+			"january": {
+				"sunday": {
+					"sessions": [
+						[	"Intoduction to OO System Development",
+							"1900",
+							"2000",
+							"True",
+							"Ibrahim Shahid",
+							"Computer Lab 3 (30)",
+							"False"],
+						[
+							"Computer and Network Systems",
+							"2100",
+							"2200",
+							"False",
+							"Lecuturer 7",
+							"Computer Lab 2 (30)",
+							"False"
+						]
+					]
+				},
+				"monday": {
+					"sessions": [
+						[
+							"Intoduction to Artificial Intelligence",
+							"2000",
+							"2200",
+							"True",
+							"Lecturer 8",
+							"Computer Lab 1 (30)",
+							"False"
+						]
+					]
+				},
+				"tuesday": {
+					"sessions": [
+						[
+							"Principles of Computing",
+							"1800",
+							"2000",
+							"False",
+							"Lecuturer 9",
+							"EW503 (24 St)",
+							"False"
+						],
+						[
+							"Computer and Network Systems",
+							"2000",
+							"2200",
+							"True",
+							"Computer Lab 1 (30)",
+							"False"
 
-			"january" : {
-				"sunday" :  {"sessions" : [["Intoduction to OO System Development", "2100", "2230", "True", "Ibrahim Shahid", "Computer Lab 3", "False"]]},
-				"monday" :  {"sessions" : [["Intoduction to Artificial Intelligence", "2100", "2300", "True", "Lecturer 8", "EW501 (36 St)", "False"]]},
-				"tuesday" : {"sessions" : [["Principles of Computing", "2100", "2200", "False", "Lecuturer 9", "Classroom 10 (36 St)", "False"]]},
-				"wednesday" : {"sessions" : [["Computer Network Systems", "2100", "2200", "True", "Lecturer 7", "EW503 (24 St)", "False"]]},
-				"thursday" :  {"sessions" : []},
-				"friday" : {"sessions" : []},
-				"saturday" : {"sessions" : []},
-				
+						]
+					]
+				},
+				"wednesday": {
+					"sessions": [
+						[
+							"Principles of Computing",
+							"1800",
+							"1900",
+							"False",
+							"Lecturer 9",
+							"EW201 (36 St)",
+							"False"
+						],
+						[
+							"Intoduction to OO System Development",
+							"1900",
+							"2000",
+							"True",
+							"Ibrahim Shahid",
+							"Computer Lab 2 (30)",
+							"True"
+						]
+					]
+				},
+				"thursday": {
+					"sessions": [
+						[
+							"Intoduction to Artifical Intelligence",
+							"1800",
+							"1900",
+							"True",
+							"Lecturer 8",
+							"Computer Lab 3 (30)",
+							"False"
+						]
+					]
+				},
+				"friday": {
+					"sessions": []
+				},
+				"saturday": {
+					"sessions": []
+				},
 				"appended": {
 					"sunday": [],
 					"monday": [],
@@ -22,16 +108,28 @@
 					"saturday": []
 				}
 			},
-
-			"may" : {
-				"sunday" :  {"sessions" : []},
-				"monday" :  {"sessions" : []},
-				"tuesday" : {"sessions" : []},
-				"wednesday" : {"sessions" : []},
-				"thursday" :  {"sessions" : []},
-				"friday" : {"sessions" : []},
-				"saturday" : {"sessions" : []},
-				
+			"may": {
+				"sunday": {
+					"sessions": []
+				},
+				"monday": {
+					"sessions": []
+				},
+				"tuesday": {
+					"sessions": []
+				},
+				"wednesday": {
+					"sessions": []
+				},
+				"thursday": {
+					"sessions": []
+				},
+				"friday": {
+					"sessions": []
+				},
+				"saturday": {
+					"sessions": []
+				},
 				"appended": {
 					"sunday": [],
 					"monday": [],
@@ -42,16 +140,28 @@
 					"saturday": []
 				}
 			},
-
-			"september" : {
-				"sunday" :  {"sessions" : []},
-				"monday" :  {"sessions" : []},
-				"tuesday" : {"sessions" : []},
-				"wednesday" : {"sessions" : []},
-				"thursday" :  {"sessions" : []},
-				"friday" : {"sessions" : []},
-				"saturday" : {"sessions" : []},
-				
+			"september": {
+				"sunday": {
+					"sessions": []
+				},
+				"monday": {
+					"sessions": []
+				},
+				"tuesday": {
+					"sessions": []
+				},
+				"wednesday": {
+					"sessions": []
+				},
+				"thursday": {
+					"sessions": []
+				},
+				"friday": {
+					"sessions": []
+				},
+				"saturday": {
+					"sessions": []
+				},
 				"appended": {
 					"sunday": [],
 					"monday": [],

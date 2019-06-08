@@ -2,7 +2,6 @@ import time
 import sys
 import json
 import core_functions as core
-import telepot
 import env
 import traceback
 
@@ -12,7 +11,6 @@ import traceback
 # Workflow the a new key is added to the payload. This file will add said 
 # key. The purpose of this key is irrelevent to be explained in this file... :p
 
-bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
 
 payload_raw = sys.argv[1]
 payload = json.loads(payload_raw)
@@ -26,6 +24,8 @@ user_list = core.openJsonFile("user_list.json")
 try:
     username = core.getUserDetails(chat_id)["username"]
 except:
+    import telepot
+    bot = telepot.Bot(env.TELEGRAM_BOT_API_KEY)
     bot.sendChatAction(chat_id, "typing")
     bot.sendMessage(chat_id, "No username, No service. Get a username and then we'll talk or else get lost!")
     bot.sendSticker(chat_id, "CAADAQADJwADLRrhIITCggTyx2NsAg")

@@ -1,3 +1,4 @@
+# - *- coding: utf- 8 - *- 
 import sys
 import json
 import telepot
@@ -13,7 +14,6 @@ import env
 import respond_function_library as respond_lib
 import security as sec
 
-    
 
 # open the append-session file...
 f = open("appended_sessions_list.json" , "r")
@@ -232,7 +232,6 @@ def sendCoreFunctKeyboard(chat_id):
                         InlineKeyboardButton(text="Remove high admin", callback_data="h_admin_revoke")],
                         [InlineKeyboardButton(text="Update OTP code", callback_data="update_otp")],
                         # [InlineKeyboardButton(text="Reset core json files", callback_data="reset_json")],
-                        # [InlineKeyboardButton(text="☠️   Shutdown system   ☠️", callback_data="shutdown_core")],
                         # removed ^ these because ice bear doesn't approve
                         [InlineKeyboardButton(text="Go back", callback_data="EnterInteractiveMode")]
                     ])
@@ -516,7 +515,7 @@ def admin_add(chat_id, context):
         # the json file
         #
         username = bot.getChat(int(user_id))["first_name"]
-        bot.sendMessage(int(user_id), "🎉*Congratulations : *🎉 \nHello " + username + ", You have been added to my system as an administrator, with the authority of full session control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*.", parse_mode="markdown")
+        bot.sendMessage(int(user_id), u"🎉*Congratulations : *🎉 \nHello " + username + ", You have been added to my system as an administrator, with the authority of full session control over the class of *" + year + "* / *" + programme + "* / *" + intake + "*.", parse_mode="markdown")
         #
         # So now we are going to send the new admin the good news that he has been added
         # to the system as an administrator

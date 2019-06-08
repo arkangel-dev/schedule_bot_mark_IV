@@ -12,6 +12,8 @@ import json
 import core_functions as core
 import normie_functions as normie
 import admin_func_lib as admin_func
+
+# - *- coding: utf- 8 - *-
  
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
@@ -88,7 +90,6 @@ elif (command == "/start"):
 	# by the "/start" command, which is sent by telegram by default
 	#
 	username = core.getUserDetails(chat_id)["first_name"]
-	bot.sendMessage(chat_id, "*Warning :*️️️ \nThis bot is its development stages. Please take everything it says with a grain of salt. Maybe a teaspoon. Also it'll be off-line from time to time for maintainance.", parse_mode="Markdown")
 	bot.sendSticker(chat_id, "CAADAQADDAADLRrhIIbDD93dFdKeAg")
 	bot.sendMessage(chat_id, "Hello *" + username + "*,\nI can help you get college schedules and stuff. I can also remind you of sessions, as soon as you /register to a programme and an intake. I will also notify you of any changes the IT Faculty rolls out. For more help send /help", parse_mode="markdown")
 	if (core.checkAuthlist(chat_id, "admin") or core.checkAuthlist(chat_id, "core_admin")):
