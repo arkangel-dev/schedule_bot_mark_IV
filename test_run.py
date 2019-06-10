@@ -1,8 +1,9 @@
+# - *- coding: utf- 8 - *-
+
 from env import TELEGRAM_BOT_API_KEY
 from env import MY_ID
 import env
 import parse_modified_data as p_modified_d
-
 import natural_language_processor as nlp
 from datetime import datetime
 import parse_dates as p_dates
@@ -13,7 +14,6 @@ import core_functions as core
 import normie_functions as normie
 import admin_func_lib as admin_func
 
-# - *- coding: utf- 8 - *-
  
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
 
@@ -27,8 +27,8 @@ converted = json.loads(raw)
 chat_id = converted["chatId"]
 content = converted["content"]
 command = content.split()[0]
-print("[!] Incoming : " + str(chat_id) + " (" + core.getUserDetails(chat_id)["username"] + ")") 
-print("[!] Content : " + content)
+print("[!][test_run.py] Incoming : " + str(chat_id) + " (" + core.getUserDetails(chat_id)["username"] + ")") 
+print("[!][test_run.py] Content : " + content)
 #
 # open the nessesary files. the user_status_data.json will
 # store whether the bot is expecting the user to enter parameter
@@ -59,9 +59,11 @@ if (command == "/cancel"):
 	# this cancel function is here because if
 	# this file will not be invoked at all
 	bot.sendMessage(chat_id, "No active command to cancel. I wasn't doing anything anyway. Zzzzz...", parse_mode="markdown")
+	print("[+][test_run.py] User requested a cancel with no running commands")
 	exit()
 
 elif (command == "/admin"):
+	print("[+][test_run.py] Quitting...")
 	# exit because this is an admin function and
 	# this file has no busness meddling with admin functions...
 	#
@@ -81,6 +83,7 @@ bot.sendChatAction(chat_id, "typing")
 
 
 if (command == "/today"):
+	print("[+][test_run.py] running /today function... ")
 	normie.sendTodaySessionList(chat_id)
 
 elif (command == "/start"):
@@ -94,8 +97,6 @@ elif (command == "/start"):
 	bot.sendMessage(chat_id, "Hello *" + username + "*,\nI can help you get college schedules and stuff. I can also remind you of sessions, as soon as you /register to a programme and an intake. I will also notify you of any changes the IT Faculty rolls out. For more help send /help", parse_mode="markdown")
 	if (core.checkAuthlist(chat_id, "admin") or core.checkAuthlist(chat_id, "core_admin")):
 		bot.sendMessage(chat_id, "*Administrative Mode : * \nHmm, it seems your account is registered as an administrator, Congratulations!. This mode is only accessible by students with special access to the bot. Admin students can manipulate sessions and other tasks. Send /admin to activate interactive mode", parse_mode="markdown")
-	# bot.sendMessage(chatId, "*I'm a God Mode : * \nThis mode is for developers only and is accessible by special hidden codes. Good luck finding them >:D", parse_mode="markdown")
-	# bot.sendMessage(chatId, "*High Admin Mode : *\nThis mode is college faculty members only.", parse_mode="markdown")
 
 elif (command == "/register"):
 	# send a keyboard so the user can register
@@ -117,6 +118,9 @@ elif (command == "/dontremindme"):
 elif (command == "/remindme"):
 	# this function is used to enable the remind function once its been disabled
 	normie.reminderToggle(chat_id, True)
+
+elif (command == "/remindmein"):
+	normie.remindSetOffset(chat_id, content)
 
 else:
 	# # this is the fallback

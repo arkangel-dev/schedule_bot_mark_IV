@@ -5,6 +5,7 @@ from env import TELEGRAM_BOT_API_KEY
 import sys
 import telepot
 import traceback
+import ast, re
 
 
 # {'message_id': 2137, 'from': {'id': 649384853, 'is_bot': True, 'first_name': 'F.R.I.D.A.Y', 'username': 'ItsFuckingFriday'
@@ -134,3 +135,18 @@ def lookUpUser(username, add_buffer=False):
 
 def sendImg(chat_id, file):
 	bot.sendPhoto(chat_id, open(file, 'rb'))
+
+def getDataType(str):
+    str=str.strip()
+    if len(str) == 0: return 'BLANK'
+
+    if re.match(r'True$|^False$|^0$|^1$', str):
+        return 'bit'
+    if re.match(r'([-+]\s*)?\d+[lL]?$', str): 
+        return 'integer'
+    if re.match(r'([-+]\s*)?[1-9][0-9]*\.?[0-9]*([Ee][+-]?[0-9]+)?$', str): 
+        return 'float'
+    if re.match(r'([-+]\s*)?[0-9]*\.?[0-9][0-9]*([Ee][+-]?[0-9]+)?$', str): 
+        return 'float'
+
+    return 'text' 

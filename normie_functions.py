@@ -172,7 +172,27 @@ def reminderToggle(chat_id, state):
     user_deets = subscribe_file["subscriptions"][str(chat_id)]
     subscribe_file["subscriptions"].update({str(chat_id) : [user_deets[0],user_deets[1],user_deets[2],str(state),user_deets[4]]})
     core.saveJsonFile(subscribe_file,"subscriptions.json")
+
     if state:
         bot.sendMessage(chat_id, "Ok I'll notify you of sessions *" + user_deets[4] + "* minutes before class.", parse_mode="Markdown")
     else:
         bot.sendMessage(chat_id, "Alrighty, you wont be reminded of sessions again. Just dont forget about you classes. If you want to re-enable reminders send /remindme")
+
+def remindSetOffset(chat_id, content):
+    #
+    # so this function will change the offset value of the 
+    # subscriptions file. It will also check if the specifed value
+    # is a compatible value to the function
+    #
+    if (len(content.split()) >= 2):
+        minutes = content.split()[1]
+        if (core.getDataType(minutes) == "integer"):
+            subscribe_file = core.openJsonFile("subscriptions.json")
+            userdetails = subscribe_file["subscriptions"][str(chat_id)]
+            subscribe_file["subscriptions"].update({str(chat_id) : [userdetails[0], userdetails[1], userdetails[2], userdetails[3],content.split()[1] ]})
+            core.saveJsonFile(subscribe_file, "subscriptions.json")
+            bot.sendMessage(chat_id, "Okay, I have updated your subscription. I will now remind you of class *" + minutes + " minutes* before it starts.", parse_mode="markdown")
+        else:
+            bot.sendMessage(chat_id, "You have to specify an integer as a parameter to this function. The type you specified is " + core.getDataType(minutes) + ".")
+    else:
+        bot.sendMessage(chat_id, "You have to specify an offset time in minutes. Example : /remindmein 45") 

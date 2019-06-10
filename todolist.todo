@@ -18,12 +18,14 @@ TODO LIST
 ✔ Add a function to add administrators @done(19-04-30 19:47)
 ✔ Add function to revoke admin rights from users @done(19-04-30 19:50)
 ☐ Add blast out function
-☐ Add logging feature to blast out function
+✘ Add logging feature to blast out function @cancelled(19-06-10 13:05)
 ☐ Add a cancel appended session function
 ✔ Improve /today funtion @done(19-04-30 19:50)
 ☐ Add /amifreeon function
 ☐ Add more emojis to the chats
 ☐ Add interactive keyboards for the normies
+☐ Add function to get schedules as per dates
+✔ Add function to change the reminder offset time @done(19-06-10 13:45)
 ✔ Add function to add admins @done(19-04-25 10:40)
 ☐ Fix parsing data and natural language module
 ✔ Add function to delete admin @done(19-04-30 19:50
