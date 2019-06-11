@@ -6,6 +6,8 @@ import sys
 import telepot
 import traceback
 import ast, re
+from contextlib import contextmanager
+import sys, os
 
 
 # {'message_id': 2137, 'from': {'id': 649384853, 'is_bot': True, 'first_name': 'F.R.I.D.A.Y', 'username': 'ItsFuckingFriday'
@@ -14,6 +16,18 @@ import ast, re
 # }
 
 bot = telepot.Bot(TELEGRAM_BOT_API_KEY)
+
+
+# sometimes to supress the output
+@contextmanager
+def suppress_stdout():
+    with open(os.devnull, "w") as devnull:
+        old_stdout = sys.stdout
+        sys.stdout = devnull
+        try:  
+            yield
+        finally:
+            sys.stdout = old_stdout
 
 def openJsonFile(filename):
     # open the json file...

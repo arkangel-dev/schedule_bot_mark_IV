@@ -25,6 +25,7 @@ TODO LIST
 ☐ Add more emojis to the chats
 ☐ Add interactive keyboards for the normies
 ☐ Add function to get schedules as per dates
+✔ Add more snarky responses to the aiml datasets as per request @done(19-06-11 22:00)
 ✔ Add function to change the reminder offset time @done(19-06-10 13:45)
 ✔ Add function to add admins @done(19-04-25 10:40)
 ☐ Fix parsing data and natural language module

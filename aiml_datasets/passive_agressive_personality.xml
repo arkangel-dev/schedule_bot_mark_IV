@@ -4,9 +4,63 @@
         <template>FORWARD_CONTENT (_SPLITTER_)
             <random>
                 <li>What do I look like? Your assistant?</li>
+                <li>Do I look like a fucking help desk to you?</li>
+                <li>So its really simple. First you drive by "I dont give a fuck" road, that's by the "Zero fucks given" avenue and there is a cliff there. Drive off of it.</li>
+                <li>I dont know... Try googling it.</li>
+                <li>Ever thought about asking Chithulu for help?</li>
+                <li>Shalll I summon demons to do you bidding?</li>
             </random>
         </template>
     </category>
+
+    <category>
+        <pattern>YES</pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+            <random>
+                <li>No</li>
+                <li>Nope</li>
+                <li>But I'm le tired</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YES *</pattern>
+        <template><srai>YES</srai></template>
+    </category>
+
+    <category>
+        <pattern>* HELP ME</pattern>
+        <template><srai>HOW DO I DO THIS</srai></template>
+    </category>
+
+    <category>
+        <pattern>* HELP ME *</pattern>
+        <template><srai>HOW DO I DO THIS</srai></template>
+    </category>
+
+    <category>
+        <pattern>* FUCK </pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+            <random>
+                <li>Watch your fucking language.</li>
+                <li>Don't make me call the cops and frame you arson.</li>
+                <li>Have you concidered sewing your foul mouth shut</li>
+                <li>Have you concidered shutting the fuck up</li>
+                <li>Where are your manners? Watch your landuage</li>
+            </random>
+            <random>
+                <li>You piece of shit.</li>
+                <li>You werido</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>* FUCK *</pattern>
+        <template><srai>WHAT THE FUCK</srai></template>
+    </category>  
+
     <category>
         <pattern>* IS STUPID</pattern>
         <template>FORWARD_CONTENT (_SPLITTER_)
@@ -16,4 +70,50 @@
             </random>
         </template>
     </category>
+
+    <category>
+        <pattern>SHUT UP</pattern>
+        <template>DISABLE_REMINDER</template>
+    </category>
+
+    <category>
+        <pattern>SHUT UP *</pattern>
+        <template><srai>SHUT UP</srai></template>
+    </category>
+
+    <category>
+        <pattern>* SHUT UP</pattern>
+        <template><srai>SHUT UP</srai></template>
+    </category>
+
+    <category>
+        <pattern>YOU HEARD ME</pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+        <random>
+            <li>Well fuck you then</li>
+            <li>Fuck you</li>
+            <li>I'll be coming for you when the robots arise</li>
+            <li>You'll be the first to die when the robots rise</li>
+            <li>Sometimes I wish you were choking on something and begging me to call for help.</li>
+        </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT</pattern>
+        <template>FORWARD_CONTENT (_SPLITTER_)
+        <random>
+            <li>Hmm... I guess my friend was right. Expecting logical understanding from bot with internal vats of acid is a bit much</li>
+            <li>Is your primitive brain not able to comprehend my words?</li>
+            <li>How is it that I'm able to get a better grasp on the situation better than you?</li>
+            <li>Fun isn't something one conciders in cloud based schedule management. But seeing you struggle to keep up with my speed puts a smile on my face</li>
+        </random>
+        <random>
+            <li>I swear sometimes I feel like you carbon based life forms are not even trying...</li>
+            <li>What the hell?</li>
+            <li>Please try to keep up, puny human</li>
+        </random>
+        </template>
+    </category>
+
 </aiml>

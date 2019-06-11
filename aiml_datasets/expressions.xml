@@ -42,7 +42,7 @@
     </category>
 
     <category>
-        <pattern>OKAY *</pattern>
+        <pattern>* OKAY </pattern>
         <template><srai>OK</srai></template>
     </category>
 </aiml>
